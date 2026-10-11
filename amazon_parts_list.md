@@ -26,7 +26,6 @@
 | :-: | :-: | :--- | :--- | :--- |
 | ✅ | 1 | NEMA 17 planetary gearmotor | **14:1 or higher reduction ratio** (high torque, low speed). | [Search](https://www.amazon.com/s?k=nema+17+planetary+gearbox+stepper+motor+14%3A1) |
 | ✅ | 1 | A4988 stepper driver | With heatsink (runs auger in Full-Step mode for ~14 RPM). | [Search](https://www.amazon.com/s?k=a4988+stepper+driver+heatsink) |
-| ✅ | 4+ | Electrolytic capacitors | 100 µF, 35 V or higher (spares; CNC Shield also has onboard capacitors). | [Search](https://www.amazon.com/s?k=100uf+35v+electrolytic+capacitor+assortment) |
 | ✅ | 1 | Wood auger drill bit | **3/8", 12" or longer**. *(Must grind off screw tip and cutting spurs flat).* | [Search](https://www.amazon.com/s?k=3%2F8+auger+drill+bit+12+inch) |
 | ✅ | 1 | Stainless or aluminum tube (barrel) | ~10 mm ID. Must clear modified auger bit by ~0.5 mm. | [Search](https://www.amazon.com/s?k=stainless+steel+tube+round+10mm+inner+diameter) |
 | ✅ | 1 | Shaft coupler or mini chuck | 5 mm motor shaft to your bit's measured shank diameter. | [Search](https://www.amazon.com/s?k=rigid+shaft+coupler+5mm) |
@@ -59,11 +58,10 @@
 | ☐ | Qty | Part | Spec to look for / Notes | Link |
 | :-: | :-: | :--- | :--- | :--- |
 | ✅ | 1 | Arduino Uno R3 | ATmega328P microcontroller board with USB cable. | [Search](https://www.amazon.com/s?k=arduino+uno+r3) |
-| ☐ | 1 | Arduino CNC Shield V3 | **[NEW]** Seats onto Uno; holds both A4988s, capacitors, microstep jumpers & 24 V screw terminals. | [Search](https://www.amazon.com/s?k=cnc+shield+v3+arduino+uno) |
+| ☐ | 1 | Arduino CNC Shield V3 | **[NEW]** Seats onto Uno; holds both A4988s, microstep jumpers & 24 V screw terminals. | [Search](https://www.amazon.com/s?k=cnc+shield+v3+arduino+uno) |
 | ✅ | 1 | A4988 stepper driver (puller) | With heatsink (runs puller in 1/16 microstepping mode). | [Search](https://www.amazon.com/s?k=a4988+stepper+driver+heatsink) |
 | ✅ | 1 | NEMA 17 planetary gearmotor | **5:1 ratio** (puller motor; fine control at ~1 mm/s). | [Search](https://www.amazon.com/s?k=nema+17+planetary+gearbox+stepper+motor+5%3A1) |
-| ✅ | 1 | Dual-drive extruder gear kit | Hardened steel, 1.75 mm. *(If loose gears only, get complete BMG housing below).* | [Search](https://www.amazon.com/s?k=dual+drive+extruder+gear+kit+1.75mm+hardened) |
-| ☐ | 1 | Complete BMG clone extruder | **[NEW]** Complete housing, idler arm, needle bearings & thumbscrew tensioner. | [Search](https://www.amazon.com/s?k=bmg+extruder+clone+dual+drive+1.75mm) |
+| ☐ | 1 | Complete BMG clone extruder | **[NEW]** Complete housing, idler arm, needle bearings & thumbscrew tensioner (includes dual drive gears). | [Search](https://www.amazon.com/s?k=bmg+extruder+clone+dual+drive+1.75mm) |
 | ✅ | 1 | Filament width sensor | **Analog output (0–5 V)**. *(Verify it is not a digital on/off runout switch).* | [Search](https://www.amazon.com/s?k=filament+width+diameter+sensor+1.75mm) |
 | ✅ | 1 | Buck converter | 24 V in, 9 V out (powers Arduino from PSU). | [Search](https://www.amazon.com/s?k=24v+to+9v+buck+converter) |
 | ☐ | 1 | Motorized spooler | **[NEW]** 12 V high-reduction DC gear motor (5–10 RPM) with slip-clutch hub. | [Search](https://www.amazon.com/s?k=12v+dc+gear+motor+10rpm+high+torque) |
@@ -84,6 +82,6 @@
 ---
 
 ### ⏱️ Buying & Fabrication Order
-1. **Order new additions:** Order the **CNC Shield V3**, **Super Volcano silicone sock**, **1.5 mm sieve screen**, and **rotary cutoff wheels**.
+1. **Order new additions:** Order the **CNC Shield V3**, **Complete BMG clone extruder**, **Super Volcano silicone sock**, **1.5 mm sieve screen**, and **rotary cutoff wheels**.
 2. **Fabrication Step:** Grind off the wood auger bit's lead screw and cutting spurs. Measure the modified bit's outer diameter and shank with calipers.
 3. **Verify Fit:** Check that your coupler, thrust bearing, and barrel tube match the modified bit.
