@@ -163,9 +163,13 @@ The Ender 3 mainboard controls heaters via low-side PWM switching. To prevent ma
    ```
 
 > [!NOTE]
-> **Pre-Compiled Firmware Ready to Flash:**
-> Pre-built binaries configured specifically for your **Ender 3 V2 DWIN color screen** are ready in the [`Ender3_Firmware/`](file:///c:/Users/adamh/Downloads/3DTruder/Ender3_Firmware/) folder:
-> * **`firmware_Ender3_V2_RE.bin`** (and `_RC.bin`): Copy to a MicroSD card to flash the Ender 3 V2 in 15 seconds. Unlocks **290 °C** for PET bottle flakes, preserves the color GUI, and permanently disables bed `MINTEMP` alarms.
+> **Pre-Compiled 3DTruder Melt Station Firmware Ready to Flash:**
+> Pre-built binaries configured specifically for your **Ender 3 V2 DWIN screen** are ready in the [`Ender3_Firmware/`](file:///c:/Users/adamh/Downloads/3DTruder/Ender3_Firmware/) folder:
+> * **`firmware_Ender3_V2_RE.bin`** (and `_RC.bin`): Copy to a micro-SD card to flash the Ender 3 V2 in 15 seconds.
+> * **Native DWIN Vector UI:** Features a dedicated 3DTruder Melt Station interface (large nozzle temp readout, real-time heating / melt-ready status, material presets, 1.4 mm nozzle indicator) rendered directly via the display controller's hardware vector text engine. **Zero disassembly required — no need to open the screen enclosure or flash screen SD assets (`DWIN_SET`)!**
+> * **All 3D Printer Artifacts Removed:** Cleaned of all unhomed axes coordinates (`???.?`), "Print" menus, missing icon glitches, and feedrate/z-offset clutter.
+> * **Streamlined Menu:** Provides quick 1-click presets (`PLA 215 °C`, `PETG 240 °C`, `PET #1 270 °C`), rotary temperature dial (0–290 °C), 1-click cooldown, and onboard PID autotune (`M303`) with EEPROM storage (`M500`).
+> * **Thermistor Diagnostic Note:** If the screen shows `522 °C / 0 °C` when powered without a hotend connected, this is normal floating CMOS ADC behavior on port `TH` (`PC5`). As soon as your 100K NTC thermistor is plugged in, the reading will immediately normalize to ambient room temperature (~20–25 °C).
 > * Full flashing instructions and source configurations are in [`Ender3_Firmware/README.md`](file:///c:/Users/adamh/Downloads/3DTruder/Ender3_Firmware/README.md).
 > * The Arduino Uno motor controller sketch and hex binary are in [`Arduino_Firmware/`](file:///c:/Users/adamh/Downloads/3DTruder/Arduino_Firmware/).
 
