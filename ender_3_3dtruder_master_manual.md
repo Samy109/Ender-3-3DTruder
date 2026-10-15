@@ -175,11 +175,12 @@ Melt pressure pushes the auger back **toward the motor**, so the thrust bearing 
 > [!WARNING]
 > Connect **both** thermistors before heating. If a zone's thermistor is unplugged when that zone is given a target (for example by a preset), Marlin halts with `MINTEMP`. That's the safety working, not a firmware fault.
 
-### 4.6 First Heat, Hot-Tighten & PID
-1. Flash the Ender 3 V2 firmware (see [`Ender3_Firmware/README.md`](Ender3_Firmware/README.md)).
-2. Set the hotend to **250 °C** and wait a few minutes.
-3. Hold the coupler's **flats with a 22 mm wrench** and tighten the nozzle a further **⅛ turn** against the stub.
-4. Run PID autotune on **both zones** and save, either from the screen (**Configuration → Advanced Settings → PID Autotune** for the nozzle and the Coupler, then **Store Settings**) or over USB:
+### 4.6 First Boot, First Heat, Hot-Tighten & PID
+1. Flash the Ender 3 V2 firmware (see [`Ender3_Firmware/README.md`](Ender3_Firmware/README.md)): `firmware_Ender3_V2_RE.bin` or `_RC.bin` to match the chip on your board. If the board has been flashed before, rename the file to something new so the bootloader picks it up.
+2. **First boot, cold:** both thermistors plugged in (nozzle on `TH`, coupler on `TB`). The nozzle readout and the `COUPLER:` line should both show room temperature (about 20–25 °C). A reading near or below 0 °C, or an error, means a thermistor isn't connected.
+3. Set the hotend to **250 °C** and wait a few minutes.
+4. Hold the coupler's **flats with a 22 mm wrench** and tighten the nozzle a further **⅛ turn** against the stub.
+5. Run PID autotune on **both zones** and save, either from the screen (**Configuration → Advanced Settings → PID Autotune** for the nozzle and the Coupler, then **Store Settings**) or over USB:
 
 ```gcode
 M303 E0 S220 C8 U1    ; nozzle (zone 1)
@@ -188,6 +189,8 @@ M500
 ```
 
 The coupler ships with rough starting PID values, so tune it before the first real run.
+
+**Then watch one full soak:** pick a preset and check the screen counts `SOAKING: 10:00` down to `>>> MELT READY <<<` and `AUGER: OK TO START`.
 
 ---
 
@@ -221,11 +224,29 @@ The coupler ships with rough starting PID values, so tune it before the first re
 * Measure Vref with a multimeter and check your A4988's sense resistor (R100 / R050) to convert.
 
 ### 5.4 Controller Firmware
-Flash [`Arduino_Firmware.ino`](Arduino_Firmware/Arduino_Firmware.ino) and set the calibration values at the top of the sketch. Details in [`Arduino_Firmware/README.md`](Arduino_Firmware/README.md).
+Flash [`Arduino_Firmware.ino`](Arduino_Firmware/Arduino_Firmware.ino) to the Uno from the Arduino IDE (**Tools → Board → Arduino Uno**, pick the port, **Upload**), or with `arduino-cli` (use your own COM port):
+
+```bash
+arduino-cli compile -b arduino:avr:uno -u -p COM7 Arduino_Firmware
+```
+
+Open a serial monitor at **115200 baud** (line ending `Newline`). You should see the `3DTruder Puller & Auger Controller V4` banner, the command list, and a status line every second. Details in [`Arduino_Firmware/README.md`](Arduino_Firmware/README.md).
 
 * Interrupt-driven stepping for both motors, so serial traffic never stutters them.
 * Soft-start auger ramp; auger speed adjustable live with `RPM <x>`.
 * Diameter control that waits for fresh strand to reach the sensor between corrections, and holds speed when the sensor is empty.
+
+### 5.5 Commissioning & Calibration
+Do these in order, with the **heaters off and the barrel empty**. The calibration values are at the top of the sketch. Re-upload after changing them.
+
+> [!WARNING]
+> With nothing plugged into A0, the `DIA:` reading drifts at random (the unconnected pin picks up noise) and can look like a real diameter. **Don't run the puller in auto mode until the sensor is connected and calibrated**, or it will chase that noise. Use `AUTO OFF` for any testing before then.
+
+1. **Motor directions:** send `RPM 4`, then `AUG ON`, watch for a second, then `AUG OFF`. The auger must turn so its flights carry flakes **toward the nozzle**. Then `SPEED 1` and `PULL ON` / `PULL OFF`: the BMG must pull the strand **away from the nozzle**. If either is backwards, flip `AUG_DIR_INVERT` or `PULL_DIR_INVERT` (or swap one coil pair on that motor's plug).
+2. **Diameter sensor:** connect it to A0 (plus 5 V and GND). Insert a **1.50 mm** gauge pin (a drill blank works) and note the `RAW:` value, then a **2.00 mm** pin and note it again. Enter them as `CAL_ADC_A` and `CAL_ADC_B`. Afterwards the `DIA:` reading should match each pin within about 0.01 mm.
+3. **Puller steps/mm:** thread a piece of filament through the BMG, mark it at the inlet, send `AUTO OFF`, `SPEED 1`, `PULL ON`, and stop it after exactly 60 s. Measure how far the mark moved (L, in mm) and set `PULL_STEPS_PER_MM = 2150 × 60 / L`.
+4. **Sensor distance:** measure from the nozzle tip to the sensor's measuring point and enter it as `SENSOR_DISTANCE_MM`.
+5. **Re-upload** the sketch and send `AUTO ON`. Commissioning is done; the line is ready for the operating procedure below.
 
 ---
 

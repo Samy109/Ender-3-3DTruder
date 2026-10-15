@@ -562,9 +562,10 @@ pre code { background: none; border: none; padding: 0; color: inherit; font-size
 </code></pre>
 <div class="callout callout-warning"><div class="callout-title">! Warning</div><p>Connect <strong>both</strong> thermistors before heating. If a zone's thermistor is unplugged when that zone is given a target (for example by a preset), Marlin halts with <code>MINTEMP</code>. That's the safety working, not a firmware fault.</p></div>
 
-<h2>4.6 First Heat, Hot-Tighten &amp; PID</h2>
+<h2>4.6 First Boot, First Heat, Hot-Tighten &amp; PID</h2>
 <ol>
-<li>Flash the Ender 3 V2 firmware (see <a href="Ender3_Firmware/README.md"><code>Ender3_Firmware/README.md</code></a>).</li>
+<li>Flash the Ender 3 V2 firmware (see <a href="Ender3_Firmware/README.md"><code>Ender3_Firmware/README.md</code></a>): <code>firmware_Ender3_V2_RE.bin</code> or <code>_RC.bin</code> to match the chip on your board. If the board has been flashed before, rename the file to something new so the bootloader picks it up.</li>
+<li><strong>First boot, cold:</strong> both thermistors plugged in (nozzle on <code>TH</code>, coupler on <code>TB</code>). The nozzle readout and the <code>COUPLER:</code> line should both show room temperature (about 20–25 °C). A reading near or below 0 °C, or an error, means a thermistor isn't connected.</li>
 <li>Set the hotend to <strong>250 °C</strong> and wait a few minutes.</li>
 <li>Hold the coupler's <strong>flats with a 22 mm wrench</strong> and tighten the nozzle a further <strong>⅛ turn</strong> against the stub.</li>
 <li>Run PID autotune on <strong>both zones</strong> and save, either from the screen (<strong>Configuration → Advanced Settings → PID Autotune</strong> for the nozzle and the Coupler, then <strong>Store Settings</strong>) or over USB:</li>
@@ -574,6 +575,7 @@ M303 E-1 S205 C8 U1   ; coupler (zone 2, the &quot;bed&quot; channel)
 M500
 </code></pre>
 <p>The coupler ships with rough starting PID values, so tune it before the first real run.</p>
+<p><strong>Then watch one full soak:</strong> pick a preset and check the screen counts <code>SOAKING: 10:00</code> down to <code>&gt;&gt;&gt; MELT READY &lt;&lt;&lt;</code> and <code>AUGER: OK TO START</code>.</p>
 
 <div class="page-break"></div><div class="header-rule"><span>3DTruder Master Manual</span><span>5. Phase 2: Puller, Sensor &amp; Controller</span></div>
 <h1>🎛️ 5. Phase 2: Puller, Sensor &amp; Controller</h1>
@@ -602,12 +604,26 @@ M500
 <li>Measure Vref with a multimeter and check your A4988's sense resistor (R100 / R050) to convert.</li>
 </ul>
 <h2>5.4 Controller Firmware</h2>
-<p>Flash <a href="Arduino_Firmware/Arduino_Firmware.ino"><code>Arduino_Firmware.ino</code></a> and set the calibration values at the top of the sketch. Details in <a href="Arduino_Firmware/README.md"><code>Arduino_Firmware/README.md</code></a>.</p>
+<p>Flash <a href="Arduino_Firmware/Arduino_Firmware.ino"><code>Arduino_Firmware.ino</code></a> to the Uno from the Arduino IDE (<strong>Tools → Board → Arduino Uno</strong>, pick the port, <strong>Upload</strong>), or with <code>arduino-cli</code> (use your own COM port):</p>
+<pre><code class="language-bash">arduino-cli compile -b arduino:avr:uno -u -p COM7 Arduino_Firmware
+</code></pre>
+<p>Open a serial monitor at <strong>115200 baud</strong> (line ending <code>Newline</code>). You should see the <code>3DTruder Puller &amp; Auger Controller V4</code> banner, the command list, and a status line every second. Details in <a href="Arduino_Firmware/README.md"><code>Arduino_Firmware/README.md</code></a>.</p>
 <ul>
 <li>Interrupt-driven stepping for both motors, so serial traffic never stutters them.</li>
 <li>Soft-start auger ramp; auger speed adjustable live with <code>RPM &lt;x&gt;</code>.</li>
 <li>Diameter control that waits for fresh strand to reach the sensor between corrections, and holds speed when the sensor is empty.</li>
 </ul>
+<h2>5.5 Commissioning &amp; Calibration</h2>
+<p>Do these in order, with the <strong>heaters off and the barrel empty</strong>. The calibration values are at the top of the sketch. Re-upload after changing them.</p>
+<div class="callout callout-warning"><div class="callout-title">! Warning</div><p>With nothing plugged into A0, the <code>DIA:</code> reading drifts at random (the unconnected pin picks up noise) and can look like a real diameter. <strong>Don't run the puller in auto mode until the sensor is connected and calibrated</strong>, or it will chase that noise. Use <code>AUTO OFF</code> for any testing before then.</p></div>
+
+<ol>
+<li><strong>Motor directions:</strong> send <code>RPM 4</code>, then <code>AUG ON</code>, watch for a second, then <code>AUG OFF</code>. The auger must turn so its flights carry flakes <strong>toward the nozzle</strong>. Then <code>SPEED 1</code> and <code>PULL ON</code> / <code>PULL OFF</code>: the BMG must pull the strand <strong>away from the nozzle</strong>. If either is backwards, flip <code>AUG_DIR_INVERT</code> or <code>PULL_DIR_INVERT</code> (or swap one coil pair on that motor's plug).</li>
+<li><strong>Diameter sensor:</strong> connect it to A0 (plus 5 V and GND). Insert a <strong>1.50 mm</strong> gauge pin (a drill blank works) and note the <code>RAW:</code> value, then a <strong>2.00 mm</strong> pin and note it again. Enter them as <code>CAL_ADC_A</code> and <code>CAL_ADC_B</code>. Afterwards the <code>DIA:</code> reading should match each pin within about 0.01 mm.</li>
+<li><strong>Puller steps/mm:</strong> thread a piece of filament through the BMG, mark it at the inlet, send <code>AUTO OFF</code>, <code>SPEED 1</code>, <code>PULL ON</code>, and stop it after exactly 60 s. Measure how far the mark moved (L, in mm) and set <code>PULL_STEPS_PER_MM = 2150 × 60 / L</code>.</li>
+<li><strong>Sensor distance:</strong> measure from the nozzle tip to the sensor's measuring point and enter it as <code>SENSOR_DISTANCE_MM</code>.</li>
+<li><strong>Re-upload</strong> the sketch and send <code>AUTO ON</code>. Commissioning is done; the line is ready for the operating procedure below.</li>
+</ol>
 
 <div class="page-break"></div><div class="header-rule"><span>3DTruder Master Manual</span><span>6. Operating Procedure</span></div>
 <h1>🚀 6. Operating Procedure</h1>
