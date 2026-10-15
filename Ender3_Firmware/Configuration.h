@@ -559,7 +559,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 1   // 3DTruder: bed channel = barrel coupler zone (100K B3950 on TB header)
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -620,7 +620,7 @@
 
 // Below this temperature the heater will be switched off
 // because it probably indicates a broken thermistor wire.
-#define HEATER_0_MINTEMP   0
+#define HEATER_0_MINTEMP   5
 #define HEATER_1_MINTEMP   5
 #define HEATER_2_MINTEMP   5
 #define HEATER_3_MINTEMP   5
@@ -628,7 +628,7 @@
 #define HEATER_5_MINTEMP   5
 #define HEATER_6_MINTEMP   5
 #define HEATER_7_MINTEMP   5
-#define BED_MINTEMP        0
+#define BED_MINTEMP        5
 #define CHAMBER_MINTEMP    5
 
 // Above this temperature the heater will be switched off.
@@ -642,7 +642,7 @@
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      120
+#define BED_MAXTEMP      290   // 3DTruder coupler zone; max settable = 290 - BED_OVERSHOOT
 #define CHAMBER_MAXTEMP  60
 
 /**
@@ -774,10 +774,11 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
 
-  // Ender 3 V2
-  #define DEFAULT_bedKp 462.10
-  #define DEFAULT_bedKi  85.47
-  #define DEFAULT_bedKd 624.59
+  // 3DTruder coupler zone (24 V 40 W cartridge in a brass coupler). Starting point only:
+  // autotune with "M303 E-1 S205 C8 U1" then "M500".
+  #define DEFAULT_bedKp  20.00
+  #define DEFAULT_bedKi   1.50
+  #define DEFAULT_bedKd  70.00
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -2246,19 +2247,19 @@
 //
 #define PREHEAT_1_LABEL       "PLA"
 #define PREHEAT_1_TEMP_HOTEND 215
-#define PREHEAT_1_TEMP_BED     0
+#define PREHEAT_1_TEMP_BED   205   // coupler zone
 #define PREHEAT_1_TEMP_CHAMBER 0
 #define PREHEAT_1_FAN_SPEED    0
 
 #define PREHEAT_2_LABEL       "PETG"
 #define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED     0
+#define PREHEAT_2_TEMP_BED   230   // coupler zone
 #define PREHEAT_2_TEMP_CHAMBER 0
 #define PREHEAT_2_FAN_SPEED    0
 
 #define PREHEAT_3_LABEL       "PET #1"
 #define PREHEAT_3_TEMP_HOTEND 270
-#define PREHEAT_3_TEMP_BED     0
+#define PREHEAT_3_TEMP_BED   260   // coupler zone
 #define PREHEAT_3_TEMP_CHAMBER 0
 #define PREHEAT_3_FAN_SPEED    0
 

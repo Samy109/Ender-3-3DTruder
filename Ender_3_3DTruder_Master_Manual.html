@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3DTruder Master Manual</title>
+<style>
+@page {
+    size: letter;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.55;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Cover Page */
+  .cover-page {
+    page-break-after: always;
+    height: 100%;
+    min-height: 880px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 20px 20px 20px;
+    border: 3px solid #0f172a;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  }
+
+  .cover-header {
+    border-bottom: 4px solid #2563eb;
+    padding-bottom: 25px;
+  }
+
+  .brand-badge {
+    display: inline-block;
+    background: #0f172a;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 9pt;
+    padding: 4px 12px;
+    border-radius: 4px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .cover-title {
+    font-size: 30pt;
+    font-weight: 900;
+    color: #0f172a;
+    line-height: 1.15;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .cover-subtitle {
+    font-size: 14pt;
+    color: #2563eb;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+  }
+
+  .cover-desc {
+    font-size: 10.5pt;
+    color: #475569;
+    max-width: 600px;
+    margin: 0;
+  }
+
+  .cover-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 25px 0;
+  }
+
+  .spec-card {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 12px 16px;
+  }
+
+  .spec-card-title {
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #64748b;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .spec-card-val {
+    font-size: 11pt;
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  .cover-footer {
+    border-top: 1px solid #cbd5e1;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8.5pt;
+    color: #64748b;
+  }
+
+  /* Headings & Page Flow */
+  h1 {
+    font-size: 17pt;
+    color: #0f172a;
+    font-weight: 800;
+    border-bottom: 2px solid #2563eb;
+    padding-bottom: 5px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    page-break-after: avoid;
+  }
+
+  h2 {
+    font-size: 12.5pt;
+    color: #1e293b;
+    font-weight: 700;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 4px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 10.5pt;
+    color: #334155;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin: 0 0 10px 0;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  /* Callout Boxes */
+  .callout {
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+
+  .callout-title {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 8.5pt;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .callout-danger {
+    background: #fef2f2;
+    border-left: 5px solid #dc2626;
+    color: #991b1b;
+  }
+  .callout-danger .callout-title { color: #dc2626; }
+
+  .callout-warning {
+    background: #fffbeb;
+    border-left: 5px solid #d97706;
+    color: #92400e;
+  }
+  .callout-warning .callout-title { color: #b45309; }
+
+  .callout-info {
+    background: #eff6ff;
+    border-left: 5px solid #2563eb;
+    color: #1e40af;
+  }
+  .callout-info .callout-title { color: #1d4ed8; }
+
+  .callout-success {
+    background: #f0fdf4;
+    border-left: 5px solid #16a34a;
+    color: #166534;
+  }
+  .callout-success .callout-title { color: #15803d; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 14px 0;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+
+  th {
+    background: #0f172a;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: left;
+    padding: 6px 10px;
+    border: 1px solid #0f172a;
+  }
+
+  td {
+    padding: 5px 10px;
+    border: 1px solid #cbd5e1;
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  code {
+    font-family: Consolas, "Courier New", monospace;
+    background: #f1f5f9;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 8.5pt;
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+  }
+
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 7.5pt;
+    line-height: 1.4;
+    overflow-x: auto;
+    margin: 8px 0;
+    page-break-inside: avoid;
+  }
+
+  .diagram-box {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 10px 0;
+    page-break-inside: avoid;
+  }
+
+  .diagram-title {
+    font-size: 8pt;
+    font-weight: 800;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    border-bottom: 1px dashed #cbd5e1;
+    padding-bottom: 3px;
+  }
+
+  .diagram-content {
+    font-family: Consolas, monospace;
+    font-size: 7pt;
+    line-height: 1.35;
+    color: #0f172a;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  ul, ol {
+    margin: 0 0 8px 0;
+    padding-left: 18px;
+  }
+
+  li {
+    margin-bottom: 3px;
+  }
+
+  .check-box {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid #475569;
+    border-radius: 2px;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+
+  .header-rule {
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.5pt;
+    color: #94a3b8;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+</style>
+</head>
+<body>
+
+<div class="cover-page">
+  <div class="cover-header">
+    <div class="brand-badge">Build &amp; Operating Manual</div>
+    <div class="cover-title">3DTRUDER MASTER MANUAL</div>
+    <div class="cover-subtitle">Auger-Fed Super Volcano Extrusion Line</div>
+    <div class="cover-desc">Turns an Ender 3 V2 into a closed-loop recycling line that extrudes shredded plastic into 1.75 mm filament.</div>
+  </div>
+  <div class="cover-grid">
+    <div class="spec-card"><div class="spec-card-title">Melt Path</div>
+      <div class="spec-card-val">Brass Coupler &rarr; Super Volcano</div>
+      <div style="font-size:8pt;color:#64748b;margin-top:2px;">Two heat zones: 80 W block + 40 W heated coupler, no heatbreak</div></div>
+    <div class="spec-card"><div class="spec-card-title">Nozzle</div>
+      <div class="spec-card-val">1.4 mm Brass Super Volcano</div>
+      <div style="font-size:8pt;color:#64748b;margin-top:2px;">Die swell drawn down to 1.75 mm by the puller</div></div>
+    <div class="spec-card"><div class="spec-card-title">Auger Drive</div>
+      <div class="spec-card-val">14:1 NEMA 17 + 51100 Bearing</div>
+      <div style="font-size:8pt;color:#64748b;margin-top:2px;">3/8" auger in a 10 &times; 12 mm stainless barrel, ~0.7 A torque limit</div></div>
+    <div class="spec-card"><div class="spec-card-title">Control</div>
+      <div class="spec-card-val">Arduino V4 + Marlin Soak Timer</div>
+      <div style="font-size:8pt;color:#64748b;margin-top:2px;">Interrupt-driven motors, dead-time-aware diameter loop</div></div>
+  </div>
+  <div class="cover-footer">
+    <div><strong>Revision:</strong> 4.0 (October 2026)</div>
+    <div><strong>Platform:</strong> Ender 3 V2 Conversion</div>
+    <div><strong>Output:</strong> 1.75 mm Recycled Filament</div>
+  </div>
+</div>
+
+<div class="header-rule"><span>3DTruder Master Manual</span><span>1. Overview &amp; Safety</span></div>
+<h1>📌 1. Overview &amp; Safety</h1>
+<h2>How it works</h2>
+<ol>
+<li>Dried, sieved plastic flakes drop from a bottle hopper into a window in a horizontal <strong>10 mm ID × 12 mm OD stainless barrel</strong>.</li>
+<li>A <strong>14:1 geared NEMA 17</strong> turns a modified <strong>3/8" wood auger</strong> inside the barrel and pushes the flakes forward.</li>
+<li>The barrel screws into a <strong>brass barrel coupler</strong> (M12×1.0 → M6×1.0 stub), which screws straight into a <strong>Super Volcano heater block</strong>. The plastic melts in the coupler and block and leaves through a <strong>1.4 mm nozzle</strong>.</li>
+<li>The strand is cooled by two <strong>5010 blowers</strong>, measured by an <strong>inline diameter sensor</strong>, and drawn down to <strong>1.75 mm</strong> by a <strong>BMG puller</strong> on a 5:1 geared motor. An Arduino adjusts the puller speed to hold diameter.</li>
+<li>The Ender 3 V2 mainboard runs <strong>two heat zones</strong>: the Super Volcano block (80 W, through an <strong>external 25 A MOSFET</strong>) and the brass coupler (40 W, on the board's former heated-bed output). Its screen shows both temperatures and a <strong>10-minute melt soak timer</strong> before the auger may start.</li>
+</ol>
+<h2>Safety Warnings</h2>
+<ul>
+<li><strong>High temperature:</strong> The heater block, nozzle and barrel coupler run at <strong>200 °C – 280 °C</strong>. Wear heat-resistant gloves when handling hot parts. Never leave the machine heating unattended.</li>
+<li><strong>Mains voltage:</strong> The Ender 3 PSU has exposed 110 V / 220 V terminals under its cover. <strong>Unplug the printer from the wall</strong> before working on any PSU or mainboard wiring.</li>
+<li><strong>High current:</strong> The 80 W heater cartridge draws about <strong>3.33 A at 24 V</strong>, more than the stock mainboard MOSFET is meant to carry continuously. <strong>Always switch the heater through the external 25 A MOSFET module.</strong></li>
+<li><strong>Fumes:</strong> Melting plastic releases VOCs and ultrafine particles. Run in a ventilated space or under a fume extractor.</li>
+<li><strong>Never process PVC (#3):</strong> Heating PVC releases hydrogen chloride gas. Only process known plastics (#1 PET, #5 PP, #7 PLA / PETG).</li>
+<li><strong>Never run the auger cold:</strong> Solid plastic jammed against the nozzle can generate enough pressure to split the thin barrel thread. Wait for <code>AUGER: OK TO START</code> on the screen.</li>
+</ul>
+<h2>Design notes</h2>
+<ul>
+<li><strong>Melt zone:</strong> The barrel is heated only by conduction from the coupler, so just its last 1–2 cm gets hot enough to melt plastic. Flakes stay solid along the rest of the barrel and melt in the brass coupler and heater block, which is why the coupler is brass (it carries heat up from the block) and why the soak timer exists (the coupler lags the block by several minutes).</li>
+<li><strong>No heatbreak:</strong> There is no V6 heatsink or heatbreak in the melt path. A heatbreak is designed to keep its top end cold, which is exactly where flakes would jam.</li>
+<li><strong>Thin barrel thread:</strong> The barrel's M12×1.0 thread leaves about 0.4 mm of wall at the thread root. Three rules keep it safe: the thread is fully hidden inside the coupler, the coupler (not the tube) is clamped to the frame, and the auger driver's current is limited so a jam makes the motor skip instead of building pressure.</li>
+<li><strong>Two heat zones:</strong> The coupler carries its own 24 V 40 W cartridge and thermistor, driven by the Ender's heated-bed output (the bed itself is removed). Marlin controls it with full PID and thermal-runaway protection, and the menus call it <strong>Coupler</strong>. It roughly doubles the heat available for melting and pushes the melt zone up into the barrel end. Presets run the coupler about 10 °C below the nozzle.</li>
+<li><strong>Die swell:</strong> Plastic swells as it leaves the 1.4 mm nozzle (to roughly 1.6–2.0 mm depending on material and temperature). The puller can only draw the strand <em>thinner</em>. If it comes out under 1.75 mm before pulling, a larger nozzle is needed (keep a 2.0 mm on hand, or drill out the 1.4 mm).</li>
+</ul>
+
+<div class="page-break"></div><div class="header-rule"><span>3DTruder Master Manual</span><span>2. Bill of Materials</span></div>
+<h1>🛒 2. Bill of Materials</h1>
+<p>Full list with specs and links: <a href="amazon_parts_list.md"><code>amazon_parts_list.md</code></a>. Shop-made parts: <a href="CAD/shop_order.md"><code>CAD/shop_order.md</code></a>.</p>
+<h2>🔹 Base Unit</h2>
+<ul>
+<li><strong>Ender 3 V2</strong> (24 V 350 W PSU, 4.2.2 mainboard, DWIN screen, 2020 frame). Heated bed removed.</li>
+<li><strong>2020 brackets &amp; M5 T-nuts</strong> for mounting the auger, coupler clamp and puller.</li>
+</ul>
+<h2>🔹 Melt Zone</h2>
+<ul>
+<li><strong>Super Volcano heater block</strong> + <strong>1.4 mm Super Volcano brass nozzle</strong> + <strong>silicone sock</strong></li>
+<li><strong>80 W 24 V heater cartridge</strong> + <strong>100K NTC B3950 thermistor cartridge</strong></li>
+<li><strong>25 A external MOSFET module</strong> + 16 AWG silicone wire + 5 A inline fuse</li>
+<li><strong>Heated barrel coupler (shop-made, brass):</strong> Ø25 × 40 mm. M12×1.0 female top, M6×1.0 male stub (15 mm, full thread), Ø3 mm bore, 22 mm wrench flats, cross holes for a 6 mm heater cartridge and a 3 mm thermistor. See <a href="CAD/shop_order.md"><code>CAD/shop_order.md</code></a> and <a href="CAD/barrel_coupler.step"><code>CAD/barrel_coupler.step</code></a>.</li>
+<li><strong>SK25 shaft support:</strong> clamps the coupler's Ø25 top section to the frame.</li>
+<li><strong>Coupler heat zone:</strong> 24 V 40 W 6 × 20 mm cartridge heater + 100K B3950 thermistor cartridge (3 × 15 mm), wired to the mainboard's bed terminals and <code>TB</code> thermistor header.</li>
+<li><strong>PTFE thread tape</strong> for the barrel thread.</li>
+</ul>
+<h2>🔹 Auger Feed</h2>
+<ul>
+<li><strong>Stainless barrel tube, 10 mm ID × 12 mm OD, 150 mm</strong>, with a 15 × 12 mm hopper window near one end. The other end gets an M12×1.0 external thread, 12 mm long (cut by the shop on a lathe).</li>
+<li><strong>3/8" wood auger bit, 12"</strong>, hex shank 9.0 mm across flats. Screw point cut off, tip ground to a cone.</li>
+<li><strong>NEMA 17 planetary gearmotor, 14:1</strong>, 8 mm output shaft (needs at least 25 mm of exposed shaft).</li>
+<li><strong>8 mm → 11 mm clamp-on shaft coupling</strong>, Ø32 × 45 mm aluminum, plus a slit sleeve or shim to center the hex shank (see 4.2).</li>
+<li><strong>51100 thrust ball bearing</strong>, 10 × 24 × 9 mm.</li>
+<li><strong>NEMA 17 motor mount plate</strong> bolted to the 2020 frame.</li>
+<li><strong>24 V 4010 fan</strong> over the barrel at the hopper window.</li>
+<li><strong>A4988 driver</strong>, full step, current limited to ~0.7 A.</li>
+</ul>
+<h2>🔹 Hopper &amp; Feedstock</h2>
+<ul>
+<li><strong>Clear PET jug</strong> (half-gallon), inverted over the barrel window.</li>
+<li><strong>Sieve set:</strong> 5 mm, 3 mm, 1 mm.</li>
+</ul>
+<h2>🔹 Puller &amp; Control</h2>
+<ul>
+<li><strong>Arduino Uno R3</strong> + <strong>CNC Shield V3</strong> (capacitors must be rated <strong>35 V or 50 V</strong> for 24 V).</li>
+<li><strong>A4988 driver</strong> for the puller, 1/16 microstepping.</li>
+<li><strong>NEMA 17 planetary gearmotor, 5:1</strong> + <strong>complete BMG clone extruder</strong> (puller).</li>
+<li><strong>Analog (0–5 V) filament diameter sensor</strong> on <code>A0</code>.</li>
+<li><strong>LM2596 buck converter</strong>, 24 V → 9 V for the Uno.</li>
+<li><strong>2× 5010 blowers + ducts</strong> for strand cooling.</li>
+<li><strong>Motorized spooler</strong> with slip-clutch hub.</li>
+</ul>
+<h2>🔹 Tools</h2>
+<ul>
+<li><strong>M12×1.0 tap &amp; die set</strong> (backup, if you ever thread a replacement barrel yourself)</li>
+<li>Angle grinder / cutoff discs, needle files, 240-grit cloth</li>
+<li>Digital caliper, multimeter (for A4988 Vref)</li>
+<li>22 mm wrench (coupler flats), nozzle wrench</li>
+</ul>
+
+<div class="page-break"></div><div class="header-rule"><span>3DTruder Master Manual</span><span>3. Feedstock &amp; Hopper</span></div>
+<h1>📥 3. Feedstock &amp; Hopper</h1>
+<h2>3.1 Sifting (3-Stage Stack)</h2>
+<p>Stack screens top to bottom: <strong>5 mm → 3 mm → 1 mm → catch pan</strong>, and shake well.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Sieve Layer</th>
+<th style="text-align: left;">Particle Size</th>
+<th style="text-align: left;">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Retained on 5 mm</strong></td>
+<td style="text-align: left;">&gt; 5 mm</td>
+<td style="text-align: left;">Return to shredder</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Retained on 3 mm</strong></td>
+<td style="text-align: left;">3.0 – 5.0 mm</td>
+<td style="text-align: left;">Return to shredder</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Retained on 1 mm</strong></td>
+<td style="text-align: left;"><strong>1.0 – 3.0 mm</strong></td>
+<td style="text-align: left;"><strong>Feedstock</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Catch pan</strong></td>
+<td style="text-align: left;">&lt; 1.0 mm</td>
+<td style="text-align: left;"><strong>Discard.</strong> Fines trap air, burn, and cause bubbles</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-info"><div class="callout-title">&#9432; Note</div><p>Measure the depth of the auger's flights (the groove between the spiral and the core). Flakes should be smaller than that depth or they wedge instead of feeding. If 3 mm flakes jam, sieve down to 1–2 mm.</p></div>
+
+<h2>3.2 Pre-Drying</h2>
+<p>Moisture boils in the melt zone and causes popping, voids and brittle filament.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Plastic</th>
+<th style="text-align: left;">Temperature</th>
+<th style="text-align: left;">Time</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>PLA</strong></td>
+<td style="text-align: left;">45 – 50 °C</td>
+<td style="text-align: left;">4+ h</td>
+<td style="text-align: left;">Stay below 55 °C or flakes clump</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PETG</strong></td>
+<td style="text-align: left;">60 – 65 °C</td>
+<td style="text-align: left;">4 – 6 h</td>
+<td style="text-align: left;">Store sealed with desiccant</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PET (#1 bottles)</strong></td>
+<td style="text-align: left;">120 – 140 °C</td>
+<td style="text-align: left;">5+ h</td>
+<td style="text-align: left;">Needs high heat to dry</td>
+</tr>
+</tbody>
+</table>
+<h2>3.3 Bottle Hopper</h2>
+<p>The barrel is horizontal, so the hopper sits upside-down on top of the window.</p>
+<ol>
+<li>Cut the bottom off the jug. It becomes the open top of the hopper.</li>
+<li>Cut a <strong>15 × 12 mm slot</strong> in the top of the cap, matching the barrel window, and file the cap's top into a curved saddle that sits on the 12 mm barrel.</li>
+<li>Screw the cap onto the jug, set it on the barrel with the slot over the window, and strap it down with a hose clamp or zip ties.</li>
+<li>The jug is PET and softens around 70 °C, so it must sit at the cold end of the barrel, over the 4010 fan zone, never near the coupler.</li>
+<li>If flakes bridge in the jug's shoulder, tap the jug or add a small vibration motor.</li>
+</ol>
+
+<div class="page-break"></div><div class="header-rule"><span>3DTruder Master Manual</span><span>4. Phase 1: Auger, Barrel &amp; Melt Zone Assembly</span></div>
+<h1>🔧 4. Phase 1: Auger, Barrel &amp; Melt Zone Assembly</h1>
+<h2>4.1 Modifying the Auger Bit</h2>
+<ol>
+<li>Clamp the auger bit in a vise.</li>
+<li><strong>Cut off the threaded screw point</strong> with an angle grinder or cutoff disc.</li>
+<li>Grind the cutting spurs into a <strong>smooth cone (about 60°)</strong>.</li>
+<li>Polish the tip with 240-grit cloth so there are no burrs.</li>
+<li>Cut the bit to length so that, when installed, its tip stops <strong>1.5 – 2.0 mm short of the barrel's threaded end</strong>. It must never touch the coupler.</li>
+</ol>
+<h2>4.2 Motor, Thrust Bearing &amp; Shaft Coupling</h2>
+<p>Melt pressure pushes the auger back <strong>toward the motor</strong>, so the thrust bearing goes between the mount plate and the coupling:</p>
+<pre><code> [ 14:1 motor ] ─ [ mount plate ] ─ [ 51100 bearing ] ─ [ shaft coupling ] ─ auger ─►
+</code></pre>
+<ol>
+<li>Bolt the motor to the mount plate and the plate to the 2020 frame.</li>
+<li>Slide the 51100 bearing over the 8 mm motor shaft against the plate.</li>
+<li>Center the hex shank in the 11 mm side of the clamp-on coupling: use the slit sleeve from the shop (Job 3), or wrap the hex in <strong>three layers of soda-can aluminum</strong>.</li>
+<li>Push the coupling down onto the bearing with <strong>no gap</strong>, then tighten the 8 mm clamp. The load path is now coupling → bearing → plate → frame, not the gearbox.</li>
+<li><strong>Spin test:</strong> turn the motor by hand and watch the auger tip. Any visible wobble will rub the barrel (only ~0.25 mm clearance per side). Fix the shim before going further.</li>
+</ol>
+<h2>4.3 Barrel Prep</h2>
+<ol>
+<li><strong>Deburr the window:</strong> file all inside edges of the window smooth with a needle file and 240-grit. Burrs left by the cutting disc catch flakes and scrape the auger.</li>
+<li>The shop cuts the <strong>M12×1.0 thread, 12 mm long</strong>, on the end without the window (see <a href="CAD/shop_order.md"><code>CAD/shop_order.md</code></a>, Job 2).</li>
+<li>Slide the barrel over the auger. The window end goes toward the motor.</li>
+</ol>
+<h2>4.4 Melt Zone Assembly</h2>
+<pre><code> barrel ══ M12×1.0 ══ [ brass coupler ] ══ M6 stub ══ [ Super Volcano block ] ══ nozzle
+                       ▲ SK25 clamp                         ▲ zone 1: 80 W + thermistor
+                       ▲ zone 2: 40 W + thermistor
+</code></pre>
+<ol>
+<li><strong>Barrel → coupler:</strong> wrap the barrel thread in PTFE tape and screw it into the coupler's M12×1.0 end until snug. The whole thread should be hidden inside the coupler.</li>
+<li><strong>Coupler → block:</strong> screw the coupler's M6 stub into the <strong>top</strong> of the Super Volcano block about 6–8 mm deep. Leave a gap between the coupler shoulder and the block.</li>
+<li><strong>Nozzle:</strong> screw the 1.4 mm nozzle <strong>up</strong> into the bottom of the block until it meets the end of the stub. There should be a small gap (0.5–1 mm) between the nozzle's hex and the block. If the hex touches the block first, screw the stub in deeper and repeat.
+   <em>The seal is the flat end of the stub pressing on the top of the nozzle, not the threads.</em></li>
+<li><strong>Clamp:</strong> mount an <strong>SK25 shaft support</strong> to the frame and clamp the round top section of the coupler (above the flats, away from the heater zone). The motor plate and the coupler are now both tied to the frame, so melt pressure goes through the frame instead of pulling on the thin barrel thread.</li>
+<li><strong>Heater &amp; sensor:</strong> install the 80 W cartridge and the thermistor in the block and fit the silicone sock.</li>
+<li><strong>Coupler heater:</strong> slide the 24 V 40 W cartridge into the coupler's Ø6 cross hole and the thermistor into the Ø3 hole, and lock each with its M3 set screw from the shoulder face. Route the leads away from the nozzle.</li>
+<li><strong>Barrel fan:</strong> clamp the 24 V 4010 fan over the barrel at the window, blowing across it, to keep the feed end cold. Wire it to an always-on 24 V supply.</li>
+</ol>
+<h2>4.5 Heater Wiring</h2>
+<p><strong>Zone 1, Super Volcano block (80 W), through the external MOSFET:</strong></p>
+<pre><code>[ Ender 3 24V PSU (+/-) ] ──(16 AWG, 5A fuse on +)──► [ MOSFET &quot;DC IN&quot; (+/-) ]
+[ Mainboard hotend terminal ] ──(signal cable)──────► [ MOSFET &quot;Control&quot; (+/-) ]
+                                                      [ MOSFET &quot;LOAD / OUT&quot; ] ──► [ 80 W heater ]
+[ Block thermistor ] ─────────────────────────────────► [ Mainboard &quot;TH&quot; header ]
+</code></pre>
+<p><strong>Zone 2, coupler (40 W), straight to the board:</strong></p>
+<pre><code>[ 40 W coupler cartridge ] ──► [ Mainboard &quot;BED&quot; screw terminals ]  (well within the bed MOSFET's rating)
+[ Coupler thermistor ]     ──► [ Mainboard &quot;TB&quot; header ]
+</code></pre>
+<div class="callout callout-warning"><div class="callout-title">! Warning</div><p>Connect <strong>both</strong> thermistors before heating. If a zone's thermistor is unplugged when that zone is given a target (for example by a preset), Marlin halts with <code>MINTEMP</code>. That's the safety working, not a firmware fault.</p></div>
+
+<h2>4.6 First Heat, Hot-Tighten &amp; PID</h2>
+<ol>
+<li>Flash the Ender 3 V2 firmware (see <a href="Ender3_Firmware/README.md"><code>Ender3_Firmware/README.md</code></a>).</li>
+<li>Set the hotend to <strong>250 °C</strong> and wait a few minutes.</li>
+<li>Hold the coupler's <strong>flats with a 22 mm wrench</strong> and tighten the nozzle a further <strong>⅛ turn</strong> against the stub.</li>
+<li>Run PID autotune on <strong>both zones</strong> and save, either from the screen (<strong>Configuration → Advanced Settings → PID Autotune</strong> for the nozzle and the Coupler, then <strong>Store Settings</strong>) or over USB:</li>
+</ol>
+<pre><code class="language-gcode">M303 E0 S220 C8 U1    ; nozzle (zone 1)
+M303 E-1 S205 C8 U1   ; coupler (zone 2, the &quot;bed&quot; channel)
+M500
+</code></pre>
+<p>The coupler ships with rough starting PID values, so tune it before the first real run.</p>
+
+<div class="page-break"></div><div class="header-rule"><span>3DTruder Master Manual</span><span>5. Phase 2: Puller, Sensor &amp; Controller</span></div>
+<h1>🎛️ 5. Phase 2: Puller, Sensor &amp; Controller</h1>
+<h2>5.1 Strand Line Layout</h2>
+<pre><code> nozzle ─► [ 5010 blowers ] ─► [ diameter sensor ] ─► [ BMG puller ] ─► [ spooler ]
+           5–10 cm after exit   10–20 cm from nozzle
+</code></pre>
+<ol>
+<li>Mount the <strong>BMG</strong> on the 5:1 geared motor and fix it to the frame after the sensor.</li>
+<li>Aim both <strong>5010 blowers</strong> at the strand 5–10 cm after the nozzle. It must be solid before it reaches the puller gears.</li>
+<li>Put the <strong>diameter sensor 10–20 cm from the nozzle</strong>, right after the cooling zone. Every extra 10 cm adds about 100 s between diameter corrections at 1 mm/s. Enter the measured distance as <code>SENSOR_DISTANCE_MM</code> in the firmware.</li>
+</ol>
+<h2>5.2 CNC Shield V3 Wiring</h2>
+<pre><code> [ Ender 3 PSU 24V ] ──────────────────────────────► [ CNC Shield &quot;Power In&quot; ]
+ [ CNC Shield on Uno ] ─► X socket (Pin 2 / 5) ─► A4988 ─► 5:1 motor  (puller, 1/16 step)
+                       ─► Y socket (Pin 3 / 6) ─► A4988 ─► 14:1 motor (auger, full step)
+                       ─► A0 (&quot;Abort&quot;)    ─────────────► diameter sensor signal
+                       ─► A2 (&quot;Resume&quot;)   ─────────────► headless run switch to GND
+</code></pre>
+<div class="callout callout-danger"><div class="callout-title">&times; Caution</div><p><strong>Check the CNC Shield capacitors before connecting 24 V.</strong> Budget shields often ship with 16 V or 25 V capacitors. Replace them with 35 V parts or run the shield from 12 V.</p></div>
+
+<h2>5.3 Driver Current (Vref)</h2>
+<ul>
+<li><strong>Auger (Y):</strong> set for about <strong>0.7 A</strong>. This is a torque limit: if the nozzle clogs, the motor skips steps (a buzzing noise) instead of building enough pressure to split the barrel thread. Raise it only in small steps if the auger skips during normal feeding.</li>
+<li><strong>Puller (X):</strong> set to the motor's comfortable running current; it carries very little load.</li>
+<li>Measure Vref with a multimeter and check your A4988's sense resistor (R100 / R050) to convert.</li>
+</ul>
+<h2>5.4 Controller Firmware</h2>
+<p>Flash <a href="Arduino_Firmware/Arduino_Firmware.ino"><code>Arduino_Firmware.ino</code></a> and set the calibration values at the top of the sketch. Details in <a href="Arduino_Firmware/README.md"><code>Arduino_Firmware/README.md</code></a>.</p>
+<ul>
+<li>Interrupt-driven stepping for both motors, so serial traffic never stutters them.</li>
+<li>Soft-start auger ramp; auger speed adjustable live with <code>RPM &lt;x&gt;</code>.</li>
+<li>Diameter control that waits for fresh strand to reach the sensor between corrections, and holds speed when the sensor is empty.</li>
+</ul>
+
+<div class="page-break"></div><div class="header-rule"><span>3DTruder Master Manual</span><span>6. Operating Procedure</span></div>
+<h1>🚀 6. Operating Procedure</h1>
+<h2>6.1 Startup</h2>
+<p>Screen presets (each sets both heat zones):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Preset</th>
+<th style="text-align: left;">Nozzle</th>
+<th style="text-align: left;">Coupler</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">PLA</td>
+<td style="text-align: left;">215 °C</td>
+<td style="text-align: left;">205 °C</td>
+</tr>
+<tr>
+<td style="text-align: left;">PETG</td>
+<td style="text-align: left;">240 °C</td>
+<td style="text-align: left;">230 °C</td>
+</tr>
+<tr>
+<td style="text-align: left;">PET</td>
+<td style="text-align: left;">270 °C</td>
+<td style="text-align: left;">260 °C</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><strong>Pre-flight:</strong> barrel fan running; feedstock sieved (1–3 mm) and dried; CNC shield on 24 V only with 35 V+ capacitors.</li>
+<li><strong>Preheat:</strong> pick a preset on the screen (table above). It sets both zones.</li>
+<li><strong>Soak:</strong> once <strong>both zones</strong> are at temperature the screen counts down <code>SOAKING: 10:00</code>. Wait for <strong><code>&gt;&gt;&gt; MELT READY &lt;&lt;&lt;</code></strong> and <strong><code>AUGER: OK TO START</code></strong>.</li>
+<li><strong>Blowers on.</strong></li>
+<li><strong>Start the auger slow:</strong> send <code>RPM 5</code>, then <code>AUG ON</code> (or close the A2 switch). Fill the hopper.</li>
+<li><strong>Capture the strand:</strong> as plastic leaves the nozzle, draw it past the blowers with pliers.</li>
+<li><strong>Thread the line:</strong> through the diameter sensor, into the BMG, tighten the thumbscrew.</li>
+<li><strong>Pull:</strong> send <code>PULL ON</code>. Use <code>SPEED &lt;x&gt;</code> to get near 1.75 mm by hand, then let auto-regulation trim it. Attach the filament to the spooler.</li>
+<li><strong>Throughput:</strong> raise the auger with <code>RPM &lt;x&gt;</code> a step at a time. If the puller pins at its maximum speed, or Marlin reports thermal runaway, the auger is too fast.</li>
+</ol>
+<h2>6.2 Shutdown</h2>
+<ol>
+<li><code>AUG OFF</code>, let the puller clear the strand, then <code>STOP</code>.</li>
+<li>Cooldown on the screen (turns off both zones). Leave the barrel fan running until the block is below 60 °C.</li>
+</ol>
+<h2>6.3 Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Symptom</th>
+<th style="text-align: left;">Likely Cause</th>
+<th style="text-align: left;">Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Auger motor buzzes / skips</strong></td>
+<td style="text-align: left;">Plastic not melted, or nozzle clogged. (Skipping is the torque limit working.)</td>
+<td style="text-align: left;">Stop the auger. Wait for <code>MELT READY</code>. Clear the nozzle. Don't raise Vref to push through.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>Thermal Runaway</code> mid-run</strong> (nozzle or coupler)</td>
+<td style="text-align: left;">Auger feeding cold flakes faster than the heaters can melt them</td>
+<td style="text-align: left;">Lower <code>RPM</code>. Don't loosen the thermal protection.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>MINTEMP</code> / <code>MAXTEMP</code></strong></td>
+<td style="text-align: left;">Thermistor unplugged or broken</td>
+<td style="text-align: left;">Check the nozzle thermistor on <code>TH</code> and the coupler thermistor on <code>TB</code>, and their wires</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Coupler never reaches temperature</strong></td>
+<td style="text-align: left;">Cartridge loose in its hole, or PID not tuned</td>
+<td style="text-align: left;">Tighten the M3 set screw; run <code>M303 E-1 S205 C8 U1</code> then <code>M500</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Plastic leaks around the block top</strong></td>
+<td style="text-align: left;">Stub end not seated on the nozzle</td>
+<td style="text-align: left;">Heat to 250 °C, hold the coupler flats, tighten the nozzle ⅛ turn. Check the nozzle hex isn't touching the block.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Plastic leaks at the barrel thread</strong></td>
+<td style="text-align: left;">Thread not sealed or not snug</td>
+<td style="text-align: left;">Cool down, re-tape and re-tighten. Check the thread is fully inside the coupler.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Squealing / auger rubbing</strong></td>
+<td style="text-align: left;">Auger off-center in the shaft coupling</td>
+<td style="text-align: left;">Redo the shim or sleeve; spin-test for wobble</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Flakes not feeding</strong></td>
+<td style="text-align: left;">Bridging in the jug, or flakes too big for the flights</td>
+<td style="text-align: left;">Tap the jug; sieve to 1–2 mm</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Diameter hunts up and down</strong></td>
+<td style="text-align: left;">Sensor too far from the nozzle, or wrong <code>SENSOR_DISTANCE_MM</code></td>
+<td style="text-align: left;">Move the sensor closer; measure and update the setting</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Filament undersized before pulling</strong></td>
+<td style="text-align: left;">Not enough die swell</td>
+<td style="text-align: left;">Raise temperature 5–10 °C, slow the puller; if still thin, switch to a 2.0 mm nozzle</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bubbles / popping</strong></td>
+<td style="text-align: left;">Wet feedstock</td>
+<td style="text-align: left;">Dry longer (PET: 5+ h at 130 °C)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Puller flattens the filament</strong></td>
+<td style="text-align: left;">Strand still soft at the puller</td>
+<td style="text-align: left;">More blower airflow; loosen the BMG thumbscrew slightly</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

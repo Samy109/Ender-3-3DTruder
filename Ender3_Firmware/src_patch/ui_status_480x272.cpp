@@ -285,72 +285,117 @@ void MarlinUI::draw_status_screen() {
   }
 
   // Live Nozzle Temperature update: Current / Target
-  celsius_t cur = thermalManager.wholeDegHotend(0);
-  celsius_t tgt = thermalManager.degTargetHotend(0);
+  const celsius_t cur = thermalManager.wholeDegHotend(0);
+  const celsius_t tgt = thermalManager.degTargetHotend(0);
 
-  static celsius_t last_cur = -999, last_tgt = -999;
-  if (!ui.did_first_redraw || cur != last_cur || tgt != last_tgt) {
+  // Coupler zone: the bed heater channel drives the barrel coupler's cartridge heater.
+  #if HAS_HEATED_BED
+    const celsius_t c_cur = thermalManager.wholeDegBed();
+    const celsius_t c_tgt = thermalManager.degTargetBed();
+  #else
+    const celsius_t c_cur = 0, c_tgt = 0;
+  #endif
+  const bool c_on = c_tgt > 0;   // a zone with target 0 is ignored, so the line can run on the nozzle alone
+
+  // Melt soak timer: the heaters reach temperature long before the barrel end does, so only
+  // report MELT READY after every active zone has held its target for MELT_SOAK_MS.
+  // Counting starts with all active zones within 3 C of target, and resets if any zone drifts
+  // more than 5 C or a target changes.
+  #define MELT_SOAK_MS (10UL * 60UL * 1000UL)
+  static millis_t soak_start_ms = 0;
+  static celsius_t soak_tgt = 0, soak_c_tgt = 0;
+  const millis_t now = millis();
+  const bool nozzle_at = ABS(cur - tgt) <= 3, coupler_at = !c_on || ABS(c_cur - c_tgt) <= 3;
+  if (tgt != soak_tgt || c_tgt != soak_c_tgt || tgt == 0 || ABS(cur - tgt) > 5 || (c_on && ABS(c_cur - c_tgt) > 5)) {
+    soak_start_ms = 0; soak_tgt = tgt; soak_c_tgt = c_tgt;
+  }
+  if (!soak_start_ms && tgt > 0 && nozzle_at && coupler_at) soak_start_ms = now ?: 1;
+  const millis_t soak_elapsed = soak_start_ms ? now - soak_start_ms : 0;
+  const bool soaked = soak_start_ms && soak_elapsed >= MELT_SOAK_MS;
+  const uint16_t soak_left_s = (soak_start_ms && !soaked) ? (MELT_SOAK_MS - soak_elapsed + 999) / 1000 : 0;
+
+  static celsius_t last_cur = -999, last_tgt = -999, last_c_cur = -999, last_c_tgt = -999;
+  static uint16_t last_soak_left_s = 0xFFFF;
+  static bool last_soaked = false;
+  if (!ui.did_first_redraw || cur != last_cur || tgt != last_tgt || c_cur != last_c_cur || c_tgt != last_c_tgt
+      || soak_left_s != last_soak_left_s || soaked != last_soaked) {
     last_cur = cur;
     last_tgt = tgt;
+    last_c_cur = c_cur;
+    last_c_tgt = c_tgt;
+    last_soak_left_s = soak_left_s;
+    last_soaked = soaked;
 
-    // Line 1: Big Nozzle Readout (Centered)
+    // Line 1: Big Nozzle Readout (13 chars * 16px = 208px in 272px width)
     dwin_string.set(i16tostr3rj(cur));
     dwin_string.add(F(" C / "));
     dwin_string.add(i16tostr3rj(tgt));
     dwin_string.add(F(" C"));
-    DWIN_Draw_String(true, font16x32, Color_White, Color_Bg_Black, 16, 92, S(dwin_string.string()));
+    DWIN_Draw_String(true, font16x32, Color_White, Color_Bg_Black, 32, 92, S(dwin_string.string()));
 
-    // Line 2: Heating Status
-    dwin_string.set();
-    uint16_t stateColor = Color_White;
+    // Line 2: Heating Status. Every state is exactly 18 chars at the same X so a shorter
+    // message never leaves pieces of the previous one behind (18 * 14px = 252px).
+    uint16_t stateColor;
     if (tgt == 0) {
-      dwin_string.set(F("  HEATER: OFF       "));
+      dwin_string.set(F("   HEATER: OFF    "));
       stateColor = Color_White;
     }
-    else if (abs(cur - tgt) <= 3) {
-      dwin_string.set(F(" >>> MELT READY <<< "));
+    else if (soaked) {
+      dwin_string.set(F(">>> MELT READY <<<"));
       stateColor = RGB(0x00,0x3F,0x00); // Bright Green
     }
-    else if (cur < tgt) {
-      dwin_string.set(F(" STATUS: HEATING... "));
+    else if (soak_start_ms) {
+      const char mmss[] = {
+        char('0' + (soak_left_s / 600) % 10), char('0' + (soak_left_s / 60) % 10), ':',
+        char('0' + (soak_left_s % 60) / 10),  char('0' + soak_left_s % 10), ' '
+      };
+      dwin_string.set(F("SOAKING:  "));
+      dwin_string.add(mmss);
+      dwin_string.add(F("   "));
+      stateColor = Color_Yellow;
+    }
+    else if (cur < tgt || (c_on && c_cur < c_tgt)) {
+      dwin_string.set(F("STATUS: HEATING..."));
       stateColor = Color_Yellow;
     }
     else {
-      dwin_string.set(F(" STATUS: COOLING... "));
+      dwin_string.set(F("STATUS: COOLING..."));
       stateColor = Color_Yellow;
     }
-    DWIN_Draw_String(true, font14x28, stateColor, Color_Bg_Black, 0, 140, S(dwin_string.string()));
+    DWIN_Draw_String(true, font14x28, stateColor, Color_Bg_Black, 10, 140, S(dwin_string.string()));
 
-    // Line 3: Thermal Guard state
-    dwin_string.set(F("THERMAL GUARD: ACTIVE "));
-    DWIN_Draw_String(true, font10x20, Color_White, Color_Bg_Black, 26, 182, S(dwin_string.string()));
+    // Line 3: Coupler zone, current / target (always 21 chars: 210px at X=31)
+    dwin_string.set(F("COUPLER: "));
+    dwin_string.add(i16tostr3rj(c_cur));
+    dwin_string.add(F(" / "));
+    if (c_on) { dwin_string.add(i16tostr3rj(c_tgt)); dwin_string.add(F(" C ")); }
+    else        dwin_string.add(F("OFF   "));
+    DWIN_Draw_String(true, font10x20, (c_on && !coupler_at) ? Color_Yellow : Color_White, Color_Bg_Black, 31, 182, S(dwin_string.string()));
 
-    // Box 2 - Line 1: Preset
+    // Box 2 - Line 1: Preset. Suffix padded to 13 chars (21 * 12px = 252px, inside the border)
     dwin_string.set(F("PRESET: "));
-    if (tgt == 215)      dwin_string.add(F("PLA (215 C)     "));
-    else if (tgt == 240) dwin_string.add(F("PETG (240 C)    "));
-    else if (tgt == 270) dwin_string.add(F("PET BOTTLE (270)"));
-    else if (tgt == 0)   dwin_string.add(F("STANDBY (OFF)   "));
+    if (tgt == 215)      dwin_string.add(F("PLA (215 C)  "));
+    else if (tgt == 240) dwin_string.add(F("PETG (240 C) "));
+    else if (tgt == 270) dwin_string.add(F("PET (270 C)  "));
+    else if (tgt == 0)   dwin_string.add(F("STANDBY (OFF)"));
     else {
-      dwin_string.add(F("CUSTOM ("));
+      dwin_string.add(F("CUSTOM "));
       dwin_string.add(i16tostr3rj(tgt));
-      dwin_string.add(F(" C) "));
+      dwin_string.add(F("C  "));
     }
-    DWIN_Draw_String(true, font12x24, Color_White, Color_Bg_Black, 16, 268, S(dwin_string.string()));
+    DWIN_Draw_String(true, font12x24, Color_White, Color_Bg_Black, 10, 268, S(dwin_string.string()));
 
-    // Box 2 - Line 2: Nozzle Spec
-    DWIN_Draw_String(false, font10x20, Color_White, Color_Bg_Black, 16, 305, F("NOZZLE : 1.4 mm BRASS"));
+    // Box 2 - Line 2: Thermal protection is compiled in for both zones
+    DWIN_Draw_String(true, font10x20, Color_White, Color_Bg_Black, 16, 305, F("THERMAL GUARD: ACTIVE"));
 
-    // Box 2 - Line 3: Hotend Fan
-    DWIN_Draw_String(false, font10x20, Color_White, Color_Bg_Black, 16, 338, F("COOLING: 24V ACTIVE  "));
+    // Box 2 - Line 3: The barrel fan is wired straight to 24V, so Marlin can only remind
+    DWIN_Draw_String(true, font10x20, Color_White, Color_Bg_Black, 16, 338, F("COOLING: CHECK FAN ON"));
 
-    // Box 2 - Line 4: Pull Rate Guide
-    if (tgt > 0 && abs(cur - tgt) <= 3) {
-      DWIN_Draw_String(true, font10x20, RGB(0x00,0x3F,0x00), Color_Bg_Black, 16, 372, F("PULL: ~250-400 mm/min"));
-    }
-    else {
-      DWIN_Draw_String(true, font10x20, Color_White, Color_Bg_Black, 16, 372, F("PULL: STANDBY / WAIT "));
-    }
+    // Box 2 - Line 4: Auger go / no-go (the Arduino can't see the temperature)
+    if (soaked)
+      DWIN_Draw_String(true, font10x20, RGB(0x00,0x3F,0x00), Color_Bg_Black, 16, 372, F("AUGER: OK TO START   "));
+    else
+      DWIN_Draw_String(true, font10x20, Color_White, Color_Bg_Black, 16, 372, F("AUGER: DO NOT START  "));
   }
 
   ui.did_first_redraw = true;
