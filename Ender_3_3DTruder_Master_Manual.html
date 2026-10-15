@@ -396,10 +396,10 @@ pre code { background: none; border: none; padding: 0; color: inherit; font-size
 </ul>
 <h2>🔹 Auger Feed</h2>
 <ul>
-<li><strong>Stainless barrel tube, 10 mm ID × 12 mm OD, 150 mm</strong>, with a 15 × 12 mm hopper window near one end. The other end gets an M12×1.0 external thread, 12 mm long (cut by the shop on a lathe).</li>
+<li><strong>Stainless barrel tube, 10 mm ID × 12 mm OD, 150 mm</strong>, with a 15 × 12 mm hopper window near one end. The other end gets an M12×1.0 external thread, 12 mm long, cut with the die (see 4.3).</li>
 <li><strong>3/8" wood auger bit, 12"</strong>, hex shank 9.0 mm across flats. Screw point cut off, tip ground to a cone.</li>
 <li><strong>NEMA 17 planetary gearmotor, 14:1</strong>, 8 mm output shaft (needs at least 25 mm of exposed shaft).</li>
-<li><strong>8 mm → 11 mm clamp-on shaft coupling</strong>, Ø32 × 45 mm aluminum, plus a slit sleeve or shim to center the hex shank (see 4.2).</li>
+<li><strong>8 mm → 11 mm clamp-on shaft coupling</strong>, Ø32 × 45 mm aluminum, plus a soda-can aluminum shim to center the hex shank (see 4.2).</li>
 <li><strong>51100 thrust ball bearing</strong>, 10 × 24 × 9 mm.</li>
 <li><strong>NEMA 17 motor mount plate</strong> bolted to the 2020 frame.</li>
 <li><strong>24 V 4010 fan</strong> over the barrel at the hopper window.</li>
@@ -422,7 +422,8 @@ pre code { background: none; border: none; padding: 0; color: inherit; font-size
 </ul>
 <h2>🔹 Tools</h2>
 <ul>
-<li><strong>M12×1.0 tap &amp; die set</strong> (backup, if you ever thread a replacement barrel yourself)</li>
+<li><strong>M12×1.0 tap &amp; die set</strong> + <strong>38 mm die handle</strong> (for the barrel thread)</li>
+<li>Bench vise, cutting oil, and a Ø10 mm rod or drill shank about 50 mm long (supports the tube while threading)</li>
 <li>Angle grinder / cutoff discs, needle files, 240-grit cloth</li>
 <li>Digital caliper, multimeter (for A4988 Vref)</li>
 <li>22 mm wrench (coupler flats), nozzle wrench</li>
@@ -524,14 +525,21 @@ pre code { background: none; border: none; padding: 0; color: inherit; font-size
 <ol>
 <li>Bolt the motor to the mount plate and the plate to the 2020 frame.</li>
 <li>Slide the 51100 bearing over the 8 mm motor shaft against the plate.</li>
-<li>Center the hex shank in the 11 mm side of the clamp-on coupling: use the slit sleeve from the shop (Job 3), or wrap the hex in <strong>three layers of soda-can aluminum</strong>.</li>
+<li>Center the hex shank in the 11 mm side of the clamp-on coupling: wrap the hex in <strong>three layers of soda-can aluminum</strong> (about 0.1 mm each) where the clamp grips it.</li>
 <li>Push the coupling down onto the bearing with <strong>no gap</strong>, then tighten the 8 mm clamp. The load path is now coupling → bearing → plate → frame, not the gearbox.</li>
 <li><strong>Spin test:</strong> turn the motor by hand and watch the auger tip. Any visible wobble will rub the barrel (only ~0.25 mm clearance per side). Fix the shim before going further.</li>
 </ol>
 <h2>4.3 Barrel Prep</h2>
 <ol>
 <li><strong>Deburr the window:</strong> file all inside edges of the window smooth with a needle file and 240-grit. Burrs left by the cutting disc catch flakes and scrape the auger.</li>
-<li>The shop cuts the <strong>M12×1.0 thread, 12 mm long</strong>, on the end without the window (see <a href="CAD/shop_order.md"><code>CAD/shop_order.md</code></a>, Job 2).</li>
+<li><strong>Thread the outlet end</strong> (the end without the window) <strong>M12×1.0, 12 mm long</strong>:<ul>
+<li>File a small 45° chamfer on the outside edge of the tube end so the die starts square.</li>
+<li>Slide the Ø10 mm rod into the tube so the 1 mm wall can't crush, and clamp the tube in the vise on a rag or soft jaws, well away from the window.</li>
+<li>Start the die square with plenty of cutting oil. Turn half a turn forward, a quarter turn back to break the chip, and repeat.</li>
+<li>Stop at <strong>12 mm</strong>. The coupler's thread is 14 mm deep, so the whole cut thread ends up hidden inside it.</li>
+<li>Back the die off, deburr the inside edge, and test-fit the coupler by hand. If the thread tears, cut 15 mm off the tube and start again.</li>
+</ul>
+</li>
 <li>Slide the barrel over the auger. The window end goes toward the motor.</li>
 </ol>
 <h2>4.4 Melt Zone Assembly</h2>
@@ -714,7 +722,7 @@ M500
 <tr>
 <td style="text-align: left;"><strong>Squealing / auger rubbing</strong></td>
 <td style="text-align: left;">Auger off-center in the shaft coupling</td>
-<td style="text-align: left;">Redo the shim or sleeve; spin-test for wobble</td>
+<td style="text-align: left;">Redo the shim; spin-test for wobble</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Flakes not feeding</strong></td>

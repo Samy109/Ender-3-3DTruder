@@ -47,10 +47,10 @@ Full list with specs and links: [`amazon_parts_list.md`](amazon_parts_list.md). 
 * **PTFE thread tape** for the barrel thread.
 
 ### 🔹 Auger Feed
-* **Stainless barrel tube, 10 mm ID × 12 mm OD, 150 mm**, with a 15 × 12 mm hopper window near one end. The other end gets an M12×1.0 external thread, 12 mm long (cut by the shop on a lathe).
+* **Stainless barrel tube, 10 mm ID × 12 mm OD, 150 mm**, with a 15 × 12 mm hopper window near one end. The other end gets an M12×1.0 external thread, 12 mm long, cut with the die (see 4.3).
 * **3/8" wood auger bit, 12"**, hex shank 9.0 mm across flats. Screw point cut off, tip ground to a cone.
 * **NEMA 17 planetary gearmotor, 14:1**, 8 mm output shaft (needs at least 25 mm of exposed shaft).
-* **8 mm → 11 mm clamp-on shaft coupling**, Ø32 × 45 mm aluminum, plus a slit sleeve or shim to center the hex shank (see 4.2).
+* **8 mm → 11 mm clamp-on shaft coupling**, Ø32 × 45 mm aluminum, plus a soda-can aluminum shim to center the hex shank (see 4.2).
 * **51100 thrust ball bearing**, 10 × 24 × 9 mm.
 * **NEMA 17 motor mount plate** bolted to the 2020 frame.
 * **24 V 4010 fan** over the barrel at the hopper window.
@@ -70,7 +70,8 @@ Full list with specs and links: [`amazon_parts_list.md`](amazon_parts_list.md). 
 * **Motorized spooler** with slip-clutch hub.
 
 ### 🔹 Tools
-* **M12×1.0 tap & die set** (backup, if you ever thread a replacement barrel yourself)
+* **M12×1.0 tap & die set** + **38 mm die handle** (for the barrel thread)
+* Bench vise, cutting oil, and a Ø10 mm rod or drill shank about 50 mm long (supports the tube while threading)
 * Angle grinder / cutoff discs, needle files, 240-grit cloth
 * Digital caliper, multimeter (for A4988 Vref)
 * 22 mm wrench (coupler flats), nozzle wrench
@@ -130,13 +131,18 @@ Melt pressure pushes the auger back **toward the motor**, so the thrust bearing 
 
 1. Bolt the motor to the mount plate and the plate to the 2020 frame.
 2. Slide the 51100 bearing over the 8 mm motor shaft against the plate.
-3. Center the hex shank in the 11 mm side of the clamp-on coupling: use the slit sleeve from the shop (Job 3), or wrap the hex in **three layers of soda-can aluminum**.
+3. Center the hex shank in the 11 mm side of the clamp-on coupling: wrap the hex in **three layers of soda-can aluminum** (about 0.1 mm each) where the clamp grips it.
 4. Push the coupling down onto the bearing with **no gap**, then tighten the 8 mm clamp. The load path is now coupling → bearing → plate → frame, not the gearbox.
 5. **Spin test:** turn the motor by hand and watch the auger tip. Any visible wobble will rub the barrel (only ~0.25 mm clearance per side). Fix the shim before going further.
 
 ### 4.3 Barrel Prep
 1. **Deburr the window:** file all inside edges of the window smooth with a needle file and 240-grit. Burrs left by the cutting disc catch flakes and scrape the auger.
-2. The shop cuts the **M12×1.0 thread, 12 mm long**, on the end without the window (see [`CAD/shop_order.md`](CAD/shop_order.md), Job 2).
+2. **Thread the outlet end** (the end without the window) **M12×1.0, 12 mm long**:
+    * File a small 45° chamfer on the outside edge of the tube end so the die starts square.
+    * Slide the Ø10 mm rod into the tube so the 1 mm wall can't crush, and clamp the tube in the vise on a rag or soft jaws, well away from the window.
+    * Start the die square with plenty of cutting oil. Turn half a turn forward, a quarter turn back to break the chip, and repeat.
+    * Stop at **12 mm**. The coupler's thread is 14 mm deep, so the whole cut thread ends up hidden inside it.
+    * Back the die off, deburr the inside edge, and test-fit the coupler by hand. If the thread tears, cut 15 mm off the tube and start again.
 3. Slide the barrel over the auger. The window end goes toward the motor.
 
 ### 4.4 Melt Zone Assembly
@@ -285,7 +291,7 @@ Screen presets (each sets both heat zones):
 | **Coupler never reaches temperature** | Cartridge loose in its hole, or PID not tuned | Tighten the M3 set screw; run `M303 E-1 S205 C8 U1` then `M500` |
 | **Plastic leaks around the block top** | Stub end not seated on the nozzle | Heat to 250 °C, hold the coupler flats, tighten the nozzle ⅛ turn. Check the nozzle hex isn't touching the block. |
 | **Plastic leaks at the barrel thread** | Thread not sealed or not snug | Cool down, re-tape and re-tighten. Check the thread is fully inside the coupler. |
-| **Squealing / auger rubbing** | Auger off-center in the shaft coupling | Redo the shim or sleeve; spin-test for wobble |
+| **Squealing / auger rubbing** | Auger off-center in the shaft coupling | Redo the shim; spin-test for wobble |
 | **Flakes not feeding** | Bridging in the jug, or flakes too big for the flights | Tap the jug; sieve to 1–2 mm |
 | **Diameter hunts up and down** | Sensor too far from the nozzle, or wrong `SENSOR_DISTANCE_MM` | Move the sensor closer; measure and update the setting |
 | **Filament undersized before pulling** | Not enough die swell | Raise temperature 5–10 °C, slow the puller; if still thin, switch to a 2.0 mm nozzle |

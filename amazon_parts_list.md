@@ -29,10 +29,10 @@
 ## 🌀 Auger Feed
 | ☐ | Qty | Part | Spec / Notes | Link |
 | :-: | :-: | :--- | :--- | :--- |
-| ✅ | 1 | Stainless barrel tube | **10 mm ID × 12 mm OD**, 150 mm. Hopper window cut. **M12×1.0 external thread, 12 mm long, on the other end (shop, Job 2).** | [Search](https://www.amazon.com/s?k=stainless+steel+tube+10mm+id+12mm+od) |
+| ✅ | 1 | Stainless barrel tube | **10 mm ID × 12 mm OD**, 150 mm. Hopper window cut. **M12×1.0 external thread, 12 mm long, on the other end (cut with the die, manual 4.3).** | [Search](https://www.amazon.com/s?k=stainless+steel+tube+10mm+id+12mm+od) |
 | ✅ | 1 | Wood auger drill bit | **3/8" (~9.5 mm), 12"**, **hex shank 9.0 mm across flats**. Screw point cut off, tip ground to a cone. | [Search](https://www.amazon.com/s?k=3%2F8+auger+drill+bit+12+inch) |
 | ✅ | 1 | NEMA 17 planetary gearmotor | **14:1**, 8 mm output shaft (needs ≥ 25 mm exposed for the bearing + coupling). | [Search](https://www.amazon.com/s?k=nema+17+planetary+gearbox+stepper+motor+14%3A1) |
-| ✅ | 1 | Shaft coupling | **8 mm → 11 mm clamp-on, Ø32 × 45 mm aluminum.** Center the hex shank with the shop sleeve (Job 3) or three wraps of soda-can aluminum. | [Search](https://www.amazon.com/s?k=8mm+to+11mm+clamp+shaft+coupling) |
+| ✅ | 1 | Shaft coupling | **8 mm → 11 mm clamp-on, Ø32 × 45 mm aluminum.** Center the hex shank with three wraps of soda-can aluminum. | [Search](https://www.amazon.com/s?k=8mm+to+11mm+clamp+shaft+coupling) |
 | ✅ | 1 | 51100 thrust ball bearing | **10 × 24 × 9 mm.** Sits on the motor shaft between the mount plate and the coupling. | [Search](https://www.amazon.com/s?k=51100+thrust+ball+bearing+10mm) |
 | ✅ | 1 | Motor mount plate & fasteners | NEMA 17 bracket, bolts to the 2020 frame. | [Search](https://www.amazon.com/s?k=nema+17+motor+mount+bracket) |
 | ✅ | 1 | A4988 stepper driver | With heatsink. Full step, **current limited to ~0.7 A** (torque limit). | [Search](https://www.amazon.com/s?k=a4988+stepper+driver+heatsink) |
@@ -74,7 +74,8 @@
 ## 🔧 Tools
 | ☐ | Qty | Part | Spec / Notes | Link |
 | :-: | :-: | :--- | :--- | :--- |
-| ✅ | 1 | M12×1.0 tap & die set | Taken to the shop for the barrel thread; backup for threading a replacement barrel. | [Search](https://www.amazon.com/s?k=m12x1+tap+and+die+set) |
+| ✅ | 1 | M12×1.0 tap & die set | Die cuts the barrel thread. Tap goes to the shop in case they need it for the coupler. | [Search](https://www.amazon.com/s?k=m12x1+tap+and+die+set) |
+| ☐ | 1 | Die handle (die stock) | **38 mm (1.5") round die**, to fit the M12 die. | [Search](https://www.amazon.com/s?k=38mm+die+handle+round+die+stock) |
 | ✅ | 1 | Angle grinder / cutoff discs | Cutting the auger tip and barrel window. | [Search](https://www.amazon.com/s?k=rotary+tool+cutoff+wheels+metal) |
 | ✅ | 1 | Needle files + 240-grit cloth | Deburring the window and auger tip. | — |
 | ✅ | 1 | Digital caliper | 0.01 mm resolution. | [Search](https://www.amazon.com/s?k=digital+caliper+150mm) |
