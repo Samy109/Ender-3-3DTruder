@@ -73,7 +73,8 @@ A complete DIY conversion turning a **Creality Ender 3 / Ender 3 V2** into a hig
 │   ├── barrel_coupler.stl
 │   ├── barrel_coupler_nothreads.step
 │   ├── barrel_coupler_nothreads.stl
-│   ├── barrel_coupler_drawing.pdf
+│   ├── barrel_coupler_drawing.pdf   (built by make_drawing.py)
+│   ├── make_drawing.py
 │   ├── assembly_overview.pdf
 │   └── shop_order.md
 ├── tools/
