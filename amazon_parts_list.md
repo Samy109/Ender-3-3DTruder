@@ -17,11 +17,12 @@
 | ✅ | 1 | Heater cartridge | 24 V, 80 W, 6 mm × 20 mm. | [Search](https://www.amazon.com/s?k=24v+80w+heater+cartridge+6mm) |
 | ✅ | 1 | Thermistor cartridge | 100K NTC B3950, rated to 300 °C for PET. | [Search](https://www.amazon.com/s?k=100k+b3950+thermistor+cartridge+3d+printer) |
 | ✅ | 1 | 25 A external MOSFET module | Opto-isolated control input, works with the mainboard's 24 V heater output. | [Search](https://www.amazon.com/s?k=3d+printer+mosfet+module+25a+24v) |
-| ☐ | 1 | **Heated barrel coupler (metal 3D printed)** | **316L stainless, Ø25 × 40 mm. M12×1.0 female top (14 mm deep), M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø2 through the stub), 22 mm flats, cross holes for a 6 mm heater cartridge and 3 mm thermistor.** Replaces any adapter or heatbreak. | [Shop order](CAD/shop_order.md) · [CAD](CAD/barrel_coupler.step) |
+| ☐ | 1 | **Heated barrel coupler (metal 3D printed)** | **PCBWay SLM print, 316L stainless, ±0.3 mm, all threads printed. Ø24.7 × 40 mm. M12×1.0 female top (14 mm deep), M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø2 through the stub), flats for a 22 mm wrench, cross holes for a 6 mm heater cartridge and 3 mm thermistor, M5 set screws.** Replaces any adapter or heatbreak. | [Shop order](CAD/shop_order.md) · [CAD](CAD/barrel_coupler.step) |
 | ☐ | 1 | SK25 shaft support | 25 mm bore. Clamps the coupler's top section to the 2020 frame so melt pressure doesn't pull on the barrel thread. | [Search](https://www.amazon.com/s?k=sk25+shaft+support+25mm) |
 | ☐ | 1 | Coupler heater cartridge | 24 V, 40 W, 6 × 20 mm. Second heat zone in the coupler, wired to the mainboard's bed terminals. | [Search](https://www.amazon.com/s?k=24v+40w+heater+cartridge+6x20mm) |
 | ☐ | 1 | Coupler thermistor | 100K NTC B3950 cartridge, 3 × 15 mm, rated to 300 °C. Plugs into the mainboard's `TB` header. | [Search](https://www.amazon.com/s?k=100k+b3950+thermistor+cartridge+3x15mm) |
 | ☐ | 1 | PTFE thread tape | For the barrel → coupler thread. | [Search](https://www.amazon.com/s?k=ptfe+thread+seal+tape) |
+| ☐ | 2 | M5 stainless set screws | Hex socket: one **M5 × 5** (heater), one **M5 × 16** (thermistor). Lock the coupler's cartridges. | [Search](https://www.amazon.com/s?k=m5+stainless+set+screw+assortment) |
 | ✅ | 1 | 24 V 4010 fan | Over the barrel at the hopper window, keeps the feed end cold. Always on. | [Search](https://www.amazon.com/s?k=4010+fan+24v) |
 
 ---
@@ -29,7 +30,7 @@
 ## 🌀 Auger Feed
 | ☐ | Qty | Part | Spec / Notes | Link |
 | :-: | :-: | :--- | :--- | :--- |
-| ✅ | 1 | Stainless barrel tube | **10 mm ID × 12 mm OD**, 150 mm. Hopper window cut. **M12×1.0 external thread, 12 mm long, on the other end (cut with the die, manual 4.3).** | [Search](https://www.amazon.com/s?k=stainless+steel+tube+10mm+id+12mm+od) |
+| ✅ | 1 | Stainless barrel tube | **10 mm ID × 12 mm OD**, 150 mm. Hopper window cut. **M12×1.0 external thread, 12 mm long, on the other end: still to do, best by a machine shop (manual 4.3).** | [Search](https://www.amazon.com/s?k=stainless+steel+tube+10mm+id+12mm+od) |
 | ✅ | 1 | Wood auger drill bit | **3/8" (~9.5 mm), 12"**, **hex shank 9.0 mm across flats**. Screw point cut off, tip ground to a cone. | [Search](https://www.amazon.com/s?k=3%2F8+auger+drill+bit+12+inch) |
 | ✅ | 1 | NEMA 17 planetary gearmotor | **14:1**, 8 mm output shaft (needs ≥ 25 mm exposed for the bearing + coupling). | [Search](https://www.amazon.com/s?k=nema+17+planetary+gearbox+stepper+motor+14%3A1) |
 | ✅ | 1 | Shaft coupling | **8 mm → 11 mm clamp-on, Ø32 × 45 mm aluminum.** Center the hex shank with three wraps of soda-can aluminum. | [Search](https://www.amazon.com/s?k=8mm+to+11mm+clamp+shaft+coupling) |
@@ -74,11 +75,11 @@
 ## 🔧 Tools
 | ☐ | Qty | Part | Spec / Notes | Link |
 | :-: | :-: | :--- | :--- | :--- |
-| ✅ | 1 | M12×1.0 tap & die set | Die cuts the barrel thread. Tap goes to the shop in case they need it for the coupler. | [Search](https://www.amazon.com/s?k=m12x1+tap+and+die+set) |
-| ☐ | 1 | Die handle (die stock) | **38 mm (1.5") round die**, to fit the M12 die. | [Search](https://www.amazon.com/s?k=38mm+die+handle+round+die+stock) |
+| ✅ | 1 | M12×1.0 tap & die set | Only needed if you cut the barrel thread yourself. The printed coupler needs no tap. | [Search](https://www.amazon.com/s?k=m12x1+tap+and+die+set) |
+| ☐ | 1 | Die handle (die stock) | **38 mm (1.5") round die**, to fit the M12 die. Skip it if a shop cuts the barrel thread. | [Search](https://www.amazon.com/s?k=38mm+die+handle+round+die+stock) |
 | ✅ | 1 | Angle grinder / cutoff discs | Cutting the auger tip and barrel window. | [Search](https://www.amazon.com/s?k=rotary+tool+cutoff+wheels+metal) |
 | ✅ | 1 | Needle files + 240-grit cloth | Deburring the window and auger tip. | — |
 | ✅ | 1 | Digital caliper | 0.01 mm resolution. | [Search](https://www.amazon.com/s?k=digital+caliper+150mm) |
 | ✅ | 1 | Multimeter | Vref and continuity checks. | [Search](https://www.amazon.com/s?k=digital+multimeter) |
-| ✅ | 1 | Wrenches | 22 mm (coupler flats) + nozzle wrench. | [Search](https://www.amazon.com/s?k=mini+wrench+set+metric) |
+| ✅ | 1 | Wrenches | 22 mm (coupler flats) + nozzle wrench + 2.5 mm hex key (M5 set screws). | [Search](https://www.amazon.com/s?k=mini+wrench+set+metric) |
 | ✅ | 1 | Fume extractor | Carbon filter fan. | [Search](https://www.amazon.com/s?k=solder+fume+extractor+fan+carbon+filter) |

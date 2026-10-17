@@ -41,13 +41,14 @@ Full list with specs and links: [`amazon_parts_list.md`](amazon_parts_list.md). 
 * **Super Volcano heater block** + **1.4 mm Super Volcano brass nozzle** + **silicone sock**
 * **80 W 24 V heater cartridge** + **100K NTC B3950 thermistor cartridge**
 * **25 A external MOSFET module** + 16 AWG silicone wire + 5 A inline fuse
-* **Heated barrel coupler (316L stainless, metal 3D printed):** Ø25 × 40 mm. M12×1.0 female top, M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø2 through the stub), 22 mm wrench flats, cross holes for a 6 mm heater cartridge and a 3 mm thermistor. See [`CAD/shop_order.md`](CAD/shop_order.md) and [`CAD/barrel_coupler.step`](CAD/barrel_coupler.step).
-* **SK25 shaft support:** clamps the coupler's Ø25 top section to the frame.
+* **Heated barrel coupler (316L stainless, metal 3D printed at ±0.3 mm, threads printed):** Ø24.7 × 40 mm. M12×1.0 female top, M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø2 through the stub), flats for a 22 mm wrench, cross holes for a 6 mm heater cartridge and a 3 mm thermistor, M5 set screws. No machining or thread cutting needed. See [`CAD/shop_order.md`](CAD/shop_order.md) and [`CAD/barrel_coupler.step`](CAD/barrel_coupler.step).
+* **SK25 shaft support:** clamps the coupler's round top section to the frame.
+* **M5 stainless set screws:** one 5 mm (heater) and one 16 mm (thermistor), plus a 2.5 mm hex key.
 * **Coupler heat zone:** 24 V 40 W 6 × 20 mm cartridge heater + 100K B3950 thermistor cartridge (3 × 15 mm), wired to the mainboard's bed terminals and `TB` thermistor header.
 * **PTFE thread tape** for the barrel thread.
 
 ### 🔹 Auger Feed
-* **Stainless barrel tube, 10 mm ID × 12 mm OD, 150 mm**, with a 15 × 12 mm hopper window near one end. The other end gets an M12×1.0 external thread, 12 mm long, cut with the die (see 4.3).
+* **Stainless barrel tube, 10 mm ID × 12 mm OD, 150 mm**, with a 15 × 12 mm hopper window near one end. The other end needs an M12×1.0 external thread, 12 mm long. Best done by a machine shop (see 4.3).
 * **3/8" wood auger bit, 12"**, hex shank 9.0 mm across flats. Screw point cut off, tip ground to a cone.
 * **NEMA 17 planetary gearmotor, 14:1**, 8 mm output shaft (needs at least 25 mm of exposed shaft).
 * **8 mm → 11 mm clamp-on shaft coupling**, Ø32 × 45 mm aluminum, plus a soda-can aluminum shim to center the hex shank (see 4.2).
@@ -70,8 +71,8 @@ Full list with specs and links: [`amazon_parts_list.md`](amazon_parts_list.md). 
 * **Motorized spooler** with slip-clutch hub.
 
 ### 🔹 Tools
-* **M12×1.0 tap & die set** + **38 mm die handle** (for the barrel thread)
-* Bench vise, cutting oil, and a Ø10 mm rod or drill shank about 50 mm long (supports the tube while threading)
+* Only if you cut the barrel thread yourself: **M12×1.0 die** + **38 mm die handle**, bench vise, cutting oil, and a Ø10 mm rod about 50 mm long
+* Sheet of glass + 400-grit wet-and-dry paper (lapping the stub end)
 * Angle grinder / cutoff discs, needle files, 240-grit cloth
 * Digital caliper, multimeter (for A4988 Vref)
 * 22 mm wrench (coupler flats), nozzle wrench
@@ -137,7 +138,7 @@ Melt pressure pushes the auger back **toward the motor**, so the thrust bearing 
 
 ### 4.3 Barrel Prep
 1. **Deburr the window:** file all inside edges of the window smooth with a needle file and 240-grit. Burrs left by the cutting disc catch flakes and scrape the auger.
-2. **Thread the outlet end** (the end without the window) **M12×1.0, 12 mm long**:
+2. **Thread the outlet end** (the end without the window) **M12×1.0, 12 mm long.** The tube wall is only 1 mm, so this is fiddly with a hand die. The easy route is a machine shop or anyone with a lathe: it's a few minutes' work. Ask for **M12×1.0 external, 12 mm long, on 12 × 1 mm stainless tube, support the bore while threading.** To cut it yourself:
     * File a small 45° chamfer on the outside edge of the tube end so the die starts square.
     * Slide the Ø10 mm rod into the tube so the 1 mm wall can't crush, and clamp the tube in the vise on a rag or soft jaws, well away from the window.
     * Start the die square with plenty of cutting oil. Turn half a turn forward, a quarter turn back to break the chip, and repeat.
@@ -146,6 +147,10 @@ Melt pressure pushes the auger back **toward the motor**, so the thrust bearing 
 3. Slide the barrel over the auger. The window end goes toward the motor.
 
 ### 4.4 Melt Zone Assembly
+First, check the printed coupler (it's printed at ±0.3 mm, threads and all):
+* Run the M6 stub into the block, the threaded barrel into the M12 end, and both M5 set screws in by hand. A printed thread may feel rough the first time; run it in and out a few times. Don't force it.
+* **Lap the stub end:** lay 400-grit paper on the glass, hold the coupler upright by its body, and rub the stub end in figure-eights until the whole face is evenly matte. It's the sealing face.
+
 ```
  barrel ══ M12×1.0 ══ [ 316L coupler ] ══ M6 stub  ══ [ Super Volcano block ] ══ nozzle
                        ▲ SK25 clamp                         ▲ zone 1: 80 W + thermistor
@@ -156,9 +161,9 @@ Melt pressure pushes the auger back **toward the motor**, so the thrust bearing 
 2. **Coupler → block:** screw the coupler's M6 stub into the **top** of the Super Volcano block about 6–8 mm deep. Leave a gap between the coupler shoulder and the block.
 3. **Nozzle:** screw the 1.4 mm nozzle **up** into the bottom of the block until it meets the end of the stub. There should be a small gap (0.5–1 mm) between the nozzle's hex and the block. If the hex touches the block first, screw the stub in deeper and repeat.
    *The seal is the flat end of the stub pressing on the top of the nozzle, not the threads.*
-4. **Clamp:** mount an **SK25 shaft support** to the frame and clamp the round top section of the coupler (above the flats, away from the heater zone). The motor plate and the coupler are now both tied to the frame, so melt pressure goes through the frame instead of pulling on the thin barrel thread.
+4. **Clamp:** mount an **SK25 shaft support** to the frame and clamp the round top section of the coupler (above the flats, away from the heater zone). It's printed slightly under 25 mm; if the clamp doesn't grip, add one wrap of soda-can aluminum. The motor plate and the coupler are now both tied to the frame, so melt pressure goes through the frame instead of pulling on the thin barrel thread.
 5. **Heater & sensor:** install the 80 W cartridge and the thermistor in the block and fit the silicone sock.
-6. **Coupler heater:** slide the 24 V 40 W cartridge into the coupler's Ø6 cross hole and the thermistor into the Ø3 hole, and lock each with its M3 set screw from the shoulder face. Route the leads away from the nozzle.
+6. **Coupler heater:** slide the 24 V 40 W cartridge into the coupler's heater hole and the thermistor into its hole, and lock each with its M5 set screw from the shoulder face (5 mm screw for the heater, 16 mm for the thermistor; snug, not tight). Route the leads away from the nozzle.
 7. **Barrel fan:** clamp the 24 V 4010 fan over the barrel at the window, blowing across it, to keep the feed end cold. Wire it to an always-on 24 V supply.
 
 ### 4.5 Heater Wiring
@@ -288,7 +293,7 @@ Screen presets (each sets both heat zones):
 | **Auger motor buzzes / skips** | Plastic not melted, or nozzle clogged. (Skipping is the torque limit working.) | Stop the auger. Wait for `MELT READY`. Clear the nozzle. Don't raise Vref to push through. |
 | **`Thermal Runaway` mid-run** (nozzle or coupler) | Auger feeding cold flakes faster than the heaters can melt them | Lower `RPM`. Don't loosen the thermal protection. |
 | **`MINTEMP` / `MAXTEMP`** | Thermistor unplugged or broken | Check the nozzle thermistor on `TH` and the coupler thermistor on `TB`, and their wires |
-| **Coupler never reaches temperature** | Cartridge loose in its hole, or PID not tuned | Tighten the M3 set screw; run `M303 E-1 S205 C8 U1` then `M500` |
+| **Coupler never reaches temperature** | Cartridge loose in its hole, or PID not tuned | Tighten the M5 set screw; run `M303 E-1 S205 C8 U1` then `M500` |
 | **Plastic leaks around the block top** | Stub end not seated on the nozzle | Heat to 250 °C, hold the coupler flats, tighten the nozzle ⅛ turn. Check the nozzle hex isn't touching the block. |
 | **Plastic leaks at the barrel thread** | Thread not sealed or not snug | Cool down, re-tape and re-tighten. Check the thread is fully inside the coupler. |
 | **Squealing / auger rubbing** | Auger off-center in the shaft coupling | Redo the shim; spin-test for wobble |

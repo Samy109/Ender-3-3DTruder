@@ -1,51 +1,54 @@
 """
-3DTruder heated barrel coupler (build123d + bd_warehouse). Matches shop_order.md, Job 1.
+3DTruder heated barrel coupler (build123d + bd_warehouse). Matches shop_order.md and drawing BC-001.
 
     Barrel tube (12 mm OD, M12x1.0 external thread)
       -> this coupler (second heat zone: 24 V cartridge + thermistor)
       -> M6x1.0 male stub straight into the Super Volcano block (seals on the nozzle)
 
-All threads are modelled (ISO 60 deg profile, right hand, bd_warehouse IsoThread):
-  M6x1.0 external stub, M12x1.0 internal top bore, M3x0.5 internal set-screw taps.
+Made as a 316L metal print (SLM) held to +/-0.3 mm, with no machining or thread cutting afterwards.
+So every fit is sized for that tolerance:
+  - threads are printed and offset by FIT on diameter (external smaller, internal larger) so they
+    still go together at the edge of the tolerance;
+  - holes a part slides into are nominal + 0.3; the wrench flats and the clamp round are nominal - 0.3.
+All threads are modelled (ISO 60 deg profile, right hand, bd_warehouse IsoThread).
 Body z runs from the shoulder (z = 0) up; the stub hangs below (z = -15 .. 0).
 
-  Stub:        M6x1.0 full length (z -15 .. -1.5), Ø4.8 x 1.5 relief at the shoulder
-  Bore:        Ø3.0 through the body, Ø2.0 through the stub (stub wall >= 1.39 mm)
+  Stub:        M6x1.0 printed full length (z -15 .. -1.5), major 5.7; Ø4.4 x 1.5 relief at the shoulder
+  Bore:        Ø3.0 through the body, Ø2.0 through the stub
   Heater zone (body z 0-20, solid except the bore):
-    Cartridge: Ø6.0 cross hole, through, 6.5 mm off-axis, at z = 7   (24 V 40 W, 6 x 20 mm)
-    Thermistor: Ø3.0 cross hole, 16 deep, 6.5 mm off-axis (opposite side), at z = 15
-    Set screws: M3x0.5 tapped up from the shoulder face into each hole
-  Flats:       22 mm across, body z 20-26
-  Top:         M12x1.0 internal thread, 14 full thread (z 26-40), hole drilled 18 deep (floor z 22); round Ø25 here for an SK25 clamp
+    Cartridge: Ø6.3 cross hole, through, 6.5 mm off-axis, at z = 7   (24 V 40 W, 6 x 20 mm)
+    Thermistor: Ø3.3 cross hole, 16 deep, 6.5 mm off-axis (opposite side), at z = 15
+    Set screws: M5x0.8 printed, up from the shoulder face into each hole
+  Flats:       21.7 mm across (fits a 22 mm wrench at +0.3), body z 20-26
+  Top:         M12x1.0 printed internal thread, major 12.3, 14 full thread (z 26-40); hole 18 deep with
+               a 90 deg cone floor; round Ø24.7 for an SK25 clamp
 Material: 316L stainless, metal 3D printed (SLM). Not aluminium.
 
-Run:  python barrel_coupler.py              -> barrel_coupler.step / .stl (all threads modelled)
-      python barrel_coupler.py --no-threads -> barrel_coupler_nothreads.step / .stl (plain Ø6 stub, Ø11 and Ø2.5 tap-drill holes)
+Run:  python barrel_coupler.py   -> barrel_coupler.step / .stl
 """
-import sys
 from pathlib import Path
 
 from build123d import Align, Axis, Box, GeomType, Plane, Polygon, chamfer, extrude, BuildLine, BuildPart, BuildSketch, Cylinder, Polyline, Pos, Rot, export_step, export_stl, make_face, revolve
 from bd_warehouse.thread import IsoThread
 
-THREADS = "--no-threads" not in sys.argv
-BODY_D, BODY_L = 25.0, 40.0
-STUB_D, STUB_L = 6.0, 15.0
-RELIEF_D, RELIEF_L = 4.8, 1.5
-M12_MAJOR, M12_DEPTH = 12.0, 14.0               # M12_DEPTH = full-thread length
-M12_DRILL_DEPTH = 18.0                           # hole drilled 4 mm past the full thread so a taper/plug tap can reach full thread
-BORE = 3.0
-FLATS, FLATS_Z0, FLATS_Z1 = 22.0, 20.0, 26.0
-HEATER_D, HEATER_OFFSET, HEATER_Z = 6.0, 6.5, 7.0
-THERM_D, THERM_OFFSET, THERM_Z, THERM_DEPTH = 3.0, -6.5, 15.0, 16.0
-SET_MAJOR = 3.0
+FIT = 0.3                                        # print tolerance (+/-), applied on diameter to every fit
+BODY_D, BODY_L = 25.0 - FIT, 40.0                # Ø24.7: an SK25 clamp still closes on it at +0.3
+STUB_L = 15.0
+M6_MAJOR = 6.0 - FIT                             # printed external M6x1.0
+RELIEF_D, RELIEF_L = 4.4, 1.5                    # just under the M6 root (4.47)
+M12_MAJOR = 12.0 + FIT                           # printed internal M12x1.0
+M12_DEPTH, M12_DRILL_DEPTH = 14.0, 18.0          # full thread, then 4 mm of plain hole above the cone floor
+BORE, STUB_BORE = 3.0, 2.0
+FLATS, FLATS_Z0, FLATS_Z1 = 22.0 - FIT, 20.0, 26.0
+HEATER_D, HEATER_OFFSET, HEATER_Z = 6.0 + FIT, 6.5, 7.0
+THERM_D, THERM_OFFSET, THERM_Z, THERM_DEPTH = 3.0 + FIT, -6.5, 15.0, 16.0
+SET_MAJOR, SET_PITCH = 5.0 + FIT, 0.8            # printed internal M5x0.8 for the set screws
+THERM_SET_X = 3.0                                # thermistor set screw: far enough in to keep wall to the OD
 CH = 0.5
 
-R, rr, rb = BODY_D / 2, RELIEF_D / 2, BORE / 2
-STUB_BORE = 2.0                                  # bore through the stub only: keeps >= 1.39 mm wall under the M6 thread root
-rbs = STUB_BORE / 2
-r_root6 = 0.5 * (STUB_D - 1.2269 * 1.0) if THREADS else STUB_D / 2          # M6x1.0 external root radius (thread ridge overlaps into this core)
-r_m12 = M12_MAJOR / 2 if THREADS else 5.5                            # hole is bored to the major radius; thread teeth are fused inside
+R, rr, rb, rbs = BODY_D / 2, RELIEF_D / 2, BORE / 2, STUB_BORE / 2
+r_root6 = 0.5 * (M6_MAJOR - 1.2269 * 1.0)        # M6 external root radius (thread ridge overlaps into this core)
+r_m12 = M12_MAJOR / 2                            # hole is bored to the major radius; thread teeth are fused inside
 z_tip, z_top, z_m12 = -STUB_L, BODY_L, BODY_L - M12_DEPTH
 z_floor = BODY_L - M12_DRILL_DEPTH
 
@@ -87,10 +90,9 @@ x_surface = (R ** 2 - THERM_OFFSET ** 2) ** 0.5
 therm_len = THERM_DEPTH + 1
 part = part - Pos(x_surface + 1 - therm_len / 2, THERM_OFFSET, THERM_Z) * Rot(0, 90, 0) * Cylinder(THERM_D / 2, therm_len)
 
-# M3 set-screw holes (bored to the major radius), up from the shoulder face into each hole
-x_set = x_surface - 4
-part = part - Pos(0, HEATER_OFFSET, HEATER_Z / 2) * Cylinder((SET_MAJOR if THREADS else 2.5) / 2, HEATER_Z)
-part = part - Pos(x_set, THERM_OFFSET, THERM_Z / 2) * Cylinder((SET_MAJOR if THREADS else 2.5) / 2, THERM_Z)
+# M5 set-screw holes (bored to the major radius), up from the shoulder face into each hole
+part = part - Pos(0, HEATER_OFFSET, HEATER_Z / 2) * Cylinder(SET_MAJOR / 2, HEATER_Z)
+part = part - Pos(THERM_SET_X, THERM_OFFSET, THERM_Z / 2) * Cylinder(SET_MAJOR / 2, THERM_Z)
 
 # 0.3 x 45 deg chamfer on the heater (both ends) and thermistor hole entries
 cross_edges = [e for e in part.edges() if e.geom_type == GeomType.BSPLINE and abs(e.center().X) > 9 and e.length > 8]
@@ -111,23 +113,22 @@ def fuse_thread(base, thread, loc):
     raise RuntimeError("thread fuse failed")
 
 
-if THREADS:
-    # Internal M3x0.5 taps first (cleanest base for the fuse); only the part below each cross hole is threaded
-    part = fuse_thread(part, IsoThread(major_diameter=SET_MAJOR, pitch=0.5, length=11.0, external=False,
-                                       end_finishes=("fade", "fade")), Pos(x_set, THERM_OFFSET, 0))
-    part = fuse_thread(part, IsoThread(major_diameter=SET_MAJOR, pitch=0.5, length=HEATER_Z - HEATER_D / 2 - 0.5, external=False,
-                                       end_finishes=("fade", "fade")), Pos(0, HEATER_OFFSET, 0))
-    # Internal M12x1.0 in the top bore (teeth fused inside the major-radius bore)
-    part = fuse_thread(part, IsoThread(major_diameter=M12_MAJOR, pitch=1.0, length=M12_DEPTH, external=False,
-                                       end_finishes=("fade", "fade")), Pos(0, 0, z_m12))
-    # External M6x1.0 on the stub: chamfered at the tip, fades out at the relief
-    part = fuse_thread(part, IsoThread(major_diameter=STUB_D, pitch=1.0, length=STUB_L - RELIEF_L, external=True,
-                                       end_finishes=("chamfer", "fade")), Pos(0, 0, z_tip))
+# Internal M5x0.8 set-screw threads first (cleanest base for the fuse); only the part below each cross hole
+heater_set_len = HEATER_Z - HEATER_D / 2 * 2 ** 0.5 - 0.3      # stops short of the heater teardrop point
+therm_set_len = THERM_Z - THERM_D / 2 * 2 ** 0.5 - 0.3
+part = fuse_thread(part, IsoThread(major_diameter=SET_MAJOR, pitch=SET_PITCH, length=therm_set_len, external=False,
+                                   end_finishes=("fade", "fade")), Pos(THERM_SET_X, THERM_OFFSET, 0))
+part = fuse_thread(part, IsoThread(major_diameter=SET_MAJOR, pitch=SET_PITCH, length=heater_set_len - 0.3, external=False,
+                                   end_finishes=("fade", "fade")), Pos(0, HEATER_OFFSET, 0.3))
+# Internal M12x1.0 in the top bore (teeth fused inside the major-radius bore)
+part = fuse_thread(part, IsoThread(major_diameter=M12_MAJOR, pitch=1.0, length=M12_DEPTH, external=False,
+                                   end_finishes=("fade", "fade")), Pos(0, 0, z_m12))
+# External M6x1.0 on the stub: chamfered at the tip, fades out at the relief
+part = fuse_thread(part, IsoThread(major_diameter=M6_MAJOR, pitch=1.0, length=STUB_L - RELIEF_L, external=True,
+                                   end_finishes=("chamfer", "fade")), Pos(0, 0, z_tip))
 
 
 out = Path(__file__).with_suffix("")
-if not THREADS:
-    out = out.with_name(out.name + "_nothreads")
 export_step(part, str(out) + ".step")
 export_stl(part, str(out) + ".stl")
 print("valid:", part.is_valid, " volume: %.1f mm3" % part.volume, " solids:", len(part.solids()))
