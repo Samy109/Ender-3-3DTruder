@@ -271,14 +271,14 @@ Screen presets (each sets both heat zones):
 2. **Preheat:** pick a preset on the screen (table above). It sets both zones.
 3. **Soak:** once **both zones** are at temperature the screen counts down `SOAKING: 10:00`. Wait for **`>>> MELT READY <<<`** and **`AUGER: OK TO START`**.
 4. **Blowers on.**
-5. **Start the auger slow:** send `RPM 5`, then `AUG ON` (or close the A2 switch). Fill the hopper.
+5. **Start the auger slow:** send `RPM 5`, then `AUG ON`. Fill the hopper. (The A2 switch starts the auger **and** the puller at the sketch defaults, 14 RPM and 1 mm/s, so save it for headless runs once the line is threaded.)
 6. **Capture the strand:** as plastic leaves the nozzle, draw it past the blowers with pliers.
 7. **Thread the line:** through the diameter sensor, into the BMG, tighten the thumbscrew.
 8. **Pull:** send `PULL ON`. Use `SPEED <x>` to get near 1.75 mm by hand, then let auto-regulation trim it. Attach the filament to the spooler.
 9. **Throughput:** raise the auger with `RPM <x>` a step at a time. If the puller pins at its maximum speed, or Marlin reports thermal runaway, the auger is too fast.
 
 ### 6.2 Shutdown
-1. `AUG OFF`, let the puller clear the strand, then `STOP`.
+1. `AUG OFF`, let the puller clear the strand, then `STOP`. If the A2 switch is closed, open it first: serial commands can't stop the motors while it's closed.
 2. Cooldown on the screen (turns off both zones). Leave the barrel fan running until the block is below 60 °C.
 
 ### 6.3 Troubleshooting

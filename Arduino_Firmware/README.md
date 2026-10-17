@@ -46,7 +46,7 @@ This firmware runs on your **Arduino Uno R3 + CNC Shield V3** to drive the mecha
   * Shield pin routing: Step = Pin 3, Dir = Pin 6.
 * **Stepper Enable:** Pin 8 (driven active-low automatically).
 * **Diameter Sensor:** Analog Pin **`A0`** (0–5 V analog signal; requires 5V, GND, Signal).
-* **Headless Line Run Switch (Optional):** Connect a toggle switch or jumper between **`Resume`** (Pin A2) and **`GND`** on the CNC Shield top header. When closed to GND, both the auger and puller run automatically without needing a PC attached!
+* **Headless Line Run Switch (Optional):** Connect a toggle switch or jumper between **`Resume`** (Pin A2) and **`GND`** on the CNC Shield top header. When closed to GND, both the auger and puller run automatically without needing a PC attached. While it is closed, `STOP` / `AUG OFF` / `PULL OFF` can't stop the motors; open the switch to stop.
 
 ---
 
@@ -68,7 +68,7 @@ The sensor sees filament that was drawn down near the nozzle some time ago (the 
 
 ### Serial Commands:
 * `START`       : Starts auger (soft-start ramp) + puller.
-* `STOP` / `OFF`: Stops both motors. Drivers are de-energized whenever nothing is running.
+* `STOP` / `OFF`: Stops both motors (unless the A2 run switch is closed). Drivers are de-energized whenever nothing is running.
 * `PULL ON` / `PULL OFF` : Puller only (strand threading).
 * `AUG ON` / `AUG OFF`   : Auger only.
 * `SPEED <x>`   : Set puller speed in mm/s (e.g. `SPEED 1.5`).

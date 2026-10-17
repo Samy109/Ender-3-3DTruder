@@ -668,7 +668,7 @@ M500
 <li><strong>Preheat:</strong> pick a preset on the screen (table above). It sets both zones.</li>
 <li><strong>Soak:</strong> once <strong>both zones</strong> are at temperature the screen counts down <code>SOAKING: 10:00</code>. Wait for <strong><code>&gt;&gt;&gt; MELT READY &lt;&lt;&lt;</code></strong> and <strong><code>AUGER: OK TO START</code></strong>.</li>
 <li><strong>Blowers on.</strong></li>
-<li><strong>Start the auger slow:</strong> send <code>RPM 5</code>, then <code>AUG ON</code> (or close the A2 switch). Fill the hopper.</li>
+<li><strong>Start the auger slow:</strong> send <code>RPM 5</code>, then <code>AUG ON</code>. Fill the hopper. (The A2 switch starts the auger <strong>and</strong> the puller at the sketch defaults, 14 RPM and 1 mm/s, so save it for headless runs once the line is threaded.)</li>
 <li><strong>Capture the strand:</strong> as plastic leaves the nozzle, draw it past the blowers with pliers.</li>
 <li><strong>Thread the line:</strong> through the diameter sensor, into the BMG, tighten the thumbscrew.</li>
 <li><strong>Pull:</strong> send <code>PULL ON</code>. Use <code>SPEED &lt;x&gt;</code> to get near 1.75 mm by hand, then let auto-regulation trim it. Attach the filament to the spooler.</li>
@@ -676,7 +676,7 @@ M500
 </ol>
 <h2>6.2 Shutdown</h2>
 <ol>
-<li><code>AUG OFF</code>, let the puller clear the strand, then <code>STOP</code>.</li>
+<li><code>AUG OFF</code>, let the puller clear the strand, then <code>STOP</code>. If the A2 switch is closed, open it first: serial commands can't stop the motors while it's closed.</li>
 <li>Cooldown on the screen (turns off both zones). Leave the barrel fan running until the block is below 60 °C.</li>
 </ol>
 <h2>6.3 Troubleshooting</h2>

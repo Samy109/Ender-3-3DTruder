@@ -52,9 +52,9 @@ A complete DIY conversion turning a **Creality Ender 3 / Ender 3 V2** into a hig
    * Puller and auger are stepped from hardware timer interrupts, so serial traffic never stalls the motors.
    * 1.5-second soft-start ramp on the 14:1 auger; auger RPM and puller speed adjustable live over serial.
    * Dead-time-aware diameter control that waits for fresh strand to reach the sensor between corrections, and holds speed when the sensor is empty.
-6. **Autonomous Workshop Operation or Raspberry Pi Host:**
+6. **Headless or USB-Hosted Operation:**
    * Runs headless via CNC Shield toggle switch on `Resume` (A2 to GND).
-   * Supports an optional Raspberry Pi connected via USB for webcam monitoring, live diameter plotting, and remote telemetry logging.
+   * Or drive it from any USB serial host (PC, Raspberry Pi) at 115200 baud; the controller prints a telemetry line every second that you can log or plot.
 
 ---
 

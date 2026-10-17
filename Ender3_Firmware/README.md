@@ -82,8 +82,8 @@ If you get `Thermal Runaway` (nozzle or coupler) mid-run, the auger is feeding c
 
 1. Format a micro-SD card (8 GB to 32 GB) as **FAT32** with **4096-byte allocation**.
 2. Select your firmware binary based on the MCU printed on your Creality 4.2.2 board:
-   - For **STM32F103RET6 / 512K** chips: use `firmware_Ender3_V2_RE.bin`
-   - For **STM32F103RCT6 / GD32F303** chips: use `firmware_Ender3_V2_RC.bin`
+   - For **STM32F103RET6** or **GD32F303RET6** (512K) chips: use `firmware_Ender3_V2_RE.bin`
+   - For **STM32F103RCT6** (256K) chips: use `firmware_Ender3_V2_RC.bin`
 3. Copy the `.bin` file to the root of the micro-SD card.
    *(Tip: Creality's bootloader remembers the last flashed filename. If updating again later, rename the file to something unique like `firmware_3dtruder_v1.bin`).*
 4. Ensure the printer power is **OFF**.
