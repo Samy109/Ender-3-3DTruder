@@ -774,7 +774,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
 
-  // 3DTruder coupler zone (24 V 40 W cartridge in a brass coupler). Starting point only:
+  // 3DTruder coupler zone (24 V 40 W cartridge in a 316L coupler). Starting point only:
   // autotune with "M303 E-1 S205 C8 U1" then "M500".
   #define DEFAULT_bedKp  20.00
   #define DEFAULT_bedKi   1.50

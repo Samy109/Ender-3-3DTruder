@@ -347,7 +347,7 @@ void MarlinUI::draw_status_screen() {
     else if (soak_start_ms) {
       const char mmss[] = {
         char('0' + (soak_left_s / 600) % 10), char('0' + (soak_left_s / 60) % 10), ':',
-        char('0' + (soak_left_s % 60) / 10),  char('0' + soak_left_s % 10), ' '
+        char('0' + (soak_left_s % 60) / 10),  char('0' + soak_left_s % 10), '\0'
       };
       dwin_string.set(F("SOAKING:  "));
       dwin_string.add(mmss);

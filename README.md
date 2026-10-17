@@ -7,7 +7,7 @@ A complete DIY conversion turning a **Creality Ender 3 / Ender 3 V2** into a hig
 ## ⚡ Quick Navigation
 
 * 📖 **[Master Build & Operating Manual](ender_3_3dtruder_master_manual.md)**: Full build and operating guide covering assembly, wiring, sifting, puller setup, calibration, and troubleshooting. Also exported as [HTML](Ender_3_3DTruder_Master_Manual.html) and [PDF](Ender_3_3DTruder_Master_Manual.pdf).
-* 🔩 **[Shop Order & CAD](CAD/shop_order.md)**: Machinist work order for the heated brass barrel coupler.
+* 🔩 **[Shop Order & CAD](CAD/shop_order.md)**: Work order and drawing for the heated barrel coupler (316L stainless, metal 3D printed).
 * 🛒 **[Bill of Materials / Amazon Parts List](amazon_parts_list.md)**: Categorized parts checklist with specifications and procurement links.
 * 🖨️ **[Ender 3 V2 Melt Station Firmware](Ender3_Firmware/README.md)**: Pre-compiled Marlin binaries (`.bin`) with native DWIN color UI, 290 °C unlocked, and a second heat zone for the barrel coupler on the bed channel.
 * 🎛️ **[Arduino Closed-Loop Controller Firmware](Arduino_Firmware/README.md)**: Pre-compiled Arduino hex binary (`.hex`) and source sketch (`.ino`) for Uno + CNC Shield V3 motor control and inline diameter regulation.
@@ -30,7 +30,7 @@ A complete DIY conversion turning a **Creality Ender 3 / Ender 3 V2** into a hig
            ▼                                           ▼
  [ Melt Zone ]                                [ Closed-Loop Filament Line ]
   - 10x12 mm Barrel, M12x1.0 Thread            - Directional Dual 5010 Strand Blowers
-  - Heated Brass Coupler -> M6 Stub            - Diameter Sensor 10-20 cm From Nozzle
+  - Heated 316L Coupler -> M6 Stub             - Diameter Sensor 10-20 cm From Nozzle
   - Super Volcano Block, 80 W Cartridge        - BMG Dual-Drive Puller Extruder
   - 1.4 mm Brass Nozzle (Die Swell)            - Motorized Slip-Clutch Spooler
 ```
@@ -42,7 +42,7 @@ A complete DIY conversion turning a **Creality Ender 3 / Ender 3 V2** into a hig
 1. **Viscoelastic Die Swell Compensation:**
    * Utilizes a **1.4 mm brass Super Volcano nozzle**. Extruding polymer swells as it exits, and the motorized puller draws the strand down to a uniform **1.75 mm ± 0.02 mm**. (A 2.0 mm nozzle is the fallback if swell falls short.)
 2. **Heatbreak-Free Melt Path:**
-   * The barrel threads into a shop-made **brass coupler** whose M6 stub screws straight into the Super Volcano block and seals on the nozzle. No heatsink or heatbreak for flakes to jam in. The coupler carries its own 40 W heater and thermistor as a second heat zone. See [`CAD/shop_order.md`](CAD/shop_order.md).
+   * The barrel threads into a metal-printed **316L stainless coupler** whose M6 stub screws straight into the Super Volcano block and seals on the nozzle. No heatsink or heatbreak for flakes to jam in. The coupler carries its own 40 W heater and thermistor as a second heat zone. See [`CAD/shop_order.md`](CAD/shop_order.md).
 3. **Dedicated External MOSFET:**
    * An 80 W heater cartridge draws ~3.33 A at 24 V. Switching is offloaded from the mainboard to an opto-isolated 25 A external MOSFET module with inline fuse protection.
 4. **Two-Zone Heating & Melt Soak Timer:**
@@ -68,12 +68,17 @@ A complete DIY conversion turning a **Creality Ender 3 / Ender 3 V2** into a hig
 ├── Ender_3_3DTruder_Master_Manual.html
 ├── Ender_3_3DTruder_Master_Manual.pdf
 ├── CAD/
-│   ├── barrel_coupler.py      (CadQuery source)
-│   ├── barrel_coupler.step
+│   ├── barrel_coupler.py      (build123d source)
+│   ├── barrel_coupler.step    (all threads modelled)
 │   ├── barrel_coupler.stl
+│   ├── barrel_coupler_nothreads.step
+│   ├── barrel_coupler_nothreads.stl
+│   ├── barrel_coupler_drawing.pdf
+│   ├── assembly_overview.pdf
 │   └── shop_order.md
 ├── tools/
-│   └── build_manual.py
+│   ├── build_manual.py
+│   └── manual.css
 ├── Arduino_Firmware/
 │   ├── Arduino_Firmware.ino
 │   ├── Arduino_Firmware.hex
@@ -85,6 +90,7 @@ A complete DIY conversion turning a **Creality Ender 3 / Ender 3 V2** into a hig
     ├── firmware_Ender3_V2_RE.bin
     ├── README.md
     └── src_patch/
+        ├── language_en.h
         ├── menu_main.cpp
         └── ui_status_480x272.cpp
 ```

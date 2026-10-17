@@ -39,8 +39,8 @@ const uint8_t SENSOR_PIN      = A0;   // ADC channel 0
 const uint8_t RUN_SWITCH_PIN  = A2;   // Close to GND = run auger + puller headless
 
 // Flip these if a motor turns the wrong way (or swap one coil pair on its connector).
-// The auger must turn so the flights carry flakes TOWARD the nozzle (clockwise viewed from
-// the motor for a standard right-hand wood auger bit).
+// The auger must turn so the flights carry flakes TOWARD the nozzle (counter-clockwise viewed
+// from the motor for a standard right-hand wood auger bit; clockwise carries them back).
 const bool PULL_DIR_INVERT    = false;
 const bool AUG_DIR_INVERT     = false;
 

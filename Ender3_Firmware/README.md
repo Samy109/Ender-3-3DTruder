@@ -1,6 +1,6 @@
 # 🖨️ Ender 3 V2 3DTruder Melt Station Firmware (Native DWIN Vector UI)
 
-This dedicated firmware turns your **Ender 3 V2** (Creality 4.2.2 32-bit mainboard) into a two-zone filament extrusion melt station: **zone 1** is the Super Volcano block (hotend channel), **zone 2** is the heated brass barrel coupler (the former heated-bed channel). It features a **custom, vector UI powered directly by the V2 DWIN screen library** (`DWIN_MARLINUI_PORTRAIT`).
+This dedicated firmware turns your **Ender 3 V2** (Creality 4.2.2 32-bit mainboard) into a two-zone filament extrusion melt station: **zone 1** is the Super Volcano block (hotend channel), **zone 2** is the heated 316L barrel coupler (the former heated-bed channel). It features a **custom, vector UI powered directly by the V2 DWIN screen library** (`DWIN_MARLINUI_PORTRAIT`).
 
 > [!TIP]
 > **Zero Hardware Disassembly Required:**

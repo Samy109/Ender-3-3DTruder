@@ -8,9 +8,9 @@
 ### How it works
 1. Dried, sieved plastic flakes drop from a bottle hopper into a window in a horizontal **10 mm ID × 12 mm OD stainless barrel**.
 2. A **14:1 geared NEMA 17** turns a modified **3/8" wood auger** inside the barrel and pushes the flakes forward.
-3. The barrel screws into a **brass barrel coupler** (M12×1.0 → M6×1.0 stub), which screws straight into a **Super Volcano heater block**. The plastic melts in the coupler and block and leaves through a **1.4 mm nozzle**.
+3. The barrel screws into a **316L stainless barrel coupler** (M12×1.0 → M6×1.0 stub), which screws straight into a **Super Volcano heater block**. The plastic melts in the coupler and block and leaves through a **1.4 mm nozzle**.
 4. The strand is cooled by two **5010 blowers**, measured by an **inline diameter sensor**, and drawn down to **1.75 mm** by a **BMG puller** on a 5:1 geared motor. An Arduino adjusts the puller speed to hold diameter.
-5. The Ender 3 V2 mainboard runs **two heat zones**: the Super Volcano block (80 W, through an **external 25 A MOSFET**) and the brass coupler (40 W, on the board's former heated-bed output). Its screen shows both temperatures and a **10-minute melt soak timer** before the auger may start.
+5. The Ender 3 V2 mainboard runs **two heat zones**: the Super Volcano block (80 W, through an **external 25 A MOSFET**) and the heated coupler (40 W, on the board's former heated-bed output). Its screen shows both temperatures and a **10-minute melt soak timer** before the auger may start.
 
 ### Safety Warnings
 * **High temperature:** The heater block, nozzle and barrel coupler run at **200 °C – 280 °C**. Wear heat-resistant gloves when handling hot parts. Never leave the machine heating unattended.
@@ -21,7 +21,7 @@
 * **Never run the auger cold:** Solid plastic jammed against the nozzle can generate enough pressure to split the thin barrel thread. Wait for `AUGER: OK TO START` on the screen.
 
 ### Design notes
-* **Melt zone:** The barrel is heated only by conduction from the coupler, so just its last 1–2 cm gets hot enough to melt plastic. Flakes stay solid along the rest of the barrel and melt in the brass coupler and heater block, which is why the coupler is brass (it carries heat up from the block) and why the soak timer exists (the coupler lags the block by several minutes).
+* **Melt zone:** The barrel is heated only by conduction from the coupler, so just its last 1–2 cm gets hot enough to melt plastic. Flakes stay solid along the rest of the barrel and melt in the coupler and heater block. The coupler is 316L stainless, which conducts heat poorly, so it carries its own heater rather than relying on heat from the block, and the soak timer exists because the coupler and barrel end lag the block by several minutes.
 * **No heatbreak:** There is no V6 heatsink or heatbreak in the melt path. A heatbreak is designed to keep its top end cold, which is exactly where flakes would jam.
 * **Thin barrel thread:** The barrel's M12×1.0 thread leaves about 0.4 mm of wall at the thread root. Three rules keep it safe: the thread is fully hidden inside the coupler, the coupler (not the tube) is clamped to the frame, and the auger driver's current is limited so a jam makes the motor skip instead of building pressure.
 * **Two heat zones:** The coupler carries its own 24 V 40 W cartridge and thermistor, driven by the Ender's heated-bed output (the bed itself is removed). Marlin controls it with full PID and thermal-runaway protection, and the menus call it **Coupler**. It roughly doubles the heat available for melting and pushes the melt zone up into the barrel end. Presets run the coupler about 10 °C below the nozzle.
@@ -41,7 +41,7 @@ Full list with specs and links: [`amazon_parts_list.md`](amazon_parts_list.md). 
 * **Super Volcano heater block** + **1.4 mm Super Volcano brass nozzle** + **silicone sock**
 * **80 W 24 V heater cartridge** + **100K NTC B3950 thermistor cartridge**
 * **25 A external MOSFET module** + 16 AWG silicone wire + 5 A inline fuse
-* **Heated barrel coupler (shop-made, brass):** Ø25 × 40 mm. M12×1.0 female top, M6×1.0 male stub (15 mm, full thread), Ø3 mm bore, 22 mm wrench flats, cross holes for a 6 mm heater cartridge and a 3 mm thermistor. See [`CAD/shop_order.md`](CAD/shop_order.md) and [`CAD/barrel_coupler.step`](CAD/barrel_coupler.step).
+* **Heated barrel coupler (316L stainless, metal 3D printed):** Ø25 × 40 mm. M12×1.0 female top, M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø2 through the stub), 22 mm wrench flats, cross holes for a 6 mm heater cartridge and a 3 mm thermistor. See [`CAD/shop_order.md`](CAD/shop_order.md) and [`CAD/barrel_coupler.step`](CAD/barrel_coupler.step).
 * **SK25 shaft support:** clamps the coupler's Ø25 top section to the frame.
 * **Coupler heat zone:** 24 V 40 W 6 × 20 mm cartridge heater + 100K B3950 thermistor cartridge (3 × 15 mm), wired to the mainboard's bed terminals and `TB` thermistor header.
 * **PTFE thread tape** for the barrel thread.
@@ -147,7 +147,7 @@ Melt pressure pushes the auger back **toward the motor**, so the thrust bearing 
 
 ### 4.4 Melt Zone Assembly
 ```
- barrel ══ M12×1.0 ══ [ brass coupler ] ══ M6 stub ══ [ Super Volcano block ] ══ nozzle
+ barrel ══ M12×1.0 ══ [ 316L coupler ] ══ M6 stub  ══ [ Super Volcano block ] ══ nozzle
                        ▲ SK25 clamp                         ▲ zone 1: 80 W + thermistor
                        ▲ zone 2: 40 W + thermistor
 ```

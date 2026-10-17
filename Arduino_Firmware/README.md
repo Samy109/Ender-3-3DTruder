@@ -41,7 +41,7 @@ This firmware runs on your **Arduino Uno R3 + CNC Shield V3** to drive the mecha
   * Insert all 3 jumpers underneath the socket (**1/16 microstepping** for smooth tensioning).
   * Shield pin routing: Step = Pin 2, Dir = Pin 5.
 * **Auger Driver (Y Socket):**
-  * Leave jumpers uninserted (**Full Step mode** for maximum torque at ~14.3 RPM).
+  * Leave jumpers uninserted (**Full Step mode** for maximum torque at ~14 RPM).
   * Set the A4988 current limit to about **0.7 A**. This is the torque limit that keeps a jam from splitting the barrel thread (see the Master Manual, section 5.3).
   * Shield pin routing: Step = Pin 3, Dir = Pin 6.
 * **Stepper Enable:** Pin 8 (driven active-low automatically).

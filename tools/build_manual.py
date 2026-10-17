@@ -11,6 +11,8 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
+import time
 from datetime import date
 from pathlib import Path
 
@@ -36,7 +38,7 @@ COVER = f"""
   </div>
   <div class="cover-grid">
     <div class="spec-card"><div class="spec-card-title">Melt Path</div>
-      <div class="spec-card-val">Brass Coupler &rarr; Super Volcano</div>
+      <div class="spec-card-val">316L Coupler &rarr; Super Volcano</div>
       <div style="font-size:8pt;color:#64748b;margin-top:2px;">Two heat zones: 80 W block + 40 W heated coupler, no heatbreak</div></div>
     <div class="spec-card"><div class="spec-card-title">Nozzle</div>
       <div class="spec-card-val">1.4 mm Brass Super Volcano</div>
@@ -123,9 +125,18 @@ def main():
     browser = find_browser()
     if not browser:
         sys.exit("No Edge/Chrome found; PDF not built.")
-    subprocess.run([browser, "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
-                    f"--print-to-pdf={PDF_OUT}", HTML_OUT.as_uri()], check=True,
-                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=120)
+    before = PDF_OUT.stat().st_mtime if PDF_OUT.exists() else 0
+    # A separate profile keeps an already-open Edge/Chrome from swallowing the job.
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as profile:
+        subprocess.run([browser, "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
+                        f"--user-data-dir={profile}", f"--print-to-pdf={PDF_OUT}", HTML_OUT.as_uri()],
+                       check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=120)
+        for _ in range(60):  # the launcher can exit before the PDF is written
+            if PDF_OUT.exists() and PDF_OUT.stat().st_mtime > before:
+                break
+            time.sleep(0.5)
+        else:
+            sys.exit("Browser exited without writing the PDF.")
     print("wrote", PDF_OUT.name)
 
 
