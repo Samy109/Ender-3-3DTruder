@@ -164,7 +164,10 @@ First, check the printed coupler (it's printed at ±0.3 mm, threads and all):
 4. **Clamp:** mount an **SK25 shaft support** to the frame and clamp the round top section of the coupler (above the flats, away from the heater zone). It's printed slightly under 25 mm; if the clamp doesn't grip, add one wrap of soda-can aluminum. The motor plate and the coupler are now both tied to the frame, so melt pressure goes through the frame instead of pulling on the thin barrel thread.
 5. **Heater & sensor:** install the 80 W cartridge and the thermistor in the block and fit the silicone sock.
 6. **Coupler heater:** slide the 24 V 40 W cartridge into the coupler's heater hole and the thermistor into its hole, and lock each with its M5 set screw from the shoulder face (5 mm screw for the heater, 16 mm for the thermistor; snug, not tight). Route the leads away from the nozzle.
-7. **Barrel fan:** clamp the 24 V 4010 fan over the barrel at the window, blowing across it, to keep the feed end cold. Wire it to an always-on 24 V supply.
+7. **Barrel fan:** mount a 24 V 4010 fan over the barrel at the window (blowing across it) to keep the feed end cold. Because the stock hotend shroud was discarded, mount it using either:
+   * **Zip-ties:** loop two zip-ties through the fan corner holes and around the barrel/hopper neck.
+   * **2020 frame bracket:** bolt a small L-bracket to the 2020 frame rail using an M5 bolt + T-nut, then screw the fan to the bracket.
+   * Wire it to an always-on 24 V supply so it runs continuously.
 
 ### 4.5 Heater Wiring
 **Zone 1, Super Volcano block (80 W), through the external MOSFET:**
@@ -214,7 +217,7 @@ The coupler ships with rough starting PID values, so tune it before the first re
 ```
 
 1. Mount the **BMG** on the 5:1 geared motor and fix it to the frame after the sensor.
-2. Aim both **5010 blowers** at the strand 5–10 cm after the nozzle. It must be solid before it reaches the puller gears.
+2. Aim both **5010 blowers** at the strand 5–10 cm after the nozzle. It must be solid before it reaches the puller gears. Mount them directly into the 2020 frame slots using M4/M5 bolts and drop-in T-nuts (loosening lets you slide them along the extrusion to tune strand cooling distance), or mount via flexible clamp arms.
 3. Put the **diameter sensor 10–20 cm from the nozzle**, right after the cooling zone. Every extra 10 cm adds about 100 s between diameter corrections at 1 mm/s. Enter the measured distance as `SENSOR_DISTANCE_MM` in the firmware.
 
 ### 5.2 CNC Shield V3 Wiring

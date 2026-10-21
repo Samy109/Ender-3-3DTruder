@@ -12,18 +12,19 @@
 | :-: | :-: | :--- | :--- | :--- |
 | ✅ | 1 | Super Volcano heater block | Brass block, M6×1.0 bore, 6 mm heater cartridge and thermistor cartridge holes. | [Search](https://www.amazon.com/s?k=super+volcano+heater+block+brass) |
 | ✅ | 1 | Super Volcano brass nozzle | **1.4 mm**, M6 thread. Screws up into the block until it meets the coupler stub. | [Search](https://www.amazon.com/s?k=super+volcano+nozzle+1.4mm+brass) |
-| ☐ | 1 | Super Volcano brass nozzle (spare, optional) | **2.0 mm**, in case 1.4 mm doesn't swell enough to reach 1.75 mm. | [Search](https://www.amazon.com/s?k=super+volcano+nozzle+2.0mm+brass) |
+| ✅ | 1 | Super Volcano brass nozzle (spare, optional) | **2.0 mm**, in case 1.4 mm doesn't swell enough to reach 1.75 mm. | [Search](https://www.amazon.com/s?k=super+volcano+nozzle+2.0mm+brass) |
 | ✅ | 1 | Super Volcano silicone sock | Shields the block from the 5010 blower drafts. | [Search](https://www.amazon.com/s?k=super+volcano+silicone+sock) |
 | ✅ | 1 | Heater cartridge | 24 V, 80 W, 6 mm × 20 mm. | [Search](https://www.amazon.com/s?k=24v+80w+heater+cartridge+6mm) |
 | ✅ | 1 | Thermistor cartridge | 100K NTC B3950, rated to 300 °C for PET. | [Search](https://www.amazon.com/s?k=100k+b3950+thermistor+cartridge+3d+printer) |
 | ✅ | 1 | 25 A external MOSFET module | Opto-isolated control input, works with the mainboard's 24 V heater output. | [Search](https://www.amazon.com/s?k=3d+printer+mosfet+module+25a+24v) |
-| ☐ | 1 | **Heated barrel coupler (metal 3D printed)** | **PCBWay SLM print, 316L stainless, ±0.3 mm, all threads printed. Ø24.7 × 40 mm. M12×1.0 female top (14 mm deep), M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø2 through the stub), flats for a 22 mm wrench, cross holes for a 6 mm heater cartridge and 3 mm thermistor, M5 set screws.** Replaces any adapter or heatbreak. | [Shop order](CAD/shop_order.md) · [CAD](CAD/barrel_coupler.step) |
-| ☐ | 1 | SK25 shaft support | 25 mm bore. Clamps the coupler's top section to the 2020 frame so melt pressure doesn't pull on the barrel thread. | [Search](https://www.amazon.com/s?k=sk25+shaft+support+25mm) |
-| ☐ | 1 | Coupler heater cartridge | 24 V, 40 W, 6 × 20 mm. Second heat zone in the coupler, wired to the mainboard's bed terminals. | [Search](https://www.amazon.com/s?k=24v+40w+heater+cartridge+6x20mm) |
-| ☐ | 1 | Coupler thermistor | 100K NTC B3950 cartridge, 3 × 15 mm, rated to 300 °C. Plugs into the mainboard's `TB` header. | [Search](https://www.amazon.com/s?k=100k+b3950+thermistor+cartridge+3x15mm) |
+| ✅ | 1 | **Heated barrel coupler (metal 3D printed)** | **PCBWay SLM print, 316L stainless, ±0.3 mm, all threads printed. Ø24.7 × 40 mm. M12×1.0 female top (14 mm deep), M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø2 through the stub), flats for a 22 mm wrench, cross holes for a 6 mm heater cartridge and 3 mm thermistor, M5 set screws.** Replaces any adapter or heatbreak. | [Shop order](CAD/shop_order.md) · [CAD](CAD/barrel_coupler.step) |
+| ✅ | 1 | SK25 shaft support | 25 mm bore. Clamps the coupler's top section to the 2020 frame so melt pressure doesn't pull on the barrel thread. | [Search](https://www.amazon.com/s?k=sk25+shaft+support+25mm) |
+| ✅ | 1 | Coupler heater cartridge | 24 V, 40 W, 6 × 20 mm. Second heat zone in the coupler, wired to the mainboard's bed terminals. | [Search](https://www.amazon.com/s?k=24v+40w+heater+cartridge+6x20mm) |
+| ✅ | 1 | Coupler thermistor | 100K NTC B3950 cartridge, 3 × 15 mm, rated to 300 °C. Plugs into the mainboard's `TB` header. | [Search](https://www.amazon.com/s?k=100k+b3950+thermistor+cartridge+3x15mm) |
 | ☐ | 1 | PTFE thread tape | For the barrel → coupler thread. | [Search](https://www.amazon.com/s?k=ptfe+thread+seal+tape) |
-| ☐ | 2 | M5 stainless set screws | Hex socket: one **M5 × 5** (heater), one **M5 × 16** (thermistor). Lock the coupler's cartridges. | [Search](https://www.amazon.com/s?k=m5+stainless+set+screw+assortment) |
-| ✅ | 1 | 24 V 4010 fan | Over the barrel at the hopper window, keeps the feed end cold. Always on. | [Search](https://www.amazon.com/s?k=4010+fan+24v) |
+| ✅ | 2 | M5 stainless set screws | Hex socket: one **M5 × 5** (heater), one **M5 × 16** (thermistor). Lock the coupler's cartridges. | [Search](https://www.amazon.com/s?k=m5+stainless+set+screw+assortment) |
+| ☐ | 1 | 24 V 4010 axial fan (replacement) | Over the barrel at the hopper window, keeps the feed end cold. Always on. *(Ender stock fan discarded).* | [Search](https://www.amazon.com/s?k=24v+4010+cooling+fan) |
+| ☐ | 1 | 2020 T-Nut & bolt kit (or zip-ties) | M4/M5 T-nuts + bolts to mount 5010 blowers and brackets directly to 2020 frame rails. | [Search](https://www.amazon.com/s?k=2020+t+nuts+m4+m5+screws+assortment) |
 
 ---
 
@@ -76,7 +77,7 @@
 | ☐ | Qty | Part | Spec / Notes | Link |
 | :-: | :-: | :--- | :--- | :--- |
 | ✅ | 1 | M12×1.0 tap & die set | Only needed if you cut the barrel thread yourself. The printed coupler needs no tap. | [Search](https://www.amazon.com/s?k=m12x1+tap+and+die+set) |
-| ☐ | 1 | Die handle (die stock) | **38 mm (1.5") round die**, to fit the M12 die. Skip it if a shop cuts the barrel thread. | [Search](https://www.amazon.com/s?k=38mm+die+handle+round+die+stock) |
+| ✅ | 1 | Die handle (die stock) | **38 mm (1.5") round die**, to fit the M12 die. Skip it if a shop cuts the barrel thread. | [Search](https://www.amazon.com/s?k=38mm+die+handle+round+die+stock) |
 | ✅ | 1 | Angle grinder / cutoff discs | Cutting the auger tip and barrel window. | [Search](https://www.amazon.com/s?k=rotary+tool+cutoff+wheels+metal) |
 | ✅ | 1 | Needle files + 240-grit cloth | Deburring the window and auger tip. | — |
 | ✅ | 1 | Digital caliper | 0.01 mm resolution. | [Search](https://www.amazon.com/s?k=digital+caliper+150mm) |
