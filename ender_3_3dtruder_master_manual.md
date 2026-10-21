@@ -164,10 +164,7 @@ First, check the printed coupler (it's printed at ±0.3 mm, threads and all):
 4. **Clamp:** mount an **SK25 shaft support** to the frame and clamp the round top section of the coupler (above the flats, away from the heater zone). It's printed slightly under 25 mm; if the clamp doesn't grip, add one wrap of soda-can aluminum. The motor plate and the coupler are now both tied to the frame, so melt pressure goes through the frame instead of pulling on the thin barrel thread.
 5. **Heater & sensor:** install the 80 W cartridge and the thermistor in the block and fit the silicone sock.
 6. **Coupler heater:** slide the 24 V 40 W cartridge into the coupler's heater hole and the thermistor into its hole, and lock each with its M5 set screw from the shoulder face (5 mm screw for the heater, 16 mm for the thermistor; snug, not tight). Route the leads away from the nozzle.
-7. **Barrel fan:** mount a 24 V 4010 fan over the barrel at the window (blowing across it) to keep the feed end cold. Because the stock hotend shroud was discarded, mount it using either:
-   * **Zip-ties:** loop two zip-ties through the fan corner holes and around the barrel/hopper neck.
-   * **2020 frame bracket:** bolt a small L-bracket to the 2020 frame rail using an M5 bolt + T-nut, then screw the fan to the bracket.
-   * Wire it to an always-on 24 V supply so it runs continuously.
+7. **Barrel fan:** mount a 24 V 4010 or 4020 fan over the barrel at the window (blowing across it) to keep the feed end cold. Zip-tie it directly: loop two zip-ties through the fan corner holes and around the 12 mm barrel or hopper neck. Wire it to an always-on 24 V supply so it runs continuously.
 
 ### 4.5 Heater Wiring
 **Zone 1, Super Volcano block (80 W), through the external MOSFET:**

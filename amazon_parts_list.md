@@ -23,7 +23,7 @@
 | ✅ | 1 | Coupler thermistor | 100K NTC B3950 cartridge, 3 × 15 mm, rated to 300 °C. Plugs into the mainboard's `TB` header. | [Search](https://www.amazon.com/s?k=100k+b3950+thermistor+cartridge+3x15mm) |
 | ☐ | 1 | PTFE thread tape | For the barrel → coupler thread. | [Search](https://www.amazon.com/s?k=ptfe+thread+seal+tape) |
 | ✅ | 2 | M5 stainless set screws | Hex socket: one **M5 × 5** (heater), one **M5 × 16** (thermistor). Lock the coupler's cartridges. | [Search](https://www.amazon.com/s?k=m5+stainless+set+screw+assortment) |
-| ☐ | 1 | 24 V 4010 axial fan (replacement) | Over the barrel at the hopper window, keeps the feed end cold. Always on. *(Ender stock fan discarded).* | [Search](https://www.amazon.com/s?k=24v+4010+cooling+fan) |
+| ☐ | 1 | 24 V 4010 / 4020 axial fan (replacement) | Over the barrel at the hopper window, keeps the feed end cold. Zip-tied directly to barrel/hopper neck. Always on. | [Search](https://www.amazon.com/s?k=24v+4020+cooling+fan) |
 | ☐ | 1 | 2020 T-Nut & bolt kit (or zip-ties) | M4/M5 T-nuts + bolts to mount 5010 blowers and brackets directly to 2020 frame rails. | [Search](https://www.amazon.com/s?k=2020+t+nuts+m4+m5+screws+assortment) |
 
 ---
