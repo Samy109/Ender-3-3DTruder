@@ -25,7 +25,7 @@
 * **No heatbreak:** There is no V6 heatsink or heatbreak in the melt path. A heatbreak is designed to keep its top end cold, which is exactly where flakes would jam.
 * **Thin barrel thread:** The barrel's M12×1.0 thread leaves about 0.4 mm of wall at the thread root. Three rules keep it safe: the thread is fully hidden inside the coupler, the coupler (not the tube) is clamped to the frame, and the auger driver's current is limited so a jam makes the motor skip instead of building pressure.
 * **Two heat zones:** The coupler carries its own 24 V 40 W cartridge and thermistor, driven by the Ender's heated-bed output (the bed itself is removed). Marlin controls it with full PID and thermal-runaway protection, and the menus call it **Coupler**. It roughly doubles the heat available for melting and pushes the melt zone up into the barrel end. Presets run the coupler about 10 °C below the nozzle.
-* **Die swell:** Plastic swells as it leaves the 1.4 mm nozzle (to roughly 1.6–2.0 mm depending on material and temperature). The puller can only draw the strand *thinner*. If it comes out under 1.75 mm before pulling, a larger nozzle is needed (keep a 2.0 mm on hand, or drill out the 1.4 mm).
+* **Die swell:** Plastic swells as it leaves the 1.4 mm nozzle (to roughly 1.6–2.0 mm depending on material and temperature). The puller can only draw the strand *thinner*. If it comes out under 1.75 mm before pulling, a larger nozzle is needed (keep a 2.0 mm on hand, or drill out the 1.4 mm). The coupler's stub bore stays 1.4 mm (that keeps its wall printable), which adds only a little back-pressure at these flow rates.
 
 ---
 

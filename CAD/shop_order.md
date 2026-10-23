@@ -20,12 +20,12 @@
 | Stub | M6×1.0 external thread, printed, full length (15), runs out at the shoulder |
 | Through bore | Ø3.0 in the body; Ø1.4 through the stub |
 | Wrench flats | 21.7 A/F: the two faces of the heater block that the cross holes exit through, 0–26 from the shoulder; 45° corner chamfers into the round |
-| Heater hole | Ø6.3 through, perpendicular to the axis, 6.5 off-center, 7 from the shoulder; 45° teardrop roof |
-| Thermistor hole | Ø3.3 × 16 deep, parallel to the heater hole, 6.5 off-center on the opposite side, 15 from the shoulder; 45° teardrop roof |
+| Heater hole | Ø6.3 through, perpendicular to the axis and to the flats (exits through both), 6.5 off-center, 7 from the shoulder; 45° teardrop roof |
+| Thermistor hole | Ø3.3 × 16 deep from one flat, parallel to the heater hole, 6.5 off-center on the opposite side, 15 from the shoulder; 45° teardrop roof |
 | Set screws | M6×1.0 internal threads, printed, from the shoulder face into the heater and thermistor holes |
 
 **Notes**
-1. Print axis vertical, top (M12) face on the plate, stub up. The teardrop roofs and the cone floor are there so no internal supports are needed.
+1. Print axis vertical, top (M12) face on the plate, stub up. The teardrop roofs, the cone floor and the 45° block corners are there so no supports are needed.
 2. Every fit already allows for ±0.3. The threads are offset in the model: the M6 is 0.3 under size and the M12 and M6 set-screw threads are 0.3 over. Holes the cartridges slide into are 0.3 over, and the flats and the clamp round are 0.3 under. Print the model as it is; don't correct these sizes back to nominal.
 3. Keep the bore, threads and cross holes clear of powder.
 4. Minimum wall is 1.5 mm everywhere except the thread teeth themselves. All threads are M6 or larger and are modelled in the file; no tapping is needed.
