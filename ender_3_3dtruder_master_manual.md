@@ -41,9 +41,9 @@ Full list with specs and links: [`amazon_parts_list.md`](amazon_parts_list.md). 
 * **Super Volcano heater block** + **1.4 mm Super Volcano brass nozzle** + **silicone sock**
 * **80 W 24 V heater cartridge** + **100K NTC B3950 thermistor cartridge**
 * **25 A external MOSFET module** + 16 AWG silicone wire + 5 A inline fuse
-* **Heated barrel coupler (316L stainless, metal 3D printed at ±0.3 mm, threads printed):** Ø24.7 × 40 mm. M12×1.0 female top, M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø2 through the stub), flats for a 22 mm wrench, cross holes for a 6 mm heater cartridge and a 3 mm thermistor, M5 set screws. No machining or thread cutting needed. See [`CAD/shop_order.md`](CAD/shop_order.md) and [`CAD/barrel_coupler.step`](CAD/barrel_coupler.step).
+* **Heated barrel coupler (316L stainless, metal 3D printed at ±0.3 mm, threads printed):** 40 mm long: a 21.7 × 24.7 mm heater block (its 21.7 mm faces are the wrench flats) under a Ø24.7 mm round for the clamp. M12×1.0 female top, M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø1.4 through the stub), flats for a 22 mm wrench, cross holes for a 6 mm heater cartridge and a 3 mm thermistor, M6 set screws. No machining or thread cutting needed. See [`CAD/shop_order.md`](CAD/shop_order.md) and [`CAD/barrel_coupler.step`](CAD/barrel_coupler.step).
 * **SK25 shaft support:** clamps the coupler's round top section to the frame.
-* **M5 stainless set screws:** one 5 mm (heater) and one 16 mm (thermistor), plus a 2.5 mm hex key.
+* **M6 stainless set screws:** one 5 mm (heater) and one 16 mm (thermistor), plus a 3 mm hex key.
 * **Coupler heat zone:** 24 V 40 W 6 × 20 mm cartridge heater + 100K B3950 thermistor cartridge (3 × 15 mm), wired to the mainboard's bed terminals and `TB` thermistor header.
 * **PTFE thread tape** for the barrel thread.
 
@@ -148,7 +148,7 @@ Melt pressure pushes the auger back **toward the motor**, so the thrust bearing 
 
 ### 4.4 Melt Zone Assembly
 First, check the printed coupler (it's printed at ±0.3 mm, threads and all):
-* Run the M6 stub into the block, the threaded barrel into the M12 end, and both M5 set screws in by hand. A printed thread may feel rough the first time; run it in and out a few times. Don't force it.
+* Run the M6 stub into the block, the threaded barrel into the M12 end, and both M6 set screws in by hand. A printed thread may feel rough the first time; run it in and out a few times. Don't force it.
 * **Lap the stub end:** lay 400-grit paper on the glass, hold the coupler upright by its body, and rub the stub end in figure-eights until the whole face is evenly matte. It's the sealing face.
 
 ```
@@ -163,7 +163,7 @@ First, check the printed coupler (it's printed at ±0.3 mm, threads and all):
    *The seal is the flat end of the stub pressing on the top of the nozzle, not the threads.*
 4. **Clamp:** mount an **SK25 shaft support** to the frame and clamp the round top section of the coupler (above the flats, away from the heater zone). It's printed slightly under 25 mm; if the clamp doesn't grip, add one wrap of soda-can aluminum. The motor plate and the coupler are now both tied to the frame, so melt pressure goes through the frame instead of pulling on the thin barrel thread.
 5. **Heater & sensor:** install the 80 W cartridge and the thermistor in the block and fit the silicone sock.
-6. **Coupler heater:** slide the 24 V 40 W cartridge into the coupler's heater hole and the thermistor into its hole, and lock each with its M5 set screw from the shoulder face (5 mm screw for the heater, 16 mm for the thermistor; snug, not tight). Route the leads away from the nozzle.
+6. **Coupler heater:** slide the 24 V 40 W cartridge into the coupler's heater hole and the thermistor into its hole, and lock each with its M6 set screw from the shoulder face (5 mm screw for the heater, 16 mm for the thermistor; snug, not tight). Route the leads away from the nozzle.
 7. **Barrel fan:** mount a 24 V 4010 or 4020 fan over the barrel at the window (blowing across it) to keep the feed end cold. Zip-tie it directly: loop two zip-ties through the fan corner holes and around the 12 mm barrel or hopper neck. Wire it to an always-on 24 V supply so it runs continuously.
 
 ### 4.5 Heater Wiring
@@ -190,7 +190,7 @@ First, check the printed coupler (it's printed at ±0.3 mm, threads and all):
 1. Flash the Ender 3 V2 firmware (see [`Ender3_Firmware/README.md`](Ender3_Firmware/README.md)): `firmware_Ender3_V2_RE.bin` or `_RC.bin` to match the chip on your board. If the board has been flashed before, rename the file to something new so the bootloader picks it up.
 2. **First boot, cold:** both thermistors plugged in (nozzle on `TH`, coupler on `TB`). The nozzle readout and the `COUPLER:` line should both show room temperature (about 20–25 °C). A reading near or below 0 °C, or an error, means a thermistor isn't connected.
 3. Set the hotend to **250 °C** and wait a few minutes.
-4. Hold the coupler's **flats with a 22 mm wrench** and tighten the nozzle a further **⅛ turn** against the stub.
+4. Hold the coupler's **flats with a 22 mm wrench** (on the upper part of the flats, clear of the heater and thermistor leads) and tighten the nozzle a further **⅛ turn** against the stub.
 5. Run PID autotune on **both zones** and save, either from the screen (**Configuration → Advanced Settings → PID Autotune** for the nozzle and the Coupler, then **Store Settings**) or over USB:
 
 ```gcode
@@ -293,7 +293,7 @@ Screen presets (each sets both heat zones):
 | **Auger motor buzzes / skips** | Plastic not melted, or nozzle clogged. (Skipping is the torque limit working.) | Stop the auger. Wait for `MELT READY`. Clear the nozzle. Don't raise Vref to push through. |
 | **`Thermal Runaway` mid-run** (nozzle or coupler) | Auger feeding cold flakes faster than the heaters can melt them | Lower `RPM`. Don't loosen the thermal protection. |
 | **`MINTEMP` / `MAXTEMP`** | Thermistor unplugged or broken | Check the nozzle thermistor on `TH` and the coupler thermistor on `TB`, and their wires |
-| **Coupler never reaches temperature** | Cartridge loose in its hole, or PID not tuned | Tighten the M5 set screw; run `M303 E-1 S205 C8 U1` then `M500` |
+| **Coupler never reaches temperature** | Cartridge loose in its hole, or PID not tuned | Tighten the M6 set screw; run `M303 E-1 S205 C8 U1` then `M500` |
 | **Plastic leaks around the block top** | Stub end not seated on the nozzle | Heat to 250 °C, hold the coupler flats, tighten the nozzle ⅛ turn. Check the nozzle hex isn't touching the block. |
 | **Plastic leaks at the barrel thread** | Thread not sealed or not snug | Cool down, re-tape and re-tighten. Check the thread is fully inside the coupler. |
 | **Squealing / auger rubbing** | Auger off-center in the shaft coupling | Redo the shim; spin-test for wobble |

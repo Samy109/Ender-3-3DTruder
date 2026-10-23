@@ -389,9 +389,9 @@ pre code { background: none; border: none; padding: 0; color: inherit; font-size
 <li><strong>Super Volcano heater block</strong> + <strong>1.4 mm Super Volcano brass nozzle</strong> + <strong>silicone sock</strong></li>
 <li><strong>80 W 24 V heater cartridge</strong> + <strong>100K NTC B3950 thermistor cartridge</strong></li>
 <li><strong>25 A external MOSFET module</strong> + 16 AWG silicone wire + 5 A inline fuse</li>
-<li><strong>Heated barrel coupler (316L stainless, metal 3D printed at ±0.3 mm, threads printed):</strong> Ø24.7 × 40 mm. M12×1.0 female top, M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø2 through the stub), flats for a 22 mm wrench, cross holes for a 6 mm heater cartridge and a 3 mm thermistor, M5 set screws. No machining or thread cutting needed. See <a href="CAD/shop_order.md"><code>CAD/shop_order.md</code></a> and <a href="CAD/barrel_coupler.step"><code>CAD/barrel_coupler.step</code></a>.</li>
+<li><strong>Heated barrel coupler (316L stainless, metal 3D printed at ±0.3 mm, threads printed):</strong> 40 mm long: a 21.7 × 24.7 mm heater block (its 21.7 mm faces are the wrench flats) under a Ø24.7 mm round for the clamp. M12×1.0 female top, M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø1.4 through the stub), flats for a 22 mm wrench, cross holes for a 6 mm heater cartridge and a 3 mm thermistor, M6 set screws. No machining or thread cutting needed. See <a href="CAD/shop_order.md"><code>CAD/shop_order.md</code></a> and <a href="CAD/barrel_coupler.step"><code>CAD/barrel_coupler.step</code></a>.</li>
 <li><strong>SK25 shaft support:</strong> clamps the coupler's round top section to the frame.</li>
-<li><strong>M5 stainless set screws:</strong> one 5 mm (heater) and one 16 mm (thermistor), plus a 2.5 mm hex key.</li>
+<li><strong>M6 stainless set screws:</strong> one 5 mm (heater) and one 16 mm (thermistor), plus a 3 mm hex key.</li>
 <li><strong>Coupler heat zone:</strong> 24 V 40 W 6 × 20 mm cartridge heater + 100K B3950 thermistor cartridge (3 × 15 mm), wired to the mainboard's bed terminals and <code>TB</code> thermistor header.</li>
 <li><strong>PTFE thread tape</strong> for the barrel thread.</li>
 </ul>
@@ -545,7 +545,7 @@ pre code { background: none; border: none; padding: 0; color: inherit; font-size
 </ol>
 <h2>4.4 Melt Zone Assembly</h2>
 <p>First, check the printed coupler (it's printed at ±0.3 mm, threads and all):
-* Run the M6 stub into the block, the threaded barrel into the M12 end, and both M5 set screws in by hand. A printed thread may feel rough the first time; run it in and out a few times. Don't force it.
+* Run the M6 stub into the block, the threaded barrel into the M12 end, and both M6 set screws in by hand. A printed thread may feel rough the first time; run it in and out a few times. Don't force it.
 * <strong>Lap the stub end:</strong> lay 400-grit paper on the glass, hold the coupler upright by its body, and rub the stub end in figure-eights until the whole face is evenly matte. It's the sealing face.</p>
 <pre><code> barrel ══ M12×1.0 ══ [ 316L coupler ] ══ M6 stub  ══ [ Super Volcano block ] ══ nozzle
                        ▲ SK25 clamp                         ▲ zone 1: 80 W + thermistor
@@ -558,7 +558,7 @@ pre code { background: none; border: none; padding: 0; color: inherit; font-size
    <em>The seal is the flat end of the stub pressing on the top of the nozzle, not the threads.</em></li>
 <li><strong>Clamp:</strong> mount an <strong>SK25 shaft support</strong> to the frame and clamp the round top section of the coupler (above the flats, away from the heater zone). It's printed slightly under 25 mm; if the clamp doesn't grip, add one wrap of soda-can aluminum. The motor plate and the coupler are now both tied to the frame, so melt pressure goes through the frame instead of pulling on the thin barrel thread.</li>
 <li><strong>Heater &amp; sensor:</strong> install the 80 W cartridge and the thermistor in the block and fit the silicone sock.</li>
-<li><strong>Coupler heater:</strong> slide the 24 V 40 W cartridge into the coupler's heater hole and the thermistor into its hole, and lock each with its M5 set screw from the shoulder face (5 mm screw for the heater, 16 mm for the thermistor; snug, not tight). Route the leads away from the nozzle.</li>
+<li><strong>Coupler heater:</strong> slide the 24 V 40 W cartridge into the coupler's heater hole and the thermistor into its hole, and lock each with its M6 set screw from the shoulder face (5 mm screw for the heater, 16 mm for the thermistor; snug, not tight). Route the leads away from the nozzle.</li>
 <li><strong>Barrel fan:</strong> mount a 24 V 4010 or 4020 fan over the barrel at the window (blowing across it) to keep the feed end cold. Zip-tie it directly: loop two zip-ties through the fan corner holes and around the 12 mm barrel or hopper neck. Wire it to an always-on 24 V supply so it runs continuously.</li>
 </ol>
 <h2>4.5 Heater Wiring</h2>
@@ -579,7 +579,7 @@ pre code { background: none; border: none; padding: 0; color: inherit; font-size
 <li>Flash the Ender 3 V2 firmware (see <a href="Ender3_Firmware/README.md"><code>Ender3_Firmware/README.md</code></a>): <code>firmware_Ender3_V2_RE.bin</code> or <code>_RC.bin</code> to match the chip on your board. If the board has been flashed before, rename the file to something new so the bootloader picks it up.</li>
 <li><strong>First boot, cold:</strong> both thermistors plugged in (nozzle on <code>TH</code>, coupler on <code>TB</code>). The nozzle readout and the <code>COUPLER:</code> line should both show room temperature (about 20–25 °C). A reading near or below 0 °C, or an error, means a thermistor isn't connected.</li>
 <li>Set the hotend to <strong>250 °C</strong> and wait a few minutes.</li>
-<li>Hold the coupler's <strong>flats with a 22 mm wrench</strong> and tighten the nozzle a further <strong>⅛ turn</strong> against the stub.</li>
+<li>Hold the coupler's <strong>flats with a 22 mm wrench</strong> (on the upper part of the flats, clear of the heater and thermistor leads) and tighten the nozzle a further <strong>⅛ turn</strong> against the stub.</li>
 <li>Run PID autotune on <strong>both zones</strong> and save, either from the screen (<strong>Configuration → Advanced Settings → PID Autotune</strong> for the nozzle and the Coupler, then <strong>Store Settings</strong>) or over USB:</li>
 </ol>
 <pre><code class="language-gcode">M303 E0 S220 C8 U1    ; nozzle (zone 1)
@@ -711,7 +711,7 @@ M500
 <tr>
 <td style="text-align: left;"><strong>Coupler never reaches temperature</strong></td>
 <td style="text-align: left;">Cartridge loose in its hole, or PID not tuned</td>
-<td style="text-align: left;">Tighten the M5 set screw; run <code>M303 E-1 S205 C8 U1</code> then <code>M500</code></td>
+<td style="text-align: left;">Tighten the M6 set screw; run <code>M303 E-1 S205 C8 U1</code> then <code>M500</code></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Plastic leaks around the block top</strong></td>
