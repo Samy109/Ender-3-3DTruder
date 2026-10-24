@@ -11,7 +11,7 @@ So every fit is sized for that tolerance:
     still go together at the edge of the tolerance;
   - holes a part slides into are nominal + 0.3; the wrench flats and the clamp round are nominal - 0.3.
 All threads are modelled (ISO 60 deg profile, right hand, bd_warehouse IsoThread), M6 or larger.
-Every wall is at least 1.5 mm (PCBWay's minimum), thread teeth aside.
+Every wall is at least 1.5 mm, thread teeth aside.
 Body z runs from the shoulder (z = 0) up; the stub hangs below (z = -15 .. 0).
 
   Stub:        M6x1.0 printed full length, major 5.7, runs out at the shoulder (no relief)

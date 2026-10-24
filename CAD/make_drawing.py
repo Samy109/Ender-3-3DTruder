@@ -316,7 +316,7 @@ callout(R(-STUB_R * 0.71, STUB_R * 0.71), (DX + 32, DY - 8), ["M6 STUB END (SEAL
 # =====================================================================================
 # Notes, title block, border
 # =====================================================================================
-notes = [  # what PCBWay is asked to hold: print as modelled, ±0.3, nothing finer
+notes = [  # what JLC3D is asked to hold: print as modelled, ±0.3, nothing finer
     "1. MATERIAL: 316L STAINLESS STEEL, METAL 3D PRINTED (SLM). NO ALUMINIUM (280 °C SERVICE).",
     "2. ALL DIMENSIONS ±0.3 (STANDARD SLM TOLERANCE). NO TIGHTER TOLERANCE APPLIES ANYWHERE ON THIS PART. NO MACHINING REQUIRED.",
     "3. PRINT EXACTLY AS MODELLED IN barrel_coupler.step. ALL FOUR THREADS (M6 STUB, M12, 2x M6 SET SCREW) ARE PRINTED; THEIR FIT IS ALREADY OFFSET IN THE MODEL.",
