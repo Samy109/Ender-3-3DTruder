@@ -22,7 +22,7 @@
 | ✅ | 1 | Coupler heater cartridge | 24 V, 40 W, 6 × 20 mm. Second heat zone in the coupler, wired to the mainboard's bed terminals. | [Search](https://www.amazon.com/s?k=24v+40w+heater+cartridge+6x20mm) |
 | ✅ | 1 | Coupler thermistor | 100K NTC B3950 cartridge, 3 × 15 mm, rated to 300 °C. Plugs into the mainboard's `TB` header. | [Search](https://www.amazon.com/s?k=100k+b3950+thermistor+cartridge+3x15mm) |
 | ☐ | 1 | PTFE thread tape | For the barrel → coupler thread. | [Search](https://www.amazon.com/s?k=ptfe+thread+seal+tape) |
-| ☐ | 2 | M6 stainless set screws | Hex socket: one **M6 × 5** (heater), one **M6 × 16** (thermistor). Lock the coupler's cartridges. | [Search](https://www.amazon.com/s?k=m6+stainless+set+screw+assortment) |
+| ☐ | 2 | M6 stainless set screws | Hex socket: one **M6 × 6** (heater), one **M6 × 16** (thermistor). Lock the coupler's cartridges. | [Search](https://www.amazon.com/s?k=m6+stainless+set+screw+assortment) |
 | ☐ | 1 | 24 V 4010 / 4020 axial fan (replacement) | Over the barrel at the hopper window, keeps the feed end cold. Zip-tied directly to barrel/hopper neck. Always on. | [Search](https://www.amazon.com/s?k=24v+4020+cooling+fan) |
 | ☐ | 1 | 2020 T-Nut & bolt kit (or zip-ties) | M4/M5 T-nuts + bolts to mount 5010 blowers and brackets directly to 2020 frame rails. | [Search](https://www.amazon.com/s?k=2020+t+nuts+m4+m5+screws+assortment) |
 
@@ -76,7 +76,8 @@
 ## 🔧 Tools
 | ☐ | Qty | Part | Spec / Notes | Link |
 | :-: | :-: | :--- | :--- | :--- |
-| ✅ | 1 | M12×1.0 tap & die set | Only needed if you cut the barrel thread yourself. The printed coupler needs no tap. | [Search](https://www.amazon.com/s?k=m12x1+tap+and+die+set) |
+| ✅ | 1 | M12×1.0 tap & die set | Die: only needed if you cut the barrel thread yourself. Tap: chases the coupler's printed M12 if it comes out tight. | [Search](https://www.amazon.com/s?k=m12x1+tap+and+die+set) |
+| ☐ | 1 | M6×1.0 tap + 1.4 mm drill bit | Cleanup only: chase the coupler's printed M6 set-screw holes if tight, and run the drill through the Ø1.4 stub bore if it printed small or holds powder. | [Search](https://www.amazon.com/s?k=m6x1.0+hand+tap) |
 | ✅ | 1 | Die handle (die stock) | **38 mm (1.5") round die**, to fit the M12 die. Skip it if a shop cuts the barrel thread. | [Search](https://www.amazon.com/s?k=38mm+die+handle+round+die+stock) |
 | ✅ | 1 | Angle grinder / cutoff discs | Cutting the auger tip and barrel window. | [Search](https://www.amazon.com/s?k=rotary+tool+cutoff+wheels+metal) |
 | ✅ | 1 | Needle files + 240-grit cloth | Deburring the window and auger tip. | — |

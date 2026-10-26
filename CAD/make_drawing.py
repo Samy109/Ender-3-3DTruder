@@ -4,7 +4,7 @@ Drawing BC-001 for the heated barrel coupler (matplotlib). Matches barrel_couple
 Run:  python make_drawing.py   -> barrel_coupler_drawing.pdf next to this file
 
 Model axes as in barrel_coupler.py: Z is the part axis (shoulder z = 0, top z = 40, stub tip z = -15),
-the heater hole runs along X at Y = +6.5, the thermistor hole along X at Y = -6.5, both exiting
+the heater hole runs along X at Y = +6.8, the thermistor hole along X at Y = -6.8, both exiting
 through the heater block's wrench flats (normal to X).
 Views are third-angle: section A-A and view C look from +X (+Y to the right), view B looks down
 from +Z, view D looks up at the shoulder face from -Z.
@@ -22,12 +22,12 @@ from matplotlib.patches import Arc, Circle, Polygon, Rectangle
 BODY_R, BODY_L, CH = 12.35, 40.0, 0.5
 STUB_R, STUB_L = 2.85, 15.0
 STUB_MINOR_R = STUB_R - 0.5 * 1.2269
-BORE_R, STUB_BORE_R = 1.5, 0.7
+BORE_R, STUB_BORE_R, STUB_BORE_TOP = 1.5, 0.7, 2.0   # Ø1.4 runs 2 into the body, then a 90° cone to Ø3.0
 M12_MAJOR_R, M12_THREAD, M12_HOLE_DEPTH = 6.15, 14.0, 18.0
 M12_MINOR_R = M12_MAJOR_R - 0.5 * 1.0825
-FLAT, BLOCK_Z1, BLOCK_R = 10.85, 26.0, 2.0       # heater block: flats at X = ±10.85, Y faces at ±BODY_R, R2 corners
-HEATER_R, HEATER_Y, HEATER_Z = 3.15, 6.5, 7.0
-THERM_R, THERM_Y, THERM_Z, THERM_DEPTH = 1.65, -6.5, 15.0, 16.0
+FLAT, BLOCK_Z1, BLOCK_R = 10.85, 26.0, 1.0       # heater block: flats at X = ±10.85, Y faces at ±BODY_R, R1 corners
+HEATER_R, HEATER_Y, HEATER_Z = 3.25, 6.8, 8.0
+THERM_R, THERM_Y, THERM_Z, THERM_DEPTH = 1.75, -6.8, 15.0, 16.0
 SET_MAJOR_R = 3.15
 SET_MINOR_R = SET_MAJOR_R - 0.5 * 1.0825
 THERM_SET_X = 3.0
@@ -140,7 +140,7 @@ half = [
     (BODY_R - CH, 0), (BODY_R, CH),
     (BODY_R, BODY_L - CH), (BODY_R - CH, BODY_L), (M12_MAJOR_R + CH, BODY_L),
     (M12_MINOR_R, BODY_L - CH - (M12_MAJOR_R - M12_MINOR_R)), (M12_MINOR_R, z_thread), (M12_MAJOR_R, z_thread),
-    (M12_MAJOR_R, z_floor), (BORE_R, z_cone), (BORE_R, 0), (STUB_BORE_R, 0),
+    (M12_MAJOR_R, z_floor), (BORE_R, z_cone), (BORE_R, STUB_BORE_TOP + BORE_R - STUB_BORE_R), (STUB_BORE_R, STUB_BORE_TOP),
 ]
 for sgn in (1, -1):
     pts = [P(sgn * y, z) for y, z in half]
@@ -178,7 +178,7 @@ dim_v(xl - 22, P(0, 0)[1], P(0, BODY_L)[1], "40", ext_from=xl, side="left")
 dim_v(xl - 12, P(0, 0)[1], P(0, BLOCK_Z1)[1], "26", ext_from=xl, side="left")
 dim_v(P(-STUB_R, 0)[0] - 14, P(0, -STUB_L)[1], P(0, 0)[1], "15", ext_from=P(-STUB_R, 0)[0], side="left")
 xr = P(BODY_R, 0)[0]
-dim_v(xr + 10, P(0, 0)[1], P(0, HEATER_Z)[1], "7", ext_from=xr)
+dim_v(xr + 10, P(0, 0)[1], P(0, HEATER_Z)[1], "8", ext_from=xr)
 dim_v(xr + 20, P(0, 0)[1], P(0, THERM_Z)[1], "15", ext_from=xr)
 dim_v(xr + 10, P(0, z_thread)[1], P(0, BODY_L)[1], "14 FULL THREAD", ext_from=xr)
 dim_v(xr + 34, P(0, z_floor)[1], P(0, BODY_L)[1], "18", ext_from=xr)
@@ -189,15 +189,15 @@ callout(P(-M12_MINOR_R, 34), (lx + 52, P(0, 34)[1]), ["M12x1.0 INTERNAL, PRINTED
 callout(P(-M12_MAJOR_R, 24), (lx + 52, P(0, 27.5)[1]), ["HOLE 18 DEEP, 90° CONE FLOOR"], ha="right")
 callout(P(-(M12_MAJOR_R + 0.25), BODY_L - 0.25), (lx + 52, P(0, 43)[1]), ["0.5 x 45° CHAMFER"], ha="right")
 callout(P(THERM_Y - THERM_R * 0.7, THERM_Z + THERM_R * 0.7), (lx + 52, P(0, 17)[1]),
-        ["THERMISTOR Ø3.3 x 16 DEEP FROM +X", "Y -6.5, 15 FROM SHOULDER"], ha="right")
-callout(P(-BORE_R, 9), (lx + 52, P(0, 8)[1]), ["Ø3.0 BODY BORE"], ha="right")
-callout(P(-STUB_BORE_R, -9), (lx + 52, P(0, -8)[1]), ["Ø1.4 STUB BORE, THRU (1.5 WALL UNDER M6 ROOT)"], ha="right")
+        ["THERMISTOR Ø3.5 x 16 DEEP FROM +X", "Y -6.8, 15 FROM SHOULDER"], ha="right")
+callout(P(-BORE_R, 9), (lx + 52, P(0, 8)[1]), ["Ø3.0 BODY BORE, 90° CONE DOWN TO Ø1.4"], ha="right")
+callout(P(-STUB_BORE_R, -9), (lx + 52, P(0, -8)[1]), ["Ø1.4 BORE THRU STUB + 2 INTO BODY", "1.5 WALL UNDER M6 ROOT"], ha="right")
 
 # Callouts, right
 rx = xr + 46
 callout(P(BODY_R, 23), (rx, P(0, 23)[1]), ["HEATER BLOCK 21.7 x 24.7, Z 0-26", "21.7 A/F FLATS NORMAL TO X (VIEWS C, D)"])
 callout(P(HEATER_Y + HEATER_R * 0.7, HEATER_Z + HEATER_R * 0.7), (rx, P(0, 9.5)[1]),
-        ["HEATER Ø6.3 THRU", "Y +6.5, 7 FROM SHOULDER"])
+        ["HEATER Ø6.5 THRU", "Y +6.8, 8 FROM SHOULDER"])
 callout(P(HEATER_Y, HEATER_Z - HEATER_R * sqrt(2) + 0.2), (rx, P(0, 3.2)[1]),
         ["45° TEARDROP ROOFS ON BOTH", "CROSS HOLES (PRINT, NOTE 3)"])
 callout(P(HEATER_Y + SET_MAJOR_R, 1.0), (rx, P(0, -3.0)[1]),
@@ -226,14 +226,14 @@ edge = corner_cone_edge()
 for sgn in (1, -1):
     line(Q(sgn * STUB_MINOR_R, -STUB_L), Q(sgn * STUB_MINOR_R, 0))
     ax.plot(*zip(*[Q(sgn * y, z) for y, z in edge]), color="k", lw=THICK)     # 45° corner chamfers
-    line(Q(sgn * (BODY_R - BLOCK_R), CH), Q(sgn * (BODY_R - BLOCK_R), edge[-1][1]))  # R2 corner tangent
+    line(Q(sgn * (BODY_R - BLOCK_R), CH), Q(sgn * (BODY_R - BLOCK_R), edge[-1][1]))  # corner round tangent
 poly(teardrop(HEATER_Y, HEATER_Z, HEATER_R, s2, Q))
 poly(teardrop(THERM_Y, THERM_Z, THERM_R, s2, Q))
 centerline(Q(0, -STUB_L - 2), Q(0, BODY_L + 2))
 text(CX, Q(0, BODY_L)[1] + 9, "VIEW C (FROM +X)", size=FS_TITLE, ha="center", weight="bold")
 text(CX, Q(0, BODY_L)[1] + 4.5, "SCALE 1.5:1", size=FS_SMALL, ha="center")
-callout(Q(HEATER_Y + HEATER_R * 0.7, HEATER_Z + HEATER_R * 0.7), (CX + 27, Q(0, 10)[1]), ["HEATER Ø6.3 THRU", "Y +6.5, Z 7"])
-callout(Q(THERM_Y + THERM_R * 0.7, THERM_Z + THERM_R * 0.7), (CX + 27, Q(0, 19)[1]), ["THERMISTOR Ø3.3 x 16", "Y -6.5, Z 15"])
+callout(Q(HEATER_Y + HEATER_R * 0.7, HEATER_Z + HEATER_R * 0.7), (CX + 27, Q(0, 10)[1]), ["HEATER Ø6.5 THRU", "Y +6.8, Z 8"])
+callout(Q(THERM_Y + THERM_R * 0.7, THERM_Z + THERM_R * 0.7), (CX + 27, Q(0, 19)[1]), ["THERMISTOR Ø3.5 x 16", "Y -6.8, Z 15"])
 callout(Q(BODY_R, 33), (CX + 27, Q(0, 33)[1]), ["Ø24.7 ROUND ABOVE FLATS", "FOR SK25 CLAMP"])
 callout(Q(-2.0, 22.0), (CX - 27, Q(0, 22)[1]), ["21.7 A/F FLAT, Z 0-26", "(22 mm WRENCH), BOTH SIDES"], ha="right")
 callout(Q(-edge[6][0], edge[6][1]), (CX - 27, Q(0, 30)[1]), ["45° CORNER CHAMFERS", "INTO THE ROUND"], ha="right")
@@ -308,22 +308,22 @@ centerline((DX, DY - s2 * BODY_R - 4), (DX, DY + s2 * BODY_R + 4))
 text(DX, DY + s2 * BODY_R + 11, "VIEW D (SHOULDER FACE, FROM -Z)", size=FS_TITLE, ha="center", weight="bold")
 text(DX, DY + s2 * BODY_R + 6.5, "SCALE 1.5:1    +X UP", size=FS_SMALL, ha="center")
 callout(R(0.0, HEATER_Y + SET_MAJOR_R * 0.7), (DX + 32, DY + 6),
-        ["M6x1.0 TO HEATER HOLE", "X 0, Y +6.5"])
+        ["M6x1.0 TO HEATER HOLE", "X 0, Y +6.8"])
 callout(R(THERM_SET_X + SET_MAJOR_R * 0.7, THERM_Y), (DX - 32, DY + 14),
-        ["M6x1.0 TO THERMISTOR HOLE", "X +%.1f, Y -6.5" % THERM_SET_X], ha="right")
+        ["M6x1.0 TO THERMISTOR HOLE", "X +%.1f, Y -6.8" % THERM_SET_X], ha="right")
 callout(R(-STUB_R * 0.71, STUB_R * 0.71), (DX + 32, DY - 8), ["M6 STUB END (SEALING FACE)", "Ø1.4 BORE"])
 
 # =====================================================================================
 # Notes, title block, border
 # =====================================================================================
-notes = [  # what JLC3D is asked to hold: print as modelled, ±0.3, nothing finer
+notes = [  # what JLC3D is asked to hold: print as modelled, their standard ±0.3 / ±0.5 on holes, nothing finer
     "1. MATERIAL: 316L STAINLESS STEEL, METAL 3D PRINTED (SLM). NO ALUMINIUM (280 °C SERVICE).",
-    "2. ALL DIMENSIONS ±0.3 (STANDARD SLM TOLERANCE). NO TIGHTER TOLERANCE APPLIES ANYWHERE ON THIS PART. NO MACHINING REQUIRED.",
-    "3. PRINT EXACTLY AS MODELLED IN barrel_coupler.step. ALL FOUR THREADS (M6 STUB, M12, 2x M6 SET SCREW) ARE PRINTED; THEIR FIT IS ALREADY OFFSET IN THE MODEL.",
+    "2. SIZES ±0.3, HOLES ±0.5 (STANDARD SLM TOLERANCE). NO TIGHTER TOLERANCE APPLIES ANYWHERE ON THIS PART. NO MACHINING REQUIRED.",
+    "3. PRINT EXACTLY AS MODELLED IN barrel_coupler.step. ALL FOUR THREADS (M6 STUB, M12, 2x M6 SET SCREW) ARE PRINTED; THEIR FIT IS ALREADY OFFSET IN THE MODEL, CARTRIDGE HOLES +0.5.",
     "4. PRINT AXIS VERTICAL, TOP (M12) FACE ON THE PLATE, STUB UP. CROSS HOLES HAVE 45° TEARDROP ROOFS; M12 HOLE FLOOR IS A 90° CONE; BLOCK CORNERS 45°. NO INTERNAL SUPPORTS.",
     "5. STRESS RELIEVE, REMOVE FROM PLATE, REMOVE SUPPORTS, BEAD BLAST. KEEP THE BORE, THREADS AND CROSS HOLES CLEAR OF POWDER.",
     "6. HEATER AND THERMISTOR HOLES RUN PARALLEL TO X, ON OPPOSITE SIDES OF THE AXIS, EXITING SQUARE THROUGH THE 21.7 FLATS. 0.3 x 45° CHAMFER ON THEIR ENTRIES.",
-    "7. MINIMUM WALL 1.5 EVERYWHERE EXCEPT THREAD TEETH (STUB 1.5 UNDER THE M6 ROOT; 1.85 BORE TO HEATER HOLE).",
+    "7. MINIMUM WALL 2.0 EXCEPT THE STUB (1.5 UNDER THE M6 ROOT) AND THREAD TEETH. BORE TO HEATER HOLE 2.05.",
     "8. THREADS SHOWN BY CONVENTION. THIRD-ANGLE PROJECTION.",
 ]
 text(16, 280, "NOTES (UNITS: mm)", size=FS_TITLE, weight="bold")
@@ -340,7 +340,7 @@ text(tb_x + 3, tb_y + 26, "HEATED BARREL COUPLER", size=10, weight="bold")
 text(tb_x + 3, tb_y + 15.5, "316L STAINLESS (SLM)    UNITS mm    QTY 1", size=FS)
 text(tb_x + 3, tb_y + 7.3, "CUSTOMER: ADAM HUMPHRIES", size=FS_SMALL)
 text(tb_x + 3, tb_y + 3.3, "REF: barrel_coupler.step", size=FS_SMALL)
-text(tb_x + 67, tb_y + 7.3, "DWG: BC-001    REV D", size=FS_SMALL)
+text(tb_x + 67, tb_y + 7.3, "DWG: BC-001    REV E", size=FS_SMALL)
 text(tb_x + 67, tb_y + 3.3, "SCALE: AS NOTED  SHEET 1/1", size=FS_SMALL)
 
 out = Path(__file__).with_name("barrel_coupler_drawing.pdf")

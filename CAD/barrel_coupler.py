@@ -5,22 +5,25 @@
       -> this coupler (second heat zone: 24 V cartridge + thermistor)
       -> M6x1.0 male stub straight into the Super Volcano block (seals on the nozzle)
 
-Made as a 316L metal print (SLM) held to +/-0.3 mm, with no machining or thread cutting afterwards.
+Made as a 316L metal print (SLM, JLC3D): +/-0.3 mm on sizes, +/-0.5 mm on holes, no machining.
 So every fit is sized for that tolerance:
-  - threads are printed and offset by FIT on diameter (external smaller, internal larger) so they
-    still go together at the edge of the tolerance;
-  - holes a part slides into are nominal + 0.3; the wrench flats and the clamp round are nominal - 0.3.
+  - threads are printed and offset by FIT on diameter (external smaller, internal larger). A tight
+    internal thread can be chased with a tap after printing; a loose one can't be fixed, so they
+    stay at 0.3 rather than 0.5;
+  - the cartridge holes are nominal + HOLE_FIT (a cartridge can't be forced into a tight hole; the
+    set screw takes up a loose one); the wrench flats and the clamp round are nominal - 0.3.
 All threads are modelled (ISO 60 deg profile, right hand, bd_warehouse IsoThread), M6 or larger.
-Every wall is at least 1.5 mm, thread teeth aside.
+Every wall is at least 2.0 mm except the stub (1.5 under the M6 root) and the thread teeth.
 Body z runs from the shoulder (z = 0) up; the stub hangs below (z = -15 .. 0).
 
   Stub:        M6x1.0 printed full length, major 5.7, runs out at the shoulder (no relief)
-  Bore:        Ø3.0 through the body, Ø1.4 through the stub (1.5 wall under the M6 root)
+  Bore:        Ø1.4 through the stub and 2 mm into the body (1.5 wall under the M6 root, and no thin
+               neck at the shoulder), 90 deg cone up to Ø3.0 through the rest of the body
   Heater block (body z 0-26): 21.7 x 24.7, the 21.7 faces (normal to X) are the wrench flats
                (22 mm wrench at +0.3); both cross holes exit square through these faces.
                Corners chamfered 45 deg into the round above so they print without support.
-    Cartridge: Ø6.3 cross hole, through, 6.5 mm off-axis, at z = 7   (24 V 40 W, 6 x 20 mm)
-    Thermistor: Ø3.3 cross hole, 16 deep from +X, 6.5 mm off-axis (opposite side), at z = 15
+    Cartridge: Ø6.5 cross hole, through, 6.8 mm off-axis, at z = 8   (24 V 40 W, 6 x 20 mm)
+    Thermistor: Ø3.5 cross hole, 16 deep from +X, 6.8 mm off-axis (opposite side), at z = 15
     Set screws: M6x1.0 printed, up from the shoulder face into each hole
   Top (z 26-40): round Ø24.7 for an SK25 clamp; M12x1.0 printed internal thread, major 12.3,
                14 full thread; hole 18 deep with a 90 deg cone floor
@@ -33,16 +36,18 @@ from pathlib import Path
 from build123d import Axis, GeomType, Plane, Polygon, RectangleRounded, chamfer, extrude, BuildLine, BuildPart, BuildSketch, Cylinder, Polyline, Pos, Rot, export_step, export_stl, make_face, revolve
 from bd_warehouse.thread import IsoThread
 
-FIT = 0.3                                        # print tolerance (+/-), applied on diameter to every fit
+FIT = 0.3                                        # print tolerance (+/-) on sizes, applied on diameter to every fit
+HOLE_FIT = 0.5                                   # JLC3D's hole tolerance (+/-), applied to the cartridge holes
 BODY_D, BODY_L = 25.0 - FIT, 40.0                # Ø24.7: an SK25 clamp still closes on it at +0.3
 STUB_L = 15.0
 M6_MAJOR = 6.0 - FIT                             # printed external M6x1.0
 M12_MAJOR = 12.0 + FIT                           # printed internal M12x1.0
 M12_DEPTH, M12_DRILL_DEPTH = 14.0, 18.0          # full thread, then 4 mm of plain hole above the cone floor
 BORE, STUB_BORE = 3.0, 1.4                       # stub bore 1.4 = nozzle orifice; leaves 1.5 wall under the M6 root
-FLATS, BLOCK_Z1, BLOCK_R = 22.0 - FIT, 26.0, 2.0  # heater block: 21.7 A/F (wrench flats) x BODY_D, z 0-26, R2 corners
-HEATER_D, HEATER_OFFSET, HEATER_Z = 6.0 + FIT, 6.5, 7.0
-THERM_D, THERM_OFFSET, THERM_Z, THERM_DEPTH = 3.0 + FIT, -6.5, 15.0, 16.0
+STUB_BORE_TOP = 2.0                              # Ø1.4 runs 2 mm into the body before the cone to Ø3.0 (no neck)
+FLATS, BLOCK_Z1, BLOCK_R = 22.0 - FIT, 26.0, 1.0  # heater block: 21.7 A/F (wrench flats) x BODY_D, z 0-26, R1 corners
+HEATER_D, HEATER_OFFSET, HEATER_Z = 6.0 + HOLE_FIT, 6.8, 8.0   # 6.8 off-axis: 2.05 wall to the bore, 2.3 to the side
+THERM_D, THERM_OFFSET, THERM_Z, THERM_DEPTH = 3.0 + HOLE_FIT, -6.8, 15.0, 16.0
 SET_MAJOR, SET_PITCH = 6.0 + FIT, 1.0            # printed internal M6x1.0 for the set screws
 THERM_SET_X = 3.0                                # thermistor set screw: X position along the thermistor hole
 CH = 0.5
@@ -81,9 +86,9 @@ stub = revolved([(0, z_tip), (r_root6, z_tip), (r_root6, 0.5), (0, 0.5)])
 
 part = top + block + stub
 
-# Bore, stub bore, M12 hole with lead-in chamfer and 90 deg cone floor (self-supporting)
+# Bore (Ø1.4 up to z 2, 90 deg cone to Ø3.0), M12 hole with lead-in chamfer and 90 deg cone floor (self-supporting)
 part = part - revolved([
-    (0, z_tip - 1), (rbs, z_tip - 1), (rbs, 0), (rb, 0),
+    (0, z_tip - 1), (rbs, z_tip - 1), (rbs, STUB_BORE_TOP), (rb, STUB_BORE_TOP + (rb - rbs)),
     (rb, z_floor - (r_m12 - rb)), (r_m12, z_floor),
     (r_m12, z_top - CH), (r_m12 + CH, z_top), (r_m12 + CH, z_top + 1), (0, z_top + 1),
 ])
