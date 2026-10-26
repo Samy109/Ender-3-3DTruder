@@ -41,7 +41,7 @@ Full list with specs and links: [`amazon_parts_list.md`](amazon_parts_list.md). 
 * **Super Volcano heater block** + **1.4 mm Super Volcano brass nozzle** + **silicone sock**
 * **80 W 24 V heater cartridge** + **100K NTC B3950 thermistor cartridge**
 * **25 A external MOSFET module** + 16 AWG silicone wire + 5 A inline fuse
-* **Heated barrel coupler (316L stainless, metal 3D printed at ±0.3 mm, threads printed):** 40 mm long: a 21.7 × 24.7 mm heater block (its 21.7 mm faces are the wrench flats) under a Ø24.7 mm round for the clamp. M12×1.0 female top, M6×1.0 male stub (15 mm, full thread), Ø3 mm bore (Ø1.4 through the stub), flats for a 22 mm wrench, cross holes for a 6 mm heater cartridge and a 3 mm thermistor, M6 set screws. No machining or thread cutting needed. See [`CAD/shop_order.md`](CAD/shop_order.md) and [`CAD/barrel_coupler.step`](CAD/barrel_coupler.step).
+* **Heated barrel coupler (316L stainless, metal 3D printed at ±0.3 mm on sizes and ±0.5 mm on holes, threads printed):** 40 mm long: a 21.7 × 24.7 mm heater block (its 21.7 mm faces are the wrench flats) under a Ø24.7 mm round for the clamp. M12×1.0 female top, M6×1.0 male stub (15 mm, full thread), Ø1.4 mm bore through the stub and 2 mm into the body, opening to Ø3 mm above that, flats for a 22 mm wrench, cross holes for a 6 mm heater cartridge and a 3 mm thermistor, M6 set screws. No machining expected; the taps and drill under Tools are only for cleanup if something prints tight. See [`CAD/shop_order.md`](CAD/shop_order.md) and [`CAD/barrel_coupler.step`](CAD/barrel_coupler.step).
 * **SK25 shaft support:** clamps the coupler's round top section to the frame.
 * **M6 stainless set screws:** one 6 mm (heater) and one 16 mm (thermistor), plus a 3 mm hex key.
 * **Coupler heat zone:** 24 V 40 W 6 × 20 mm cartridge heater + 100K B3950 thermistor cartridge (3 × 15 mm), wired to the mainboard's bed terminals and `TB` thermistor header.
@@ -149,7 +149,7 @@ Melt pressure pushes the auger back **toward the motor**, so the thrust bearing 
 
 ### 4.4 Melt Zone Assembly
 First, check the printed coupler (it's printed at ±0.3 mm on sizes and ±0.5 mm on holes, threads and all):
-* Run the M6 stub into the block, the threaded barrel into the M12 end, and both M6 set screws in by hand. A printed thread may feel rough the first time; run it in and out a few times. Don't force it: if an internal thread is tight, chase it with the M12×1.0 or M6×1.0 tap (by hand, cutting oil, back off every half turn).
+* Dry-fit by hand, then take everything apart again: run the M6 stub into the block, the threaded barrel into the M12 end, and both M6 set screws into their holes. A printed thread may feel rough the first time; run it in and out a few times. Don't force it: if an internal thread is tight, chase it with the M12×1.0 or M6×1.0 tap (by hand, cutting oil, back off every half turn).
 * **Check the bore:** you should see light straight through. If the Ø1.4 stub bore printed small or holds powder, run a 1.4 mm drill through it by hand.
 * **Lap the stub end:** lay 400-grit paper on the glass, hold the coupler upright by its body, and rub the stub end in figure-eights until the whole face is evenly matte. It's the sealing face.
 
@@ -159,14 +159,17 @@ First, check the printed coupler (it's printed at ±0.3 mm on sizes and ±0.5 mm
                        ▲ zone 2: 40 W + thermistor
 ```
 
-1. **Barrel → coupler:** wrap the barrel thread in PTFE tape and screw it into the coupler's M12×1.0 end until snug. The whole thread should be hidden inside the coupler.
-2. **Coupler → block:** screw the coupler's M6 stub into the **top** of the Super Volcano block about 6–8 mm deep. Leave a gap between the coupler shoulder and the block.
-3. **Nozzle:** screw the 1.4 mm nozzle **up** into the bottom of the block until it meets the end of the stub. There should be a small gap (0.5–1 mm) between the nozzle's hex and the block. If the hex touches the block first, screw the stub in deeper and repeat.
+Do these in order. The coupler's set screws and the SK25 clamp can't be reached or fitted later in the sequence.
+
+1. **SK25 onto the barrel:** slide the **SK25 shaft support** onto the barrel from the outlet (threaded) end. It has to go on now: the coupler's heater block is wider than the clamp's 25 mm bore, and the shaft coupling blocks the other end.
+2. **Barrel → coupler:** wrap the barrel thread in PTFE tape and screw the barrel into the coupler's M12×1.0 end until snug. The whole thread should be hidden inside the coupler.
+3. **Coupler heater:** slide the 24 V 40 W cartridge into the coupler's heater hole and the thermistor into its hole, and lock each with its M6 set screw from the shoulder face (6 mm screw for the heater, 16 mm for the thermistor; snug, not tight). Do it now: once the stub is in the block, the shoulder face is only a few millimetres above the block and a hex key won't fit. With the cartridges seated the heater screw stands about 1 mm proud of the shoulder and the thermistor screw about 2 mm; that's normal.
+4. **Coupler → block:** turn the Super Volcano block onto the coupler's M6 stub, about 6–8 mm deep (turn the block, not the coupler, so the coupler's leads don't wind up). Keep at least 3 mm between the coupler's shoulder and the block so the set screw heads clear it.
+5. **Nozzle:** screw the 1.4 mm nozzle **up** into the bottom of the block until it meets the end of the stub. There should be a small gap (0.5–1 mm) between the nozzle's hex and the block. If the hex touches the block first, screw the stub in deeper and repeat, keeping the 3 mm shoulder gap.
    *The seal is the flat end of the stub pressing on the top of the nozzle, not the threads.*
-4. **Clamp:** mount an **SK25 shaft support** to the frame and clamp the round top section of the coupler (above the flats, away from the heater zone). It's printed slightly under 25 mm; if the clamp doesn't grip, add one wrap of soda-can aluminum. The motor plate and the coupler are now both tied to the frame, so melt pressure goes through the frame instead of pulling on the thin barrel thread.
-5. **Heater & sensor:** install the 80 W cartridge and the thermistor in the block and fit the silicone sock.
-6. **Coupler heater:** slide the 24 V 40 W cartridge into the coupler's heater hole and the thermistor into its hole, and lock each with its M6 set screw from the shoulder face (6 mm screw for the heater, 16 mm for the thermistor; snug, not tight). Route the leads away from the nozzle.
-7. **Barrel fan:** mount a 24 V 4010 or 4020 fan over the barrel at the window (blowing across it) to keep the feed end cold. Zip-tie it directly: loop two zip-ties through the fan corner holes and around the 12 mm barrel or hopper neck. Wire it to an always-on 24 V supply so it runs continuously.
+6. **Clamp:** turn the barrel and coupler together until the hopper window faces straight up, then slide the SK25 down onto the coupler's round top section until it stops against the heater block. The clamp is wider than the round (about 24 mm against 14 mm), so it overhangs onto the barrel; it only grips the round, which is fine. It's printed slightly under 25 mm; if the clamp doesn't grip, add one wrap of soda-can aluminum. Bolt the SK25 to the frame, **shimming under its base so the barrel lines up with the motor shaft**, then tighten the clamp and repeat the spin test from 4.2: the auger has only ~0.25 mm of clearance per side, so a clamp that sits high or low will make it rub. The motor plate and the coupler are now both tied to the frame, so melt pressure goes through the frame instead of pulling on the thin barrel thread.
+7. **Block heater & sensor:** install the 80 W cartridge and the thermistor in the block and fit the silicone sock. Route the coupler's leads away from the nozzle.
+8. **Barrel fan:** mount a 24 V 4010 or 4020 fan over the barrel at the window (blowing across it) to keep the feed end cold. Zip-tie it directly: loop two zip-ties through the fan corner holes and around the 12 mm barrel or hopper neck. Wire it to an always-on 24 V supply so it runs continuously.
 
 ### 4.5 Heater Wiring
 **Zone 1, Super Volcano block (80 W), through the external MOSFET:**
@@ -295,7 +298,7 @@ Screen presets (each sets both heat zones):
 | **Auger motor buzzes / skips** | Plastic not melted, or nozzle clogged. (Skipping is the torque limit working.) | Stop the auger. Wait for `MELT READY`. Clear the nozzle. Don't raise Vref to push through. |
 | **`Thermal Runaway` mid-run** (nozzle or coupler) | Auger feeding cold flakes faster than the heaters can melt them | Lower `RPM`. Don't loosen the thermal protection. |
 | **`MINTEMP` / `MAXTEMP`** | Thermistor unplugged or broken | Check the nozzle thermistor on `TH` and the coupler thermistor on `TB`, and their wires |
-| **Coupler never reaches temperature** | Cartridge loose in its hole, or PID not tuned | Tighten the M6 set screw; run `M303 E-1 S205 C8 U1` then `M500` |
+| **Coupler never reaches temperature** | Cartridge loose in its hole, PID not tuned, or the SK25 clamp and frame pulling heat away | Tighten the M6 set screw (with the block on, use a short hex bit or a key with its short arm cut down); run `M303 E-1 S205 C8 U1` then `M500`. If it still can't hold temperature, the clamp is sinking heat into the frame: check it isn't clamping onto the heater block |
 | **Plastic leaks around the block top** | Stub end not seated on the nozzle | Heat to 250 °C, hold the coupler flats, tighten the nozzle ⅛ turn. Check the nozzle hex isn't touching the block. |
 | **Plastic leaks at the barrel thread** | Thread not sealed or not snug | Cool down, re-tape and re-tighten. Check the thread is fully inside the coupler. |
 | **Squealing / auger rubbing** | Auger off-center in the shaft coupling | Redo the shim; spin-test for wobble |

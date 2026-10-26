@@ -28,7 +28,7 @@
 1. Print axis vertical, top (M12) face on the plate, stub up. The teardrop roofs, the cone floor and the 45° block corners are there so no supports are needed.
 2. Every fit already allows for the tolerance. The threads are offset in the model: the M6 stub is 0.3 under size and the M12 and M6 set-screw threads are 0.3 over (a tight internal thread will be chased with a tap). The holes the cartridges slide into are 0.5 over, and the flats and the clamp round are 0.3 under. Print the model as it is; don't correct these sizes back to nominal.
 3. Keep the bore, threads and cross holes clear of powder.
-4. Minimum wall is 2.0 mm except the M6 stub (1.5 mm under the thread root, the most an M6 allows) and the thread teeth themselves. All threads are M6 or larger and are modelled in the file; no tapping is needed.
+4. Minimum wall is 2.0 mm except the M6 stub (1.5 mm under the thread root, the most an M6 allows) and the thread teeth themselves. All threads are M6 or larger and are modelled in the file; no tapping or other machining is needed from you.
 
 **Customer checks on arrival**
 - [ ] The M6 stub screws into the Super Volcano block by hand
