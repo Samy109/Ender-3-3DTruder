@@ -38,7 +38,7 @@ y_round = sqrt(BODY_R ** 2 - FLAT ** 2)           # 5.9: where the flats meet th
 
 
 def corner_cone_edge(n=12):
-    """Edge where the 45° corner cone (r = BODY_R + 26 - z) cuts the +X flat: (y, z) from the round to the R2 corner."""
+    """Edge where the 45° corner cone (r = BODY_R + 26 - z) cuts the +X flat: (y, z) from the round to the corner round."""
     y_end = BODY_R - BLOCK_R
     return [(y, BLOCK_Z1 - (sqrt(FLAT ** 2 + y ** 2) - BODY_R))
             for y in (y_round + (y_end - y_round) * i / n for i in range(n + 1))]
@@ -252,7 +252,7 @@ ax.add_patch(Circle(c, s2 * BORE_R, fill=False, lw=THICK))
 
 
 def block_outline(inset=0.0, n=8):
-    """Heater block footprint (x, y): 21.7 x 24.7, R2 corners, counter-clockwise; optionally inset."""
+    """Heater block footprint (x, y): 21.7 x 24.7, R1 corners, counter-clockwise; optionally inset."""
     pts, r = [], BLOCK_R - inset
     for cx, cy, a0 in ((FLAT - BLOCK_R, BODY_R - BLOCK_R, 0), (-(FLAT - BLOCK_R), BODY_R - BLOCK_R, 90),
                        (-(FLAT - BLOCK_R), -(BODY_R - BLOCK_R), 180), (FLAT - BLOCK_R, -(BODY_R - BLOCK_R), 270)):
