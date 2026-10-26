@@ -51,7 +51,7 @@ Full list with specs and links: [`amazon_parts_list.md`](amazon_parts_list.md). 
 * **Stainless barrel tube, 10 mm ID × 12 mm OD, 150 mm**, with a 15 × 12 mm hopper window near one end. The other end needs an M12×1.0 external thread, 12 mm long. Best done by a machine shop (see 4.3).
 * **3/8" wood auger bit, 12"**, hex shank 9.0 mm across flats. Screw point cut off, tip ground to a cone.
 * **NEMA 17 planetary gearmotor, 14:1**, 8 mm output shaft (needs at least 25 mm of exposed shaft).
-* **8 mm → 11 mm clamp-on shaft coupling**, Ø32 × 45 mm aluminum, plus a soda-can aluminum shim to center the hex shank (see 4.2).
+* **Shaft coupling** that fits the motor's 8 mm shaft on one side and the auger's 9 mm hex shank on the other, snug with no shim.
 * **51100 thrust ball bearing**, 10 × 24 × 9 mm.
 * **NEMA 17 motor mount plate** bolted to the 2020 frame.
 * **24 V 4010 fan** over the barrel at the hopper window.
@@ -133,9 +133,9 @@ Melt pressure pushes the auger back **toward the motor**, so the thrust bearing 
 
 1. Bolt the motor to the mount plate and the plate to the 2020 frame.
 2. Slide the 51100 bearing over the 8 mm motor shaft against the plate.
-3. Center the hex shank in the 11 mm side of the clamp-on coupling: wrap the hex in **three layers of soda-can aluminum** (about 0.1 mm each) where the clamp grips it.
-4. Push the coupling down onto the bearing with **no gap**, then tighten the 8 mm clamp. The load path is now coupling → bearing → plate → frame, not the gearbox.
-5. **Spin test:** turn the motor by hand and watch the auger tip. Any visible wobble will rub the barrel (only ~0.25 mm clearance per side). Fix the shim before going further.
+3. Push the auger's hex shank fully into the coupling's auger side and tighten it.
+4. Push the coupling down onto the bearing with **no gap**, then tighten it onto the motor shaft. The load path is now coupling → bearing → plate → frame, not the gearbox.
+5. **Spin test:** turn the motor by hand and watch the auger tip. Any visible wobble will rub the barrel (only ~0.25 mm clearance per side). If it wobbles, loosen the coupling, reseat the shank and retighten before going further.
 
 ### 4.3 Barrel Prep
 1. **Deburr the window:** file all inside edges of the window smooth with a needle file and 240-grit. Burrs left by the cutting disc catch flakes and scrape the auger.
@@ -161,7 +161,7 @@ First, check the printed coupler (it's printed at ±0.3 mm on sizes and ±0.5 mm
 
 Do these in order. The coupler's set screws and the SK25 clamp can't be reached or fitted later in the sequence.
 
-1. **SK25 onto the barrel:** slide the **SK25 shaft support** onto the barrel from the outlet (threaded) end. It has to go on now: the coupler's heater block is wider than the clamp's 25 mm bore, and the shaft coupling blocks the other end.
+1. **SK25 onto the barrel:** slide the **SK25 shaft support** onto the barrel from the outlet (threaded) end. It has to go on now: the coupler's heater block is wider than the clamp's 25 mm bore, and the motor and mount plate block the other end.
 2. **Barrel → coupler:** wrap the barrel thread in PTFE tape and screw the barrel into the coupler's M12×1.0 end until snug. The whole thread should be hidden inside the coupler.
 3. **Coupler heater:** slide the 24 V 40 W cartridge into the coupler's heater hole and the thermistor into its hole, and lock each with its M6 set screw from the shoulder face (6 mm screw for the heater, 16 mm for the thermistor; snug, not tight). Do it now: once the stub is in the block, the shoulder face is only a few millimetres above the block and a hex key won't fit. With the cartridges seated the heater screw stands about 1 mm proud of the shoulder and the thermistor screw about 2 mm; that's normal.
 4. **Coupler → block:** turn the Super Volcano block onto the coupler's M6 stub, about 6–8 mm deep (turn the block, not the coupler, so the coupler's leads don't wind up). Keep at least 3 mm between the coupler's shoulder and the block so the set screw heads clear it.
@@ -301,7 +301,7 @@ Screen presets (each sets both heat zones):
 | **Coupler never reaches temperature** | Cartridge loose in its hole, PID not tuned, or the SK25 clamp and frame pulling heat away | Tighten the M6 set screw (with the block on, use a short hex bit or a key with its short arm cut down); run `M303 E-1 S205 C8 U1` then `M500`. If it still can't hold temperature, the clamp is sinking heat into the frame: check it isn't clamping onto the heater block |
 | **Plastic leaks around the block top** | Stub end not seated on the nozzle | Heat to 250 °C, hold the coupler flats, tighten the nozzle ⅛ turn. Check the nozzle hex isn't touching the block. |
 | **Plastic leaks at the barrel thread** | Thread not sealed or not snug | Cool down, re-tape and re-tighten. Check the thread is fully inside the coupler. |
-| **Squealing / auger rubbing** | Auger off-center in the shaft coupling | Redo the shim; spin-test for wobble |
+| **Squealing / auger rubbing** | Auger off-center in the shaft coupling, or the SK25 out of line with the motor | Reseat the shank in the coupling; check the SK25 shims; spin-test for wobble |
 | **Flakes not feeding** | Bridging in the jug, or flakes too big for the flights | Tap the jug; sieve to 1–2 mm |
 | **Diameter hunts up and down** | Sensor too far from the nozzle, or wrong `SENSOR_DISTANCE_MM` | Move the sensor closer; measure and update the setting |
 | **Filament undersized before pulling** | Not enough die swell | Raise temperature 5–10 °C, slow the puller; if still thin, switch to a 2.0 mm nozzle |
