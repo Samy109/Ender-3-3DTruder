@@ -7,6 +7,7 @@ A complete DIY conversion turning a **Creality Ender 3 / Ender 3 V2** into a hig
 ## ⚡ Quick Navigation
 
 * 📖 **[Master Build & Operating Manual](ender_3_3dtruder_master_manual.md)**: Full build and operating guide covering assembly, wiring, sifting, puller setup, calibration, and troubleshooting. Also exported as [HTML](Ender_3_3DTruder_Master_Manual.html) and [PDF](Ender_3_3DTruder_Master_Manual.pdf).
+* 📐 **[System Schematic](CAD/3DTruder_schematic.pdf)**: Six-sheet A3 PDF covering the system overview, the fully assembled device, power and heater wiring, Arduino controller wiring, mechanical layout with a to-scale melt path section, and the wire schedule and settings.
 * 🔩 **[Shop Order & CAD](CAD/shop_order.md)**: Print order and drawing for the heated barrel coupler (316L stainless, metal 3D printed at ±0.3 mm on sizes / ±0.5 mm on holes, with printed threads).
 * 🛒 **[Bill of Materials / Amazon Parts List](amazon_parts_list.md)**: Categorized parts checklist with specifications and procurement links.
 * 🖨️ **[Ender 3 V2 Melt Station Firmware](Ender3_Firmware/README.md)**: Pre-compiled Marlin binaries (`.bin`) with native DWIN color UI, 290 °C unlocked, and a second heat zone for the barrel coupler on the bed channel.
@@ -74,6 +75,8 @@ A complete DIY conversion turning a **Creality Ender 3 / Ender 3 V2** into a hig
 │   ├── barrel_coupler_drawing.pdf   (built by make_drawing.py)
 │   ├── make_drawing.py
 │   ├── assembly_overview.pdf
+│   ├── 3DTruder_schematic.pdf   (built by make_schematic.py)
+│   ├── make_schematic.py
 │   └── shop_order.md
 ├── tools/
 │   ├── build_manual.py
